@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Event : MonoBehaviour
 {
+	public String description;
     public String debugMessage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,15 +17,18 @@ public class Event : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log(debugMessage);
-        }
+
     }
+
+	void OnMouseDown()
+	{
+		Debug.Log(debugMessage);
+		Debug.Log(description);
+	}
 
     // Show event dialog window after event is triggered by mouse click
     void Show()
     {
-        
+
     }
 }
