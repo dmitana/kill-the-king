@@ -1,34 +1,39 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class Event : MonoBehaviour
-{
+public class Event : MonoBehaviour {
+	public GameObject popUpWindow;
+	public TMP_Text popUpText;
+	public Button acceptButton;
+	public Button rejectButton;
 	public String description;
     public String debugMessage;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        debugMessage = "Event triggered!";
+    void Awake() {
+		rejectButton.onClick.AddListener(OnRejectButtonClick);
+		acceptButton.onClick.AddListener(OnAcceptButtonClick);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-	void OnMouseDown()
-	{
-		Debug.Log(debugMessage);
-		Debug.Log(description);
+	private void OnMouseDown() {
+		popUpWindow.SetActive(true);
+		popUpText.text = description;
 	}
 
-    // Show event dialog window after event is triggered by mouse click
-    void Show()
-    {
+	private void OnRejectButtonClick() {
+		popUpWindow.SetActive(false);
+		Destroy(gameObject);
+	}
 
-    }
+	// TODO: Add implementation
+	private void OnAcceptButtonClick() {
+		Debug.Log("Click on Accept button");
+		popUpWindow.SetActive(false);
+		Destroy(gameObject);
+		SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
+	}
 }
