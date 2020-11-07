@@ -9,9 +9,4 @@ public class PeasantInDanger : Event
 		description = "Peasant in Danger description";
         debugMessage = "Peasant in Danger event triggered!";
     }
-
-	void Update()
-	{
-
-	}
 }
