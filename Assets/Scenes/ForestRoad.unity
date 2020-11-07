@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 82342824}
   m_Layer: 0
   m_Name: PlayerTeam
-  m_TagString: Untagged
+  m_TagString: PlayerTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3675,6 +3675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Assassin
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011821036864, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011826580284, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4709,6 +4713,8 @@ MonoBehaviour:
   rejectButton: {fileID: 708826021}
   description: 
   debugMessage: 
+  enemies:
+  - {fileID: 4614913004294492742, guid: 3a4a0c25ed0b3d6b9a1960b44af76fe5, type: 3}
 --- !u!1001 &1770528095
 PrefabInstance:
   m_ObjectHideFlags: 0
