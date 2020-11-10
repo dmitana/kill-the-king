@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: d0bdfb44e35b70844a392ef9d66b514a
+  - enabled: 1
+    path: Assets/Scenes/TeamSelection.unity
+    guid: 46c0723b453815784b91654cabcae5aa
+  - enabled: 1
     path: Assets/Scenes/ForestRoad.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
