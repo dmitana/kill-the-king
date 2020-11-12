@@ -7,6 +7,8 @@ TagManager:
   - Event
   - PlayerTeam
   - EnemyTeam
+  - GameMaster
+  - SceneContainer
   layers:
   - Default
   - TransparentFX
