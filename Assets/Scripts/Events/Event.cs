@@ -15,12 +15,18 @@ public class Event : MonoBehaviour {
     public String debugMessage;
     public List<Character> enemies = new List<Character>();
 
+    private SceneController _sceneController;
+
     void Awake() {
         rejectButton.onClick.AddListener(OnRejectButtonClick);
         acceptButton.onClick.AddListener(OnAcceptButtonClick);
+        
+        UnityEngine.Object obj = FindObjectOfType(typeof(SceneController));
+        _sceneController = (SceneController) obj;
     }
 
     private void OnMouseDown() {
+        Debug.Log("WAAAAAAAAAAA");
         popUpWindow.SetActive(true);
         popUpText.text = description;
     }
@@ -29,27 +35,10 @@ public class Event : MonoBehaviour {
         popUpWindow.SetActive(false);
         Destroy(gameObject);
     }
-
-    // TODO: Add implementation
+    
     private void OnAcceptButtonClick() {
-        Debug.Log("Click on Accept button");
         popUpWindow.SetActive(false);
+        _sceneController.ChangeScene("Battle");
         Destroy(gameObject);
-        SceneManager.LoadScene("Battle", LoadSceneMode.Single);
-        Scene scene = SceneManager.GetActiveScene();
-        
-        Debug.Log("Before instantiate");
-        FillEnemiesToBattle();
-        Debug.Log("After instantiate");
-    }
-
-    private void FillEnemiesToBattle() {
-        var playerTeam = GameObject.FindGameObjectsWithTag("PlayerTeam")[0];
-        // var enemyTeam = GameObject.FindGameObjectsWithTag("EnemyTeam")[0];
-        var position = playerTeam.transform.position;
-        Debug.Log(position);
-        position[0] += 5;
-        Instantiate(enemies[0], position, Quaternion.identity);
-        Debug.Log(position);
     }
 }
