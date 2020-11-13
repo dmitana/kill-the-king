@@ -9,7 +9,7 @@ public class TeamSelectionController : MonoBehaviour {
 	// UI game objects
 	public GameObject assassinUI;
 	public GameObject characterDetailUI;
-	public GameObject skillUI;
+	public List<GameObject> skillsUI;
 
 	// Prefabs
 	public Team team;
@@ -26,48 +26,76 @@ public class TeamSelectionController : MonoBehaviour {
 
 	// Instantiated prefabs
 	private Team teamInstantiated;
+	private Character assassinInstantiated;
 
 	void Awake() {
+		// Instantiate prefabs
+		teamInstantiated = Instantiate(team);
+		assassinInstantiated = Instantiate(assassin);
+		assassinInstantiated.gameObject.SetActive(false);
+
 		// Add listerens for Assassin UI
 		assassinToggle = assassinUI.GetComponentInChildren<Toggle>();
 		assassinButton = assassinUI.GetComponentInChildren<Button>();
-		assassinToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, assassin));
-		assassinButton.onClick.AddListener(() => ShowCharacter(assassin));
+		assassinToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, assassinInstantiated));
+		assassinButton.onClick.AddListener(() => ShowCharacter(assassinInstantiated));
 
 		// Get character detail UI childen
 		var texts = characterDetailUI.GetComponentsInChildren<TMP_Text>();
 		characterNameText = texts[0];
 		characterHealthText = texts[1];
 		characterStrenghtText = texts[2];
-
-		// Instantiate team
-		teamInstantiated = Instantiate(team);
 	}
 
-	private void ShowCharacter(Character c) {
+	void Update() {
+		CanSelectCharacter(assassinInstantiated, assassinToggle);
+	}
+
+	private void CanSelectCharacter(Character character, Toggle characterToggle) {
+		characterToggle.interactable = character.skills.Count == 2 ? true : false;
+	}
+
+	private void ShowCharacter(Character character) {
 		characterDetailUI.SetActive(true);
-		characterNameText.text = c.name;
-		characterHealthText.text = $"Health: {c.health}";
-		characterStrenghtText.text = $"Strength: {c.baseStrength}";
+		characterNameText.text = character.characterName;
+		characterHealthText.text = $"Health: {character.health}";
+		characterStrenghtText.text = $"Strength: {character.baseStrength}";
 
 		// Create UI for each skill
-		foreach (Skill skill in c.skills) {
-			var skillUIInstantiated = Instantiate(skillUI, characterDetailUI.transform, false);
-			var skillTexts = skillUIInstantiated.GetComponentsInChildren<TMP_Text>();
-			skillTexts[0].text = skill.skillName;
-			skillTexts[1].text = skill.description;
+		if (character.availableSkills.Count != skillsUI.Count)
+			throw new System.ArgumentException(
+				$"Character must have {skillsUI.Count} skill, but has {character.availableSkills.Count}"
+			);
+
+		for (int i = 0;  i < skillsUI.Count; ++i) {
+			var skillTexts = skillsUI[i].GetComponentsInChildren<TMP_Text>();
+			skillTexts[0].text = character.availableSkills[i].skillName;
+			skillTexts[1].text = character.availableSkills[i].description;
+
+			int n = i;
+			Toggle toggle = skillsUI[i].GetComponentInChildren<Toggle>();
+			toggle.onValueChanged.AddListener(
+				(change) => AddRemoveSkill(change, character.availableSkills[n], character)
+			);
 		}
 	}
 
-	private void AddRemoveCharacter(bool change, Character c) {
+	private void AddRemoveCharacter(bool change, Character character) {
 		if (change)
-			teamInstantiated.AddCharacterToTeam(c);
+			teamInstantiated.AddCharacterToTeam(character);
 		else
-			teamInstantiated.RemoveCharacterFromTeam(c);
+			teamInstantiated.RemoveCharacterFromTeam(character);
+	}
+
+	private void AddRemoveSkill(bool change, Skill skill, Character character) {
+		if (change)
+			character.AddSkill(skill);
+		else
+			character.RemoveSkill(skill);
 	}
 
 	public void CreateTeamButton() {
-		teamInstantiated.InstantiateCharacters();
+		teamInstantiated.SetCharactersParent();
 		SceneManager.LoadScene("ForestRoad");
 		teamInstantiated.EnableCamera();
 		teamInstantiated.EnableCharacters();

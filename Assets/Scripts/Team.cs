@@ -19,12 +19,10 @@ public class Team : MonoBehaviour {
 		characters.Remove(c);
 	}
 
-	public void InstantiateCharacters() {
-		for (int i = 0; i < characters.Count; ++i) {
-			characters[i] = Instantiate(characters[i], transform, false);
-			characters[i].gameObject.SetActive(false);
-		}
-	}
+  public void SetCharactersParent() {
+    foreach (Character character in characters)
+      character.gameObject.GetComponent<Transform>().SetParent(transform);
+  }
 
 	public void EnableCharacters() {
 		foreach (Character c in characters)
