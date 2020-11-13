@@ -96,9 +96,7 @@ public class TeamSelectionController : MonoBehaviour {
 
 	public void CreateTeamButton() {
 		teamInstantiated.SetCharactersParent();
-		SceneManager.LoadScene("ForestRoad");
-		teamInstantiated.EnableCamera();
-		teamInstantiated.EnableCharacters();
+		SceneManager.LoadScene("PathSelection");
 	}
 
 }
