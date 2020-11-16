@@ -9,6 +9,7 @@ TagManager:
   - EnemyTeam
   - GameMaster
   - SceneContainer
+  - BattleCamera
   layers:
   - Default
   - TransparentFX
