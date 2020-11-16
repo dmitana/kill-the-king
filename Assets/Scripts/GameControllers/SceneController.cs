@@ -7,10 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
     private Event areaEvent;
+    private BattleController _battleController;
 
     void Awake() {
         GameObject obj = GameObject.FindGameObjectWithTag("Event");
         areaEvent = (Event) obj.GetComponent(typeof(Event));
+
+        GameObject gameMaster = GameObject.FindGameObjectWithTag("GameMaster");
+        _battleController = (BattleController) gameMaster.GetComponent(typeof(BattleController));
     }
 
     public void ChangeScene(String newSceneName) {
@@ -32,6 +36,7 @@ public class SceneController : MonoBehaviour {
 
         if (newSceneName == "Battle") {
             FillEnemiesToBattle();
+            _battleController.InitializeCombat();
         }
     }
 

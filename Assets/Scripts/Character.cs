@@ -10,10 +10,12 @@ public class Character : MonoBehaviour {
 	public List<Skill> availableSkills = new List<Skill>();
     public List<Skill> skills = new List<Skill>();
 
-    private List<Effect> _activeEffects = new List<Effect>();
+    private List<Effect> activeEffects = new List<Effect>();
+    private bool canBeClicked = false;
+    private BattleController battleController;
 
     public void AddEffect(Effect effect) {
-        _activeEffects.Add(effect);
+        activeEffects.Add(effect);
     }
 
     public void DecreaseHealth(int damage) {
@@ -31,5 +33,17 @@ public class Character : MonoBehaviour {
 
 	public void RemoveSkill(Skill skill) {
 		skills.Remove(skill);
+	}
+
+	public void SetBattleController(BattleController battleController) {
+		this.battleController = battleController;
+	}
+	
+	private void OnMouseDown() {
+		battleController.SetChosenCharacter(this);
+	}
+
+	public void DisplaySkills() {
+		
 	}
 }

@@ -26,7 +26,6 @@ public class Event : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        Debug.Log("WAAAAAAAAAAA");
         popUpWindow.SetActive(true);
         popUpText.text = description;
     }
