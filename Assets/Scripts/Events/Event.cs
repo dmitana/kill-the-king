@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class Event : MonoBehaviour {
     public GameObject popUpWindow;
@@ -15,14 +14,13 @@ public class Event : MonoBehaviour {
     public String debugMessage;
     public List<Character> enemies = new List<Character>();
 
-    private SceneController _sceneController;
+    private SceneController sceneController;
 
     void Awake() {
         rejectButton.onClick.AddListener(OnRejectButtonClick);
         acceptButton.onClick.AddListener(OnAcceptButtonClick);
-        
-        UnityEngine.Object obj = FindObjectOfType(typeof(SceneController));
-        _sceneController = (SceneController) obj;
+
+		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
     }
 
     private void OnMouseDown() {
@@ -34,10 +32,10 @@ public class Event : MonoBehaviour {
         popUpWindow.SetActive(false);
         Destroy(gameObject);
     }
-    
+
     private void OnAcceptButtonClick() {
         popUpWindow.SetActive(false);
-        _sceneController.ChangeScene("Battle");
+		sceneController.ChangeToBattleScene("Battle", enemies);
         Destroy(gameObject);
     }
 }

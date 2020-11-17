@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,8 +12,7 @@ public class TeamSelectionController : MonoBehaviour {
 	public GameObject characterDetailUI;
 	public List<GameObject> skillsUI;
 
-	// Prefabs
-	public Team team;
+	// Public instantiated prefabs
 	public Character assassin;
 
 	// Assassin's UI elements
@@ -24,21 +24,20 @@ public class TeamSelectionController : MonoBehaviour {
 	private TMP_Text characterHealthText;
 	private TMP_Text characterStrenghtText;
 
-	// Instantiated prefabs
-	private Team teamInstantiated;
-	private Character assassinInstantiated;
+	// Private Instantiated prefabs
+	private Team playerTeam;
+
+	private SceneController sceneController;
 
 	void Awake() {
-		// Instantiate prefabs
-		teamInstantiated = Instantiate(team);
-		assassinInstantiated = Instantiate(assassin);
-		assassinInstantiated.gameObject.SetActive(false);
+		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
+		playerTeam = Team.playerTeamInstance;
 
 		// Add listerens for Assassin UI
 		assassinToggle = assassinUI.GetComponentInChildren<Toggle>();
 		assassinButton = assassinUI.GetComponentInChildren<Button>();
-		assassinToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, assassinInstantiated));
-		assassinButton.onClick.AddListener(() => ShowCharacter(assassinInstantiated));
+		assassinToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, assassin));
+		assassinButton.onClick.AddListener(() => ShowCharacter(assassin));
 
 		// Get character detail UI childen
 		var texts = characterDetailUI.GetComponentsInChildren<TMP_Text>();
@@ -48,7 +47,7 @@ public class TeamSelectionController : MonoBehaviour {
 	}
 
 	void Update() {
-		CanSelectCharacter(assassinInstantiated, assassinToggle);
+		CanSelectCharacter(assassin, assassinToggle);
 	}
 
 	private void CanSelectCharacter(Character character, Toggle characterToggle) {
@@ -82,9 +81,9 @@ public class TeamSelectionController : MonoBehaviour {
 
 	private void AddRemoveCharacter(bool change, Character character) {
 		if (change)
-			teamInstantiated.AddCharacterToTeam(character);
+			playerTeam.AddCharacterToTeam(character);
 		else
-			teamInstantiated.RemoveCharacterFromTeam(character);
+			playerTeam.RemoveCharacterFromTeam(character);
 	}
 
 	private void AddRemoveSkill(bool change, Skill skill, Character character) {
@@ -95,8 +94,11 @@ public class TeamSelectionController : MonoBehaviour {
 	}
 
 	public void CreateTeamButton() {
-		teamInstantiated.SetCharactersParent();
-		SceneManager.LoadScene("PathSelection");
+		playerTeam.SetCharactersParent();
+		sceneController.ChangeScene("PathSelection", true);
 	}
 
+	public void BackButton() {
+		sceneController.ChangeScene("MainMenu", true);
+	}
 }
