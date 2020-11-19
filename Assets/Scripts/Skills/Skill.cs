@@ -16,16 +16,24 @@ public class Skill : MonoBehaviour {
 
     public List<Effect> effects;
 
+    public int numOfTargets;
+
     void Start() {
         effects = new List<Effect>();
     }
 
     // Some skills can have multiple target while others only one
-    void ApplySkill(Character attacker, List<Character> targets) {
+    public void ApplySkill(Character attacker, List<Character> targets) {
         foreach (var target in targets) {
             ApplySkill(attacker, target);
         }
     }
 
-    void ApplySkill(Character attacker, Character target) { }
+    private void ApplySkill(Character attacker, Character target) { }
+
+    public void HighlightTargets(Team playerTeam, Team enemyTeam) { }
+
+    public int GetNumOfTargets() {
+        return numOfTargets;
+    }
 }

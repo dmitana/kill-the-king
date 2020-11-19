@@ -11,7 +11,6 @@ public class Character : MonoBehaviour {
     public List<Skill> skills = new List<Skill>();
 
     private List<Effect> activeEffects = new List<Effect>();
-    private bool canBeClicked = false;
     private BattleController battleController;
 
     public void AddEffect(Effect effect) {
@@ -20,6 +19,8 @@ public class Character : MonoBehaviour {
 
     public void DecreaseHealth(int damage) {
         health -= damage;
+        if (health <= 0)
+	        Destroy(this);
     }
 
 	public void AddSkill(Skill skill) {
@@ -35,15 +36,30 @@ public class Character : MonoBehaviour {
 		skills.Remove(skill);
 	}
 
-	public void SetBattleController(BattleController battleController) {
-		this.battleController = battleController;
+	public void SetBattleController(BattleController controller) {
+		battleController = controller;
 	}
 	
 	private void OnMouseDown() {
-		battleController.SetChosenCharacter(this);
+		if (battleController.GetChosenCharacter() == null) {
+			if (battleController.GetCurrentTeam().GetPlayedCharacters().Contains(this)) {
+				Debug.Log($"Character {characterName} was already used.");
+				return;
+			}
+
+			battleController.SetChosenCharacter(this);
+		}
+		else
+			battleController.AddTarget(this);
 	}
 
 	public void DisplaySkills() {
+		GameObject skillField = GameObject.FindGameObjectWithTag("SkillField");
+		skillField.SetActive(true);
 		
+		UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
+		for (int i = 0; i < availableSkills.Count; i++) {
+			skillFields[i].SetSkill(availableSkills[i]);
+		}
 	}
 }

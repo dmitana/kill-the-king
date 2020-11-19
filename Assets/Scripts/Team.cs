@@ -71,6 +71,9 @@ public class Team : MonoBehaviour {
     }
 
     public void HighlightUnplayed() {
-
+        Debug.Log("Unplayed characters");
+        foreach (Character c in unplayedCharacters) {
+            Debug.Log(c.characterName);
+        }
     }
 }

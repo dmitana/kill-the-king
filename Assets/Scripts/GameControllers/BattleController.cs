@@ -10,9 +10,12 @@ public class BattleController : MonoBehaviour {
     private GameObject playerTeam;
     private GameObject enemyTeam;
     private Character chosenCharacter;
+    private List<Character> chosenTargets;
     private Skill chosenSkill;
-
+    
+    private Team currentTeam;
     private bool playerTeamFirst;
+    private GameObject skillField;
 
     private Random rng;
 
@@ -37,23 +40,49 @@ public class BattleController : MonoBehaviour {
         playerTeam.GetComponent<CharacterMovement>().enabled = false;
 
         playerTeamFirst = (rng.Next(2) == 0);
+
+        foreach (Character c in ((Team) playerTeam.GetComponent(typeof(Team))).GetCharacters()) {
+            c.SetBattleController(this);
+        }
+        
+        foreach (Character c in ((Team) enemyTeam.GetComponent(typeof(Team))).GetCharacters()) {
+            c.SetBattleController(this);
+        }
+        
+        skillField = GameObject.FindGameObjectWithTag("SkillField");
+        foreach (UISkillField field in skillField.transform.GetComponentsInChildren<UISkillField>()) {
+            field.SetBattleController(this);
+        }
+
+        StartCoroutine(Combat());
     }
 
     private IEnumerator Combat() {
         Team playerTeamComp = (Team) playerTeam.GetComponent(typeof(Team));
         Team enemyTeamComp = (Team) enemyTeam.GetComponent(typeof(Team));
 
-        Team nextTeam;
-
         while (playerTeamComp.GetCharacters().Count > 0 && enemyTeamComp.GetCharacters().Count > 0) {
-
-            // set unplayed characters - each character will have some status attribute telling whether it can be clicked
+            
+            foreach (Character c in playerTeamComp.GetCharacters()) {
+                playerTeamComp.AddUnplayedCharacter(c);
+                playerTeamComp.RemovePlayedCharacter(c); // prerobit tak, aby to vymazalo aj mrtve postavy
+            }
+            
+            foreach (Character c in enemyTeamComp.GetCharacters()) {
+                enemyTeamComp.AddUnplayedCharacter(c);
+                enemyTeamComp.RemovePlayedCharacter(c);
+            }
+            
             bool playerTeamRound = playerTeamFirst;
             while (playerTeamComp.GetUnplayedCharacters().Count > 0 || enemyTeamComp.GetUnplayedCharacters().Count > 0) {
                 chosenCharacter = null;
 
-                nextTeam = (playerTeamRound) ? playerTeamComp : enemyTeamComp;
-                nextTeam.HighlightUnplayed();
+                currentTeam = (playerTeamRound) ? playerTeamComp : enemyTeamComp;
+                playerTeamRound = !playerTeamRound;
+                if (currentTeam.GetUnplayedCharacters().Count == 0)
+                    continue;
+                
+                currentTeam.HighlightUnplayed();
                 while (chosenCharacter == null) {
                     yield return new WaitForSeconds(0.5f);
                 }
@@ -63,14 +92,17 @@ public class BattleController : MonoBehaviour {
                 while (chosenSkill == null) {
                     yield return new WaitForSeconds(0.5f);
                 }
+                
+                chosenTargets = new List<Character>();
+                chosenSkill.HighlightTargets(playerTeamComp, enemyTeamComp);
+                while (chosenSkill.GetNumOfTargets() == chosenTargets.Count) {
+                    yield return new WaitForSeconds(0.5f);
+                }
 
-                // pick character from team
-                // pick skill
-                // attack
-                // move used character to PlayedCharacters list
-                playerTeamRound = !playerTeamRound;
+                chosenSkill.ApplySkill(chosenCharacter, chosenTargets);
+                currentTeam.AddPlayedCharacter(chosenCharacter);
+                currentTeam.RemoveUnplayedCharacter(chosenCharacter);
             }
-
         }
 
         // End battle function call
@@ -80,7 +112,23 @@ public class BattleController : MonoBehaviour {
         chosenCharacter = character;
     }
 
+    public Character GetChosenCharacter() {
+        return chosenCharacter;
+    }
+
     public void SetChosenSkill(Skill skill) {
         chosenSkill = skill;
+    }
+
+    public Skill GetChosenSkill() {
+        return chosenSkill;
+    }
+
+    public void AddTarget(Character target) {
+        chosenTargets.Add(target);
+    }
+
+    public Team GetCurrentTeam() {
+        return currentTeam;
     }
 }

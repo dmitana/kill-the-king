@@ -134,11 +134,11 @@ GameObject:
   - component: {fileID: 194340947}
   m_Layer: 5
   m_Name: SkillsImage
-  m_TagString: Untagged
+  m_TagString: SkillField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &194340946
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1256,6 +1256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 259034915}
   - component: {fileID: 259034917}
+  - component: {fileID: 259034918}
   - component: {fileID: 259034916}
   m_Layer: 5
   m_Name: Skill2
@@ -1320,6 +1321,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259034914}
   m_CullTransparentMesh: 0
+--- !u!114 &259034918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259034914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696d50c25f77f2e0b938dc740114d3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &294644660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,6 +1470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 610945036}
   - component: {fileID: 610945038}
+  - component: {fileID: 610945039}
   - component: {fileID: 610945037}
   m_Layer: 5
   m_Name: BasicSkill
@@ -1521,6 +1535,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610945035}
   m_CullTransparentMesh: 0
+--- !u!114 &610945039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610945035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696d50c25f77f2e0b938dc740114d3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &758436872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,6 +1557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 758436873}
   - component: {fileID: 758436875}
+  - component: {fileID: 758436876}
   - component: {fileID: 758436874}
   m_Layer: 5
   m_Name: Skill5
@@ -1595,6 +1622,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758436872}
   m_CullTransparentMesh: 0
+--- !u!114 &758436876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758436872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696d50c25f77f2e0b938dc740114d3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1135752855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,6 +1743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1260489121}
   - component: {fileID: 1260489123}
+  - component: {fileID: 1260489124}
   - component: {fileID: 1260489122}
   m_Layer: 5
   m_Name: Skill3
@@ -1768,6 +1808,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260489120}
   m_CullTransparentMesh: 0
+--- !u!114 &1260489124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260489120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696d50c25f77f2e0b938dc740114d3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1438727395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,6 +1863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f6a25f0a44142287a512b56ace3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamCamera: {fileID: 0}
 --- !u!1 &1506769477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,6 +1874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1506769478}
   - component: {fileID: 1506769480}
+  - component: {fileID: 1506769481}
   - component: {fileID: 1506769479}
   m_Layer: 5
   m_Name: Skill4
@@ -1885,6 +1939,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506769477}
   m_CullTransparentMesh: 0
+--- !u!114 &1506769481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506769477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696d50c25f77f2e0b938dc740114d3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1866144560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,6 +2027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2086146810}
   - component: {fileID: 2086146812}
+  - component: {fileID: 2086146813}
   - component: {fileID: 2086146811}
   m_Layer: 5
   m_Name: Skill1
@@ -2025,3 +2092,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086146809}
   m_CullTransparentMesh: 0
+--- !u!114 &2086146813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086146809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696d50c25f77f2e0b938dc740114d3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
