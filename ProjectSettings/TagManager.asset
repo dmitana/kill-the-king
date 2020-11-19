@@ -10,6 +10,7 @@ TagManager:
   - GameMaster
   - SceneContainer
   - BattleCamera
+  - SkillField
   layers:
   - Default
   - TransparentFX
