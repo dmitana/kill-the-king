@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour {
 	public Boolean IsGameStarted { get; private set; } = false;
 	public Boolean IsGameScene { get; private set; } = false;
+	public Boolean IsBattleScene { get; private set; } = false;
 
 	private String currentSceneName = "MainMenu";
 	private String currentGameSceneName;
-	private GameObject currentGameSceneContainer;
+	private Stack<GameObject> gameSceneContainers = new Stack<GameObject>();
 	private Team playerTeam;
 	private Boolean isChangeToBattleScene = false;
     private BattleController battleController;
@@ -62,8 +63,8 @@ public class SceneController : MonoBehaviour {
 		if (!IsGameScene)
 			return false;
 
-		currentGameSceneContainer = GameObject.FindGameObjectWithTag("SceneContainer");
-		currentGameSceneContainer.SetActive(false);
+		gameSceneContainers.Push(GameObject.FindGameObjectWithTag("SceneContainer"));
+		gameSceneContainers.Peek().SetActive(false);
 		IsGameScene = false;
 		playerTeam.SetActiveCamera(false);
 		playerTeam.SetActiveCharacters(false);
@@ -77,17 +78,22 @@ public class SceneController : MonoBehaviour {
 			return false;
 
 		ChangeScene(currentGameSceneName, true);
-		currentGameSceneContainer.SetActive(true);
+		gameSceneContainers.Pop().SetActive(true);
 		IsGameScene = true;
-		playerTeam.SetActiveCamera(true);
+		if (!IsBattleScene)
+			playerTeam.SetActiveCamera(true);
 		playerTeam.SetActiveCharacters(true);
 
 		return true;
 	}
 
 	public void ChangeToBattleScene(String newSceneName, List<Character> enemies) {
+		gameSceneContainers.Push(GameObject.FindGameObjectWithTag("SceneContainer"));
+		gameSceneContainers.Peek().SetActive(false);
+		playerTeam.SetActiveCamera(false);
 		battleController.Enemies = enemies;
 		isChangeToBattleScene = true;
+		IsBattleScene = true;
 		ChangeScene(newSceneName);
 	}
 
