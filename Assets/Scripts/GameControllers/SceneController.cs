@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
-	public Boolean isGameStarted = false;
+	public Boolean IsGameStarted { get; private set; } = false;
+	public Boolean IsGameScene { get; private set; } = false;
 
 	private String currentSceneName = "MainMenu";
 	private String currentGameSceneName;
@@ -51,24 +52,37 @@ public class SceneController : MonoBehaviour {
 	public void ChangeToGameScene(String newSceneName) {
 		ChangeScene(newSceneName, true);
 		currentGameSceneName = newSceneName;
-		isGameStarted = true;
+		IsGameStarted = true;
+		IsGameScene = true;
 		playerTeam.SetActiveCamera(true);
 		playerTeam.SetActiveCharacters(true);
 	}
 
-	public void ChangeFromGameScene(String newSceneName) {
+	public Boolean ChangeFromGameScene(String newSceneName) {
+		if (!IsGameScene)
+			return false;
+
 		currentGameSceneContainer = GameObject.FindGameObjectWithTag("SceneContainer");
 		currentGameSceneContainer.SetActive(false);
+		IsGameScene = false;
 		playerTeam.SetActiveCamera(false);
 		playerTeam.SetActiveCharacters(false);
 		ChangeScene(newSceneName);
+
+		return true;
 	}
 
-	public void ResumeGameScene() {
+	public Boolean ResumeGameScene() {
+		if (IsGameScene)
+			return false;
+
 		ChangeScene(currentGameSceneName, true);
 		currentGameSceneContainer.SetActive(true);
+		IsGameScene = true;
 		playerTeam.SetActiveCamera(true);
 		playerTeam.SetActiveCharacters(true);
+
+		return true;
 	}
 
 	public void ChangeToBattleScene(String newSceneName, List<Character> enemies) {

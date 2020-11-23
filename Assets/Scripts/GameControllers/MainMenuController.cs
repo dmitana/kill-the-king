@@ -24,7 +24,7 @@ public class MainMenuController : MonoBehaviour {
 	}
 
     private void EnableResumeGame(Scene sceneCurrent, Scene sceneNext) {
-		if (sceneController != null && sceneController.isGameStarted) {
+		if (sceneController != null && sceneController.IsGameStarted) {
 			newGameButton.gameObject.SetActive(false);
 			resumeGameButton.gameObject.SetActive(true);
 		}
