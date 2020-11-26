@@ -25,11 +25,14 @@ public class BattleController : MonoBehaviour {
 
     public void FillEnemiesToBattle() {
         enemyTeam = GameObject.FindGameObjectWithTag("EnemyTeam");
+        Team enemyTeamComp = enemyTeam.GetComponent<Team>();
 		Transform enemyTeamTransform = enemyTeam.transform;
 		Vector3 position = enemyTeamTransform.position;
 
 		foreach (Character enemy in Enemies) {
-			Instantiate(enemy, position, Quaternion.identity, enemyTeamTransform);
+			Character newEnemy = Instantiate(enemy, position, Quaternion.identity, enemyTeamTransform);
+            enemyTeamComp.AddCharacterToTeam(newEnemy);
+            newEnemy.SetTeam(enemyTeamComp);
 			position[0] += 1;
 		}
     }
@@ -62,7 +65,7 @@ public class BattleController : MonoBehaviour {
         Team enemyTeamComp = (Team) enemyTeam.GetComponent(typeof(Team));
 
         while (playerTeamComp.GetCharacters().Count > 0 && enemyTeamComp.GetCharacters().Count > 0) {
-            
+            Debug.Log("Nove kolo zacalo");
             foreach (Character c in playerTeamComp.GetCharacters()) {
                 playerTeamComp.AddUnplayedCharacter(c);
                 playerTeamComp.RemovePlayedCharacter(c); // prerobit tak, aby to vymazalo aj mrtve postavy
@@ -75,6 +78,7 @@ public class BattleController : MonoBehaviour {
             
             bool playerTeamRound = playerTeamFirst;
             while (playerTeamComp.GetUnplayedCharacters().Count > 0 || enemyTeamComp.GetUnplayedCharacters().Count > 0) {
+                Debug.Log("Novy tah");
                 chosenCharacter = null;
 
                 currentTeam = (playerTeamRound) ? playerTeamComp : enemyTeamComp;
@@ -95,7 +99,7 @@ public class BattleController : MonoBehaviour {
                 
                 chosenTargets = new List<Character>();
                 chosenSkill.HighlightTargets(playerTeamComp, enemyTeamComp);
-                while (chosenSkill.GetNumOfTargets() == chosenTargets.Count) {
+                while (chosenSkill.GetNumOfTargets() != chosenTargets.Count) {
                     yield return new WaitForSeconds(0.5f);
                 }
 
@@ -130,5 +134,9 @@ public class BattleController : MonoBehaviour {
 
     public Team GetCurrentTeam() {
         return currentTeam;
+    }
+
+    public GameObject GetSkillField() {
+        return skillField;
     }
 }

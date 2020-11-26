@@ -4,29 +4,32 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 	public string characterName;
-    public int health;
-    public int baseStrength;
+	public int health;
+	public int baseStrength;
 
 	public List<Skill> availableSkills = new List<Skill>();
-    public List<Skill> skills = new List<Skill>();
+	public List<Skill> skills = new List<Skill>();
 
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
 	private Team team;
 
-    public void AddEffect(Effect effect) {
-        activeEffects.Add(effect);
-    }
+	public void AddEffect(Effect effect) {
+		activeEffects.Add(effect);
+	}
 
-    public void DecreaseHealth(int damage) {
-        health -= damage;
-        if (health <= 0)
-	        Destroy(this);
-    }
+	public void DecreaseHealth(int damage) {
+		health -= damage;
+		Debug.Log($"New character health: {health}");
+		if (health <= 0) {
+			team.RemoveCharacterFromTeam(this);
+			Destroy(gameObject);
+		}
+	}
 
 	public void AddSkill(Skill skill) {
 		if (!availableSkills.Contains(skill))
-            throw new System.ArgumentException(
+			throw new System.ArgumentException(
 				$"Trying to add {skill.name}, which is not available for current character."
 			);
 
@@ -40,7 +43,7 @@ public class Character : MonoBehaviour {
 	public void SetBattleController(BattleController controller) {
 		battleController = controller;
 	}
-	
+
 	private void OnMouseDown() {
 		if (battleController.GetChosenCharacter() == null) {
 			if (battleController.GetCurrentTeam().GetPlayedCharacters().Contains(this)) {
@@ -50,17 +53,17 @@ public class Character : MonoBehaviour {
 
 			battleController.SetChosenCharacter(this);
 		}
-		else
+		else if (battleController.GetChosenSkill() != null)
 			battleController.AddTarget(this);
 	}
 
 	public void DisplaySkills() {
-		GameObject skillField = GameObject.FindGameObjectWithTag("SkillField");
-		skillField.SetActive(true);
-		
+		Debug.Log("Display skills");
+		GameObject skillField = battleController.GetSkillField();
+
 		UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
-		for (int i = 0; i < availableSkills.Count; i++) {
-			skillFields[i].SetSkill(availableSkills[i]);
+		for (int i = 0; i < skills.Count; i++) {
+			skillFields[i].SetSkill(skills[i]);
 		}
 	}
 

@@ -45,7 +45,7 @@ public class Team : MonoBehaviour {
     }
 
     public List<Character> GetCharacters() {
-        return playedCharacters;
+        return characters;
     }
 
     public List<Character> GetPlayedCharacters() {
