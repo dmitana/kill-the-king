@@ -59,16 +59,18 @@ public class SceneController : MonoBehaviour {
 		playerTeam.SetActiveCharacters(true);
 	}
 
-	public Boolean ChangeFromGameScene(String newSceneName) {
+	public Boolean ChangeFromGameScene(String newSceneName, Boolean unloadCurrentScene = false) {
 		if (!IsGameScene)
 			return false;
 
-		gameSceneContainers.Push(GameObject.FindGameObjectWithTag("SceneContainer"));
-		gameSceneContainers.Peek().SetActive(false);
+		if (!unloadCurrentScene) {
+			gameSceneContainers.Push(GameObject.FindGameObjectWithTag("SceneContainer"));
+			gameSceneContainers.Peek().SetActive(false);
+		}
 		IsGameScene = false;
 		playerTeam.SetActiveCamera(false);
 		playerTeam.SetActiveCharacters(false);
-		ChangeScene(newSceneName);
+		ChangeScene(newSceneName, unloadCurrentScene);
 
 		return true;
 	}

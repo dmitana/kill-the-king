@@ -11,6 +11,8 @@ public class Team : MonoBehaviour {
     private List<Character> playedCharacters = new List<Character>();
     private List<Character> unplayedCharacters = new List<Character>();
 
+	public int CurrentEnvironment { get; private set; } = 0;
+
     void Awake() {
 		if (playerTeamInstance == null && gameObject.tag == "PlayerTeam") {
 			playerTeamInstance = this;
@@ -76,4 +78,8 @@ public class Team : MonoBehaviour {
             Debug.Log(c.characterName);
         }
     }
+
+	public void IncreaseEnvironment() {
+		++CurrentEnvironment;
+	}
 }

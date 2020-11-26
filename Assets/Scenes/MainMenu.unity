@@ -1358,7 +1358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ffa4d5742dfa0a0a239f6aa1385692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGameStarted: 0
 --- !u!4 &2037618716
 Transform:
   m_ObjectHideFlags: 0
@@ -1510,6 +1509,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2872859250312053130, guid: 6791e638e1c76a3ea904979dfb5e8700,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4221367839710944861, guid: 6791e638e1c76a3ea904979dfb5e8700,
         type: 3}
       propertyPath: m_Name
