@@ -10,8 +10,9 @@ public class Character : MonoBehaviour {
 	public List<Skill> availableSkills = new List<Skill>();
     public List<Skill> skills = new List<Skill>();
 
-    private List<Effect> activeEffects = new List<Effect>();
-    private BattleController battleController;
+	private List<Effect> activeEffects = new List<Effect>();
+	private BattleController battleController;
+	private Team team;
 
     public void AddEffect(Effect effect) {
         activeEffects.Add(effect);
@@ -61,5 +62,9 @@ public class Character : MonoBehaviour {
 		for (int i = 0; i < availableSkills.Count; i++) {
 			skillFields[i].SetSkill(availableSkills[i]);
 		}
+	}
+
+	public void SetTeam(Team t) {
+		team = t;
 	}
 }

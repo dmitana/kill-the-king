@@ -80,8 +80,10 @@ public class TeamSelectionController : MonoBehaviour {
 	}
 
 	private void AddRemoveCharacter(bool change, Character character) {
-		if (change)
+		if (change) {
 			playerTeam.AddCharacterToTeam(character);
+			character.SetTeam(playerTeam);
+		}
 		else
 			playerTeam.RemoveCharacterFromTeam(character);
 	}
