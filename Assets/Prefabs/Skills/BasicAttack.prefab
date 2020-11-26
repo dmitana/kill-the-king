@@ -51,3 +51,4 @@ MonoBehaviour:
   cooldown: 0
   maxCooldown: 0
   effects: []
+  numOfTargets: 1
