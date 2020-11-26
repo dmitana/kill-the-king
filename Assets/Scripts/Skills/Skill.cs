@@ -29,9 +29,13 @@ public class Skill : MonoBehaviour {
         }
     }
 
-    private void ApplySkill(Character attacker, Character target) { }
+    public virtual void ApplySkill(Character attacker, Character target) {
+        Debug.Log("Skill main class");
+    }
 
-    public void HighlightTargets(Team playerTeam, Team enemyTeam) { }
+    public virtual void HighlightTargets(Team playerTeam, Team enemyTeam) {
+        Debug.Log("Skill main class");
+    }
 
     public int GetNumOfTargets() {
         return numOfTargets;

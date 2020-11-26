@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicAttack : Skill {
-    private void ApplySkill(Character attacker, Character target) {
+    public override void ApplySkill(Character attacker, Character target) {
         var damage = attacker.baseStrength;
         target.DecreaseHealth(damage);
     }
 
-    public void HighlightTargets(Team playerTeam, Team enemyTeam) {
+    public override void HighlightTargets(Team playerTeam, Team enemyTeam) {
         Debug.Log("All enemies are valid targets.");
     }
 }
