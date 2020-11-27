@@ -14,12 +14,14 @@ public class SceneController : MonoBehaviour {
 	private Stack<GameObject> gameSceneContainers = new Stack<GameObject>();
 	private Team playerTeam;
 	private Boolean isChangeToBattleScene = false;
+	private Boolean isChangeToGameScene = false;
     private BattleController battleController;
 
     void Awake() {
 		battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
 		playerTeam = Team.playerTeamInstance;
 
+		SceneManager.activeSceneChanged += OnChangeToGameScene;
 		SceneManager.activeSceneChanged += OnChangeToBattleScene;
     }
 
@@ -55,8 +57,25 @@ public class SceneController : MonoBehaviour {
 		currentGameSceneName = newSceneName;
 		IsGameStarted = true;
 		IsGameScene = true;
+
+		// Activate change scene callback
+		isChangeToGameScene = true;
+	}
+
+	public void OnChangeToGameScene(Scene sceneCurrent, Scene sceneNext) {
+		if (!isChangeToGameScene)
+			return;
+
+		// Place player team to initial position
+		GameObject playerTeamInitialPosition = GameObject.FindGameObjectWithTag("PlayerTeamInitialPosition");
+		playerTeam.gameObject.transform.position = playerTeamInitialPosition.transform.position;
+
+		// Activate player team
 		playerTeam.SetActiveCamera(true);
 		playerTeam.SetActiveCharacters(true);
+
+		// Deactivate change scene callback
+		isChangeToGameScene = false;
 	}
 
 	public Boolean ChangeFromGameScene(String newSceneName, Boolean unloadCurrentScene = false) {
@@ -94,16 +113,22 @@ public class SceneController : MonoBehaviour {
 		gameSceneContainers.Peek().SetActive(false);
 		playerTeam.SetActiveCamera(false);
 		battleController.Enemies = enemies;
-		isChangeToBattleScene = true;
-		IsBattleScene = true;
+
 		ChangeScene(newSceneName);
+		IsBattleScene = true;
+
+		// Activate change scene callback
+		isChangeToBattleScene = true;
 	}
 
 	public void OnChangeToBattleScene(Scene sceneCurrent, Scene sceneNext) {
-		if (isChangeToBattleScene) {
-			battleController.FillEnemiesToBattle();
-			battleController.InitializeCombat();
-			isChangeToBattleScene = false;
-		}
+		if (!isChangeToBattleScene)
+			return;
+
+		battleController.FillEnemiesToBattle();
+		battleController.InitializeCombat();
+
+		// Deactivate change scene helper
+		isChangeToBattleScene = false;
 	}
 }

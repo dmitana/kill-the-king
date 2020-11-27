@@ -11,6 +11,8 @@ TagManager:
   - SceneContainer
   - BattleCamera
   - SkillField
+  - ResumeGameButton
+  - PlayerTeamInitialPosition
   layers:
   - Default
   - TransparentFX
