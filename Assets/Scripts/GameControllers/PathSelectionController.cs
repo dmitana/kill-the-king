@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PathSelectionController : MonoBehaviour {
 	public GameObject countrySideEnvButtons;
 	public GameObject townEnvButtons;
+	public GameObject castleEnvButtons;
 
 	private SceneController sceneController;
 	private Team playerTeam;
@@ -20,6 +21,10 @@ public class PathSelectionController : MonoBehaviour {
 		if (playerTeam.CurrentEnvironment > 0) {
 			townEnvButtons.SetActive(true);
 			SetNonInteractable(countrySideEnvButtons);
+		}
+		if (playerTeam.CurrentEnvironment > 1) {
+			castleEnvButtons.SetActive(true);
+			SetNonInteractable(townEnvButtons);
 		}
 	}
 
