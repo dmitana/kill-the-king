@@ -31,8 +31,10 @@ public class Team : MonoBehaviour {
     }
 
     public void SetCharactersParent() {
-        foreach (Character character in characters)
+        foreach (Character character in characters) {
             character.gameObject.GetComponent<Transform>().SetParent(transform);
+            character.gameObject.GetComponent<FixedJoint2D>().connectedBody = gameObject.GetComponent<Rigidbody2D>();
+        }
     }
 
     public void SetActiveCharacters(Boolean value) {
