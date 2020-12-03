@@ -59,7 +59,7 @@ public class Character : MonoBehaviour {
 
 			battleController.SetChosenCharacter(this);
 		}
-		else if (battleController.GetChosenSkill() != null)
+		else if (battleController.GetChosenSkill() != null && battleController.ValidTargets.Contains(this))
 			battleController.AddTarget(this);
 	}
 

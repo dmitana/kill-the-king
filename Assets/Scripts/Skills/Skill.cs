@@ -33,8 +33,9 @@ public class Skill : MonoBehaviour {
         Debug.Log("Skill main class");
     }
 
-    public virtual void HighlightTargets(Team playerTeam, Team enemyTeam) {
+    public virtual List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
         Debug.Log("Skill main class");
+        return new List<Character>();
     }
 
     public int GetNumOfTargets() {

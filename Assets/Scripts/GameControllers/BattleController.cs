@@ -5,14 +5,16 @@ using UnityEngine;
 using Random = System.Random;
 
 public class BattleController : MonoBehaviour {
-	private List<Character> enemies;
-	public List<Character> Enemies { get; set; }
+    private List<Character> enemies;
+    public List<Character> Enemies { get; set; }
     private GameObject playerTeam;
     private GameObject enemyTeam;
     private Character chosenCharacter;
     private List<Character> chosenTargets;
+
+    public List<Character> ValidTargets { get; private set; }
     private Skill chosenSkill;
-    
+
     private Team currentTeam;
     private bool playerTeamFirst;
     private GameObject skillField;
@@ -26,15 +28,15 @@ public class BattleController : MonoBehaviour {
     public void FillEnemiesToBattle() {
         enemyTeam = GameObject.FindGameObjectWithTag("EnemyTeam");
         Team enemyTeamComp = enemyTeam.GetComponent<Team>();
-		Transform enemyTeamTransform = enemyTeam.transform;
-		Vector3 position = enemyTeamTransform.position;
+        Transform enemyTeamTransform = enemyTeam.transform;
+        Vector3 position = enemyTeamTransform.position;
 
-		foreach (Character enemy in Enemies) {
-			Character newEnemy = Instantiate(enemy, position, Quaternion.identity, enemyTeamTransform);
+        foreach (Character enemy in Enemies) {
+            Character newEnemy = Instantiate(enemy, position, Quaternion.identity, enemyTeamTransform);
             enemyTeamComp.AddCharacterToTeam(newEnemy);
             newEnemy.SetTeam(enemyTeamComp);
-			position[0] += 1;
-		}
+            position[0] += 1;
+        }
     }
 
     public void InitializeCombat() {
@@ -47,11 +49,11 @@ public class BattleController : MonoBehaviour {
         foreach (Character c in ((Team) playerTeam.GetComponent(typeof(Team))).GetCharacters()) {
             c.InitializeForBattle(this);
         }
-        
+
         foreach (Character c in ((Team) enemyTeam.GetComponent(typeof(Team))).GetCharacters()) {
             c.InitializeForBattle(this);
         }
-        
+
         skillField = GameObject.FindGameObjectWithTag("SkillField");
         foreach (UISkillField field in skillField.transform.GetComponentsInChildren<UISkillField>()) {
             field.SetBattleController(this);
@@ -70,22 +72,24 @@ public class BattleController : MonoBehaviour {
                 playerTeamComp.AddUnplayedCharacter(c);
                 playerTeamComp.RemovePlayedCharacter(c); // prerobit tak, aby to vymazalo aj mrtve postavy
             }
-            
+
             foreach (Character c in enemyTeamComp.GetCharacters()) {
                 enemyTeamComp.AddUnplayedCharacter(c);
                 enemyTeamComp.RemovePlayedCharacter(c);
             }
-            
+
             bool playerTeamRound = playerTeamFirst;
-            while (playerTeamComp.GetUnplayedCharacters().Count > 0 || enemyTeamComp.GetUnplayedCharacters().Count > 0) {
+            while (playerTeamComp.GetUnplayedCharacters().Count > 0 ||
+                   enemyTeamComp.GetUnplayedCharacters().Count > 0) {
                 Debug.Log("Novy tah");
                 chosenCharacter = null;
 
                 currentTeam = (playerTeamRound) ? playerTeamComp : enemyTeamComp;
-                playerTeamRound = !playerTeamRound;
-                if (currentTeam.GetUnplayedCharacters().Count == 0)
+                if (currentTeam.GetUnplayedCharacters().Count == 0) {
+                    playerTeamRound = !playerTeamRound;
                     continue;
-                
+                }
+
                 currentTeam.HighlightUnplayed();
                 while (chosenCharacter == null) {
                     yield return new WaitForSeconds(0.5f);
@@ -96,9 +100,9 @@ public class BattleController : MonoBehaviour {
                 while (chosenSkill == null) {
                     yield return new WaitForSeconds(0.5f);
                 }
-                
+
                 chosenTargets = new List<Character>();
-                chosenSkill.HighlightTargets(playerTeamComp, enemyTeamComp);
+                ValidTargets = chosenSkill.HighlightTargets(playerTeamComp, enemyTeamComp, playerTeamRound);
                 while (chosenSkill.GetNumOfTargets() != chosenTargets.Count) {
                     yield return new WaitForSeconds(0.5f);
                 }
@@ -106,6 +110,7 @@ public class BattleController : MonoBehaviour {
                 chosenSkill.ApplySkill(chosenCharacter, chosenTargets);
                 currentTeam.AddPlayedCharacter(chosenCharacter);
                 currentTeam.RemoveUnplayedCharacter(chosenCharacter);
+                playerTeamRound = !playerTeamRound;
             }
         }
 
