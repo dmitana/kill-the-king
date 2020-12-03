@@ -45,11 +45,11 @@ public class BattleController : MonoBehaviour {
         playerTeamFirst = (rng.Next(2) == 0);
 
         foreach (Character c in ((Team) playerTeam.GetComponent(typeof(Team))).GetCharacters()) {
-            c.SetBattleController(this);
+            c.InitializeForBattle(this);
         }
         
         foreach (Character c in ((Team) enemyTeam.GetComponent(typeof(Team))).GetCharacters()) {
-            c.SetBattleController(this);
+            c.InitializeForBattle(this);
         }
         
         skillField = GameObject.FindGameObjectWithTag("SkillField");

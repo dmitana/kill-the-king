@@ -13,6 +13,7 @@ public class Character : MonoBehaviour {
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
 	private Team team;
+	private bool inBattle = false;
 
 	public void AddEffect(Effect effect) {
 		activeEffects.Add(effect);
@@ -40,12 +41,17 @@ public class Character : MonoBehaviour {
 		skills.Remove(skill);
 	}
 
-	public void SetBattleController(BattleController controller) {
+	public void InitializeForBattle(BattleController controller) {
 		battleController = controller;
+		inBattle = true;
 	}
 
 	private void OnMouseDown() {
-		if (battleController.GetChosenCharacter() == null) {
+		if (inBattle == false)
+			return;
+
+		Team currentTeam = battleController.GetCurrentTeam();
+		if (battleController.GetChosenCharacter() == null && currentTeam.GetUnplayedCharacters().Contains(this)) {
 			if (battleController.GetCurrentTeam().GetPlayedCharacters().Contains(this)) {
 				Debug.Log($"Character {characterName} was already used.");
 				return;
