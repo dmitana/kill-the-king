@@ -10,8 +10,8 @@ public class TeamSelectionController : MonoBehaviour {
 	// UI game objects
 	public GameObject assassinUI;
 	public GameObject darkKnightUI;
-	public GameObject characterDetailUI;
-	public List<GameObject> skillsUI;
+	public CharacterDetailUI characterDetailUI;
+	public GameObject teamSelectionUI;
 
 	// Public instantiated prefabs
 	public Character assassin;
@@ -20,19 +20,15 @@ public class TeamSelectionController : MonoBehaviour {
 	// Assassin's UI elements
 	private Toggle assassinToggle;
 	private Button assassinButton;
-	
+
 	// Dark Knight's UI elements
 	private Toggle darkKnightToggle;
 	private Button darkKnightButton;
 
-	// Character detail UI childen
-	private TMP_Text characterNameText;
-	private TMP_Text characterHealthText;
-	private TMP_Text characterStrenghtText;
+	private CharacterDetailUI currentCharacterDetailUI;
+	private Dictionary<String, CharacterDetailUI> characterDetailUIMapping = new Dictionary<String, CharacterDetailUI>();
 
-	// Private Instantiated prefabs
 	private Team playerTeam;
-
 	private SceneController sceneController;
 
 	void Awake() {
@@ -43,19 +39,13 @@ public class TeamSelectionController : MonoBehaviour {
 		assassinToggle = assassinUI.GetComponentInChildren<Toggle>();
 		assassinButton = assassinUI.GetComponentInChildren<Button>();
 		assassinToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, assassin));
-		assassinButton.onClick.AddListener(() => ShowCharacter(assassin));
-		
+		assassinButton.onClick.AddListener(() => CreateCharacterDetailUI(assassin));
+
 		// Add listerens for Dark Knight UI
 		darkKnightToggle = darkKnightUI.GetComponentInChildren<Toggle>();
 		darkKnightButton = darkKnightUI.GetComponentInChildren<Button>();
 		darkKnightToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, darkKnight));
-		darkKnightButton.onClick.AddListener(() => ShowCharacter(darkKnight));
-
-		// Get character detail UI childen
-		var texts = characterDetailUI.GetComponentsInChildren<TMP_Text>();
-		characterNameText = texts[0];
-		characterHealthText = texts[1];
-		characterStrenghtText = texts[2];
+		darkKnightButton.onClick.AddListener(() => CreateCharacterDetailUI(darkKnight));
 	}
 
 	void Update() {
@@ -64,31 +54,21 @@ public class TeamSelectionController : MonoBehaviour {
 	}
 
 	private void CanSelectCharacter(Character character, Toggle characterToggle) {
-		characterToggle.interactable = character.skills.Count == 2 ? true : false;
+		characterToggle.interactable = character.SkillPoints == 0 ? true : false;
 	}
 
-	private void ShowCharacter(Character character) {
-		characterDetailUI.SetActive(true);
-		characterNameText.text = character.characterName;
-		characterHealthText.text = $"Health: {character.health}";
-		characterStrenghtText.text = $"Strength: {character.baseStrength}";
+	private void CreateCharacterDetailUI(Character character) {
+		currentCharacterDetailUI?.gameObject.SetActive(false);
 
-		// Create UI for each skill
-		if (character.availableSkills.Count != skillsUI.Count)
-			throw new System.ArgumentException(
-				$"Character must have {skillsUI.Count} skill, but has {character.availableSkills.Count}"
-			);
-
-		for (int i = 0;  i < skillsUI.Count; ++i) {
-			var skillTexts = skillsUI[i].GetComponentsInChildren<TMP_Text>();
-			skillTexts[0].text = character.availableSkills[i].skillName;
-			skillTexts[1].text = character.availableSkills[i].description;
-
-			int n = i;
-			Toggle toggle = skillsUI[i].GetComponentInChildren<Toggle>();
-			toggle.onValueChanged.AddListener(
-				(change) => AddRemoveSkill(change, character.availableSkills[n], character)
-			);
+		if (characterDetailUIMapping.ContainsKey(character.characterName)) {
+			Debug.Log(characterDetailUIMapping[character.characterName]);
+			currentCharacterDetailUI = characterDetailUIMapping[character.characterName];
+			currentCharacterDetailUI.gameObject.SetActive(true);
+		}
+		else {
+			currentCharacterDetailUI = Instantiate(characterDetailUI, teamSelectionUI.transform);
+			currentCharacterDetailUI.Show(character);
+			characterDetailUIMapping.Add(character.characterName, currentCharacterDetailUI);
 		}
 	}
 
@@ -101,13 +81,6 @@ public class TeamSelectionController : MonoBehaviour {
 			playerTeam.RemoveCharacterFromTeam(character);
 			character.SetTeam(null);
 		}
-	}
-
-	private void AddRemoveSkill(bool change, Skill skill, Character character) {
-		if (change)
-			character.AddSkill(skill);
-		else
-			character.RemoveSkill(skill);
 	}
 
 	public void CreateTeamButton() {
