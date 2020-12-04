@@ -2,16 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class Team : MonoBehaviour {
 	public static Team playerTeamInstance;
     public Camera teamCamera;
+    public bool isAI = false;
+    public BattleController BattleController { get; set; }
 
-    private List<Character> characters = new List<Character>();
-    private List<Character> playedCharacters = new List<Character>();
-    private List<Character> unplayedCharacters = new List<Character>();
+    public List<Character> Characters { get; private set; }
+    public List<Character> PlayedCharacters { get; private set; }
+    public List<Character> UnplayedCharacters { get; private set; }
 
 	public int CurrentEnvironment { get; private set; } = 0;
+
+    private Random rng;
 
     void Awake() {
 		if (playerTeamInstance == null && gameObject.tag == "PlayerTeam") {
@@ -20,25 +25,33 @@ public class Team : MonoBehaviour {
 		}
 		else if (playerTeamInstance != null && gameObject.tag == "PlayerTeam")
 			Destroy(gameObject);
+        Characters = new List<Character>();
+        PlayedCharacters = new List<Character>();
+        UnplayedCharacters = new List<Character>();
+        rng = new Random();
     }
 
     public void AddCharacterToTeam(Character c) {
-        characters.Add(c);
+        Characters.Add(c);
     }
 
     public void RemoveCharacterFromTeam(Character c) {
-        characters.Remove(c);
+        Characters.Remove(c);
+        if (UnplayedCharacters.Contains(c))
+            UnplayedCharacters.Remove(c);
+        if (PlayedCharacters.Contains(c))
+            PlayedCharacters.Remove(c);
     }
 
     public void SetCharactersParent() {
-        foreach (Character character in characters) {
+        foreach (Character character in Characters) {
             character.gameObject.GetComponent<Transform>().SetParent(transform);
             character.gameObject.GetComponent<FixedJoint2D>().connectedBody = gameObject.GetComponent<Rigidbody2D>();
         }
     }
 
     public void SetActiveCharacters(Boolean value) {
-        foreach (Character c in characters)
+        foreach (Character c in Characters)
             c.gameObject.SetActive(value);
     }
 
@@ -46,37 +59,25 @@ public class Team : MonoBehaviour {
         teamCamera.gameObject.SetActive(value);
     }
 
-    public List<Character> GetCharacters() {
-        return characters;
-    }
-
-    public List<Character> GetPlayedCharacters() {
-        return playedCharacters;
-    }
-
     public void AddPlayedCharacter(Character c) {
-        playedCharacters.Add(c);
+        PlayedCharacters.Add(c);
     }
 
     public void RemovePlayedCharacter(Character c) {
-        playedCharacters.Remove(c);
+        PlayedCharacters.Remove(c);
     }
 
     public void AddUnplayedCharacter(Character c) {
-        unplayedCharacters.Add(c);
+        UnplayedCharacters.Add(c);
     }
 
     public void RemoveUnplayedCharacter(Character c) {
-        unplayedCharacters.Remove(c);
-    }
-
-    public List<Character> GetUnplayedCharacters() {
-        return unplayedCharacters;
+        UnplayedCharacters.Remove(c);
     }
 
     public void HighlightUnplayed() {
         Debug.Log("Unplayed characters");
-        foreach (Character c in unplayedCharacters) {
+        foreach (Character c in UnplayedCharacters) {
             Debug.Log(c.characterName);
         }
     }
@@ -84,4 +85,17 @@ public class Team : MonoBehaviour {
 	public void IncreaseEnvironment() {
 		++CurrentEnvironment;
 	}
+
+    public void SelectCharacter() {
+        int idx = rng.Next(UnplayedCharacters.Count);
+        BattleController.ChosenCharacter = UnplayedCharacters[idx];
+    }
+
+    public void SelectTargets(int numOfTargets, List<Character> validTargets) {
+        while (numOfTargets > BattleController.ChosenTargets.Count) {
+            int idx = rng.Next(validTargets.Count);
+            if (!BattleController.ChosenTargets.Contains(validTargets[idx]))
+                BattleController.ChosenTargets.Add(validTargets[idx]);
+        }
+    }
 }

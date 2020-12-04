@@ -14,8 +14,8 @@ public class UISkillField : MonoBehaviour {
     }
     
     public void ChooseSkill() {
-        if (battleController.GetChosenSkill() == null)
-            battleController.SetChosenSkill(skill);
+        if (battleController.ChosenSkill == null)
+            battleController.ChosenSkill = skill;
         Debug.Log("Skill chosen");
     }
     

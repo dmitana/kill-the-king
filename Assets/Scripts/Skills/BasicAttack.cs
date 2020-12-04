@@ -10,6 +10,6 @@ public class BasicAttack : Skill {
 
     public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
         Debug.Log("All enemies are valid targets.");
-        return (playerTeamTurn) ? enemyTeam.GetCharacters() : playerTeam.GetCharacters();
+        return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
     }
 }

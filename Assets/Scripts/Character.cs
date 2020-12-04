@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class Character : MonoBehaviour {
 	public string characterName;
@@ -51,22 +52,22 @@ public class Character : MonoBehaviour {
 			return;
 
 		Team currentTeam = battleController.GetCurrentTeam();
-		if (battleController.GetChosenCharacter() == null && currentTeam.GetUnplayedCharacters().Contains(this)) {
-			if (battleController.GetCurrentTeam().GetPlayedCharacters().Contains(this)) {
+		if (battleController.ChosenCharacter == null && currentTeam.UnplayedCharacters.Contains(this)) {
+			if (battleController.GetCurrentTeam().PlayedCharacters.Contains(this)) {
 				Debug.Log($"Character {characterName} was already used.");
 				return;
 			}
 
-			battleController.SetChosenCharacter(this);
+			battleController.ChosenCharacter = this;
 		}
-		else if (battleController.GetChosenSkill() != null && battleController.ValidTargets.Contains(this))
-			battleController.AddTarget(this);
+		else if (battleController.ChosenSkill != null && battleController.ValidTargets.Contains(this))
+			battleController.ChosenTargets.Add(this);
 	}
 
 	public void DisplaySkills() {
 		Debug.Log("Display skills");
+		
 		GameObject skillField = battleController.GetSkillField();
-
 		UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
 		for (int i = 0; i < skills.Count; i++) {
 			skillFields[i].SetSkill(skills[i]);
@@ -75,5 +76,11 @@ public class Character : MonoBehaviour {
 
 	public void SetTeam(Team t) {
 		team = t;
+	}
+
+	public void SelectSkill() {
+		Random rng = new Random();
+		int idx = rng.Next(skills.Count);
+		battleController.ChosenSkill = skills[idx];
 	}
 }
