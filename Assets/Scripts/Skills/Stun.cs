@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Invisibility : Skill {
+public class Stun : Skill {
     public override void ApplySkill(Character attacker, Character target) { }
 }

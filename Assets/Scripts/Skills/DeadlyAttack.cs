@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeadlyAttack : Skill {
-    void ApplySkill(Character attacker, Character target) {
+    public override void ApplySkill(Character attacker, Character target) {
     }
 }

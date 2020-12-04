@@ -3,6 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PoisonousAttack : Skill {
-    void ApplySkill(Character attacker, Character target) {
-    }
+    public override void ApplySkill(Character attacker, Character target) { }
 }

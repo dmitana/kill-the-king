@@ -9,15 +9,21 @@ using UnityEngine.UI;
 public class TeamSelectionController : MonoBehaviour {
 	// UI game objects
 	public GameObject assassinUI;
+	public GameObject darkKnightUI;
 	public GameObject characterDetailUI;
 	public List<GameObject> skillsUI;
 
 	// Public instantiated prefabs
 	public Character assassin;
+	public Character darkKnight;
 
 	// Assassin's UI elements
 	private Toggle assassinToggle;
 	private Button assassinButton;
+	
+	// Dark Knight's UI elements
+	private Toggle darkKnightToggle;
+	private Button darkKnightButton;
 
 	// Character detail UI childen
 	private TMP_Text characterNameText;
@@ -38,6 +44,12 @@ public class TeamSelectionController : MonoBehaviour {
 		assassinButton = assassinUI.GetComponentInChildren<Button>();
 		assassinToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, assassin));
 		assassinButton.onClick.AddListener(() => ShowCharacter(assassin));
+		
+		// Add listerens for Dark Knight UI
+		darkKnightToggle = darkKnightUI.GetComponentInChildren<Toggle>();
+		darkKnightButton = darkKnightUI.GetComponentInChildren<Button>();
+		darkKnightToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, darkKnight));
+		darkKnightButton.onClick.AddListener(() => ShowCharacter(darkKnight));
 
 		// Get character detail UI childen
 		var texts = characterDetailUI.GetComponentsInChildren<TMP_Text>();
@@ -48,6 +60,7 @@ public class TeamSelectionController : MonoBehaviour {
 
 	void Update() {
 		CanSelectCharacter(assassin, assassinToggle);
+		CanSelectCharacter(darkKnight, darkKnightToggle);
 	}
 
 	private void CanSelectCharacter(Character character, Toggle characterToggle) {
@@ -84,8 +97,10 @@ public class TeamSelectionController : MonoBehaviour {
 			playerTeam.AddCharacterToTeam(character);
 			character.SetTeam(playerTeam);
 		}
-		else
+		else {
 			playerTeam.RemoveCharacterFromTeam(character);
+			character.SetTeam(null);
+		}
 	}
 
 	private void AddRemoveSkill(bool change, Skill skill, Character character) {

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6466053576492194007
+--- !u!1 &1823097360260233006
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3797718873898017272}
-  - component: {fileID: 7688424282076989447}
+  - component: {fileID: 145856519459582480}
+  - component: {fileID: -4789432574398516970}
   m_Layer: 0
-  m_Name: Invisibility
+  m_Name: StrongAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3797718873898017272
+--- !u!4 &145856519459582480
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6466053576492194007}
+  m_GameObject: {fileID: 1823097360260233006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,20 +31,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7688424282076989447
+--- !u!114 &-4789432574398516970
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6466053576492194007}
+  m_GameObject: {fileID: 1823097360260233006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cf4688541d13a29bf4dbefef338900, type: 3}
+  m_Script: {fileID: 11500000, guid: 7903f6c04b2197e6a9d5b52c1a321d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Invisibility
-  description: Invisibility description
+  skillName: Strong Attack
+  description: Strong Attack description
   strength: 0
   maxStrength: 0
   increasePerUse: 0
