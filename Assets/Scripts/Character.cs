@@ -7,9 +7,9 @@ public class Character : MonoBehaviour {
 	public string characterName;
 	public int health;
 	public int baseStrength;
-
 	public List<Skill> availableSkills = new List<Skill>();
 	public List<Skill> skills = new List<Skill>();
+	public int SkillPoints { get; private set; } = 1;
 
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
@@ -36,10 +36,12 @@ public class Character : MonoBehaviour {
 			);
 
 		skills.Add(skill);
+		--SkillPoints;
 	}
 
 	public void RemoveSkill(Skill skill) {
 		skills.Remove(skill);
+		++SkillPoints;
 	}
 
 	public void InitializeForBattle(BattleController controller) {
@@ -66,7 +68,7 @@ public class Character : MonoBehaviour {
 
 	public void DisplaySkills() {
 		Debug.Log("Display skills");
-		
+
 		GameObject skillField = battleController.GetSkillField();
 		UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
 		for (int i = 0; i < skills.Count; i++) {
@@ -82,5 +84,9 @@ public class Character : MonoBehaviour {
 		Random rng = new Random();
 		int idx = rng.Next(skills.Count);
 		battleController.ChosenSkill = skills[idx];
+	}
+
+	public void AddSkillPoint() {
+		++SkillPoints;
 	}
 }

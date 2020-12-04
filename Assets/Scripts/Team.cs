@@ -98,4 +98,9 @@ public class Team : MonoBehaviour {
                 BattleController.ChosenTargets.Add(validTargets[idx]);
         }
     }
+
+	public void AddSkillPointToCharacters() {
+		foreach (Character character in Characters)
+			character.AddSkillPoint();
+	}
 }
