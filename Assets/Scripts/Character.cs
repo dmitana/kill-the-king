@@ -10,10 +10,10 @@ public class Character : MonoBehaviour {
 	public List<Skill> availableSkills = new List<Skill>();
 	public List<Skill> skills = new List<Skill>();
 	public int SkillPoints { get; private set; } = 1;
+	public Team Team { get; set; }
 
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
-	private Team team;
 	private bool inBattle = false;
 
 	public void AddEffect(Effect effect) {
@@ -24,7 +24,7 @@ public class Character : MonoBehaviour {
 		health -= damage;
 		Debug.Log($"New character health: {health}");
 		if (health <= 0) {
-			team.RemoveCharacterFromTeam(this);
+			Team.RemoveCharacterFromTeam(this);
 			Destroy(gameObject);
 		}
 	}
@@ -74,10 +74,6 @@ public class Character : MonoBehaviour {
 		for (int i = 0; i < skills.Count; i++) {
 			skillFields[i].SetSkill(skills[i]);
 		}
-	}
-
-	public void SetTeam(Team t) {
-		team = t;
 	}
 
 	public void SelectSkill() {

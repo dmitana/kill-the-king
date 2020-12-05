@@ -33,15 +33,22 @@ public class Team : MonoBehaviour {
 
     public void AddCharacterToTeam(Character c) {
         Characters.Add(c);
+		c.Team = this;
     }
 
     public void RemoveCharacterFromTeam(Character c) {
         Characters.Remove(c);
+		c.Team = null;
+
         if (UnplayedCharacters.Contains(c))
             UnplayedCharacters.Remove(c);
         if (PlayedCharacters.Contains(c))
             PlayedCharacters.Remove(c);
     }
+
+	public void ClearCharacters() {
+		Characters.Clear();
+	}
 
     public void SetCharactersParent() {
         foreach (Character character in Characters) {

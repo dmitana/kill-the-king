@@ -73,14 +73,10 @@ public class TeamSelectionController : MonoBehaviour {
 	}
 
 	private void AddRemoveCharacter(bool change, Character character) {
-		if (change) {
+		if (change)
 			playerTeam.AddCharacterToTeam(character);
-			character.SetTeam(playerTeam);
-		}
-		else {
+		else
 			playerTeam.RemoveCharacterFromTeam(character);
-			character.SetTeam(null);
-		}
 	}
 
 	public void CreateTeamButton() {
@@ -89,6 +85,7 @@ public class TeamSelectionController : MonoBehaviour {
 	}
 
 	public void BackButton() {
+		playerTeam.ClearCharacters();
 		sceneController.ChangeScene("MainMenu", true);
 	}
 }

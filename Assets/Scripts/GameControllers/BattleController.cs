@@ -34,7 +34,6 @@ public class BattleController : MonoBehaviour {
         foreach (Character enemy in Enemies) {
             Character newEnemy = Instantiate(enemy, position, Quaternion.identity, enemyTeamTransform);
             enemyTeamComp.AddCharacterToTeam(newEnemy);
-            newEnemy.SetTeam(enemyTeamComp);
             position[0] += 1;
         }
     }
