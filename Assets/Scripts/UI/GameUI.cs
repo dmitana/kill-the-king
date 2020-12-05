@@ -7,9 +7,11 @@ public class GameUI : MonoBehaviour {
 	public List<GameObject> charactersUI;
 
 	private Team playerTeam;
+	private SceneController sceneController;
 
 	void Awake() {
 		playerTeam = Team.playerTeamInstance;
+		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
 	}
 
 	void Start() {
@@ -27,5 +29,9 @@ public class GameUI : MonoBehaviour {
 			characterTexts[1].text = $"Health: {playerTeam.Characters[i].health}";
 			characterTexts[2].text = $"Strength: {playerTeam.Characters[i].baseStrength}";
 		}
+	}
+
+	public void OnClick() {
+		sceneController.ChangeFromGameScene("CharactersDetail");
 	}
 }

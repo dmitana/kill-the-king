@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharactersDetailController : MonoBehaviour {
 	public GameObject charactersDetailUI;
 	public CharacterDetailUI characterDetailUI;
 	public GameObject characterDetailPosition;
 	public Button nextButton;
+	public Button backButton;
 
 	private Team playerTeam;
 	private SceneController sceneController;
@@ -16,6 +18,14 @@ public class CharactersDetailController : MonoBehaviour {
 		playerTeam = Team.playerTeamInstance;
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
 	}
+
+    void OnEnable() {
+		SceneManager.activeSceneChanged += EnableNextOrBackButton;
+    }
+
+    void OnDisable() {
+        SceneManager.activeSceneChanged -= EnableNextOrBackButton;
+    }
 
 	void Start() {
 		ShowCharactersDetail();
@@ -43,12 +53,28 @@ public class CharactersDetailController : MonoBehaviour {
 		foreach (Character character in playerTeam.Characters) {
 			totalSkillPoints += character.SkillPoints;
 		}
-		Debug.Log(totalSkillPoints);
 		nextButton.interactable = totalSkillPoints > 0 ? false : true;
 	}
+
+    private void EnableNextOrBackButton(Scene sceneCurrent, Scene sceneNext) {
+		if (sceneController == null)
+			return;
+
+		if (sceneController.IsGameStarted) {
+			nextButton.gameObject.SetActive(false);
+			backButton.gameObject.SetActive(true);
+		}
+		else {
+			nextButton.gameObject.SetActive(true);
+			backButton.gameObject.SetActive(false);
+		}
+    }
 
 	public void NextButton() {
 		sceneController.ChangeScene("PathSelection", true);
 	}
 
+	public void BackButton() {
+		sceneController.ResumeGameScene();
+	}
 }

@@ -86,6 +86,9 @@ public class SceneController : MonoBehaviour {
 			gameSceneContainers.Push(GameObject.FindGameObjectWithTag("SceneContainer"));
 			gameSceneContainers.Peek().SetActive(false);
 		}
+		else
+			IsGameStarted = false;
+
 		IsGameScene = false;
 		playerTeam.SetActiveCamera(false);
 		playerTeam.SetActiveCharacters(false);

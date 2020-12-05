@@ -41,13 +41,18 @@ public class CharacterDetailUI : MonoBehaviour {
 				toggle.group = null;
 				toggle.isOn = true;
 				toggle.interactable = false;
+				continue;
 			}
-			else {
-				int n = i;
-				toggle.onValueChanged.AddListener(
-					(change) => AddRemoveSkill(change, character.availableSkills[n], character)
-				);
+
+			if (character.SkillPoints == 0) {
+				toggle.interactable = false;
+				continue;
 			}
+
+			int n = i;
+			toggle.onValueChanged.AddListener(
+				(change) => AddRemoveSkill(change, character.availableSkills[n], character)
+			);
 		}
 	}
 
