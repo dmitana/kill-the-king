@@ -6,15 +6,22 @@ using Random = System.Random;
 
 public class Team : MonoBehaviour {
 	public static Team playerTeamInstance;
+
     public Camera teamCamera;
     public bool isAI = false;
-    public BattleController BattleController { get; set; }
+	[Space]
+	public int expPerLevel;
+	public float healthIncPerLevel;
+	public float strengthIncPerLevel;
 
+    public BattleController BattleController { get; set; }
     public List<Character> Characters { get; private set; }
     public List<Character> PlayedCharacters { get; private set; }
     public List<Character> UnplayedCharacters { get; private set; }
-
 	public int CurrentEnvironment { get; private set; } = 0;
+
+	private int level = 1;
+	private int exp = 0;
 
     private Random rng;
 
@@ -25,6 +32,7 @@ public class Team : MonoBehaviour {
 		}
 		else if (playerTeamInstance != null && gameObject.tag == "PlayerTeam")
 			Destroy(gameObject);
+
         Characters = new List<Character>();
         PlayedCharacters = new List<Character>();
         UnplayedCharacters = new List<Character>();
@@ -116,5 +124,20 @@ public class Team : MonoBehaviour {
         foreach (Character c in Characters) {
             c.InitializeForBattle(controller);
         }
+	}
+
+	public void AddExp(int exp) {
+		this.exp += exp;
+		if (this.exp < expPerLevel)
+			return;
+
+		this.exp -= expPerLevel;
+		level += 1;
+		foreach (Character character in Characters) {
+			character.maxHealth += (int) Math.Round(character.maxHealth * healthIncPerLevel);
+			character.baseStrength += (int) Math.Round(character.baseStrength * strengthIncPerLevel);
+		}
+
+
 	}
 }

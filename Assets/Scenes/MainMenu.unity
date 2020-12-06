@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!20 &188948634 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 5572348361589202607, guid: 6791e638e1c76a3ea904979dfb5e8700,
-    type: 3}
-  m_PrefabInstance: {fileID: 2138528472}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &305136317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,11 +1503,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2872859250312053130, guid: 6791e638e1c76a3ea904979dfb5e8700,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4221367839710944861, guid: 6791e638e1c76a3ea904979dfb5e8700,
         type: 3}
       propertyPath: m_Name
@@ -1574,15 +1563,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8535207211485828049, guid: 6791e638e1c76a3ea904979dfb5e8700,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9014919594848035939, guid: 6791e638e1c76a3ea904979dfb5e8700,
-        type: 3}
-      propertyPath: teamCamera
-      value: 
-      objectReference: {fileID: 188948634}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6791e638e1c76a3ea904979dfb5e8700, type: 3}
