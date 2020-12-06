@@ -110,4 +110,11 @@ public class Team : MonoBehaviour {
 		foreach (Character character in Characters)
 			character.AddSkillPoint();
 	}
+
+	public void InitilizeForBattle(BattleController controller) {
+		BattleController = controller;
+        foreach (Character c in Characters) {
+            c.InitializeForBattle(controller);
+        }
+	}
 }

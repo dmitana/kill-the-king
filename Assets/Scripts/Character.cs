@@ -5,16 +5,24 @@ using Random = System.Random;
 
 public class Character : MonoBehaviour {
 	public string characterName;
-	public int health;
+	public int maxHealth;
 	public int baseStrength;
 	public List<Skill> availableSkills = new List<Skill>();
 	public List<Skill> skills = new List<Skill>();
+	[Space]
+	public HealthBarUI healthBarUI;
+
 	public int SkillPoints { get; private set; } = 1;
 	public Team Team { get; set; }
 
+	private int health;
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
 	private bool inBattle = false;
+
+	void Start() {
+		health = maxHealth;
+	}
 
 	public void AddEffect(Effect effect) {
 		activeEffects.Add(effect);
@@ -22,6 +30,7 @@ public class Character : MonoBehaviour {
 
 	public void DecreaseHealth(int damage) {
 		health -= damage;
+		healthBarUI.UpdateHealthBar(health, maxHealth);
 		Debug.Log($"New character health: {health}");
 		if (health <= 0) {
 			Team.RemoveCharacterFromTeam(this);
@@ -47,6 +56,7 @@ public class Character : MonoBehaviour {
 	public void InitializeForBattle(BattleController controller) {
 		battleController = controller;
 		inBattle = true;
+		healthBarUI.gameObject.SetActive(true);
 	}
 
 	private void OnMouseDown() {

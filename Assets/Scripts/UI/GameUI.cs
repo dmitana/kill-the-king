@@ -26,7 +26,7 @@ public class GameUI : MonoBehaviour {
 			}
 			var characterTexts = charactersUI[i].GetComponentsInChildren<TMP_Text>();
 			characterTexts[0].text = playerTeam.Characters[i].characterName;
-			characterTexts[1].text = $"Health: {playerTeam.Characters[i].health}";
+			characterTexts[1].text = $"Health: {playerTeam.Characters[i].maxHealth}";
 			characterTexts[2].text = $"Strength: {playerTeam.Characters[i].baseStrength}";
 		}
 	}

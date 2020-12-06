@@ -21,7 +21,7 @@ public class CharacterDetailUI : MonoBehaviour {
 
 	public void Show(Character character) {
 		characterNameText.text = character.characterName;
-		characterHealthText.text = $"Health: {character.health}";
+		characterHealthText.text = $"Health: {character.maxHealth}";
 		characterStrenghtText.text = $"Strength: {character.baseStrength}";
 
 		// Create UI for each skill

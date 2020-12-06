@@ -46,16 +46,10 @@ public class BattleController : MonoBehaviour {
         playerTeamFirst = (rng.Next(2) == 0);
 
         Team playerTeamComp = (Team) playerTeam.GetComponent(typeof(Team));
-        playerTeamComp.BattleController = this;
-        foreach (Character c in playerTeamComp.Characters) {
-            c.InitializeForBattle(this);
-        }
+		playerTeamComp.InitilizeForBattle(this);
 
         Team enemyTeamComp = (Team) enemyTeam.GetComponent(typeof(Team));
-        enemyTeamComp.BattleController = this;
-        foreach (Character c in ((Team) enemyTeam.GetComponent(typeof(Team))).Characters) {
-            c.InitializeForBattle(this);
-        }
+		enemyTeamComp.InitilizeForBattle(this);
 
         skillField = GameObject.FindGameObjectWithTag("SkillField");
         foreach (UISkillField field in skillField.transform.GetComponentsInChildren<UISkillField>()) {
