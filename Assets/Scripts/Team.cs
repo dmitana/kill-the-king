@@ -62,9 +62,18 @@ public class Team : MonoBehaviour {
 	}
 
     public void SetCharactersParent() {
+		int i = 0;
+		Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+
         foreach (Character character in Characters) {
-            character.gameObject.GetComponent<Transform>().SetParent(transform);
-            character.gameObject.GetComponent<FixedJoint2D>().connectedBody = gameObject.GetComponent<Rigidbody2D>();
+			character.gameObject.transform.SetParent(transform);
+            character.gameObject.GetComponent<FixedJoint2D>().connectedBody = rb;
+
+			// Move characters to not overlap
+			Vector3 position = character.gameObject.transform.position;
+			position[0] -= i * 2;
+			character.gameObject.transform.position = position;
+			++i;
         }
     }
 
