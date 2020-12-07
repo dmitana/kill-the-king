@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
@@ -59,6 +60,13 @@ public class Character : MonoBehaviour {
 		healthBarUI.gameObject.SetActive(true);
 	}
 
+	public void AfterBattle() {
+		battleController = null;
+		inBattle = false;
+		healthBarUI.gameObject.SetActive(false);
+		health = maxHealth;
+	}
+
 	private void OnMouseDown() {
 		if (inBattle == false)
 			return;
@@ -94,5 +102,12 @@ public class Character : MonoBehaviour {
 
 	public void AddSkillPoint() {
 		++SkillPoints;
+	}
+
+	public void LevelUp(float healthIncPerLevel, float strengthIncPerLevel) {
+		maxHealth += (int) Math.Round(maxHealth * healthIncPerLevel);
+		health = maxHealth;
+
+		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevel);
 	}
 }

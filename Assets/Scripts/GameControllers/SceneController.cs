@@ -128,10 +128,21 @@ public class SceneController : MonoBehaviour {
 		if (!isChangeToBattleScene)
 			return;
 
-		battleController.FillEnemiesToBattle();
-		battleController.InitializeCombat();
+		battleController.InitializeBattle();
 
 		// Deactivate change scene helper
 		isChangeToBattleScene = false;
+	}
+
+	public Boolean ReturnFromBattleScene() {
+		if (!IsBattleScene)
+			return false;
+
+		IsBattleScene = false;
+		ChangeScene(currentGameSceneName, true);
+		gameSceneContainers.Pop().SetActive(true);
+		playerTeam.SetActiveCamera(true);
+
+		return true;
 	}
 }

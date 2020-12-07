@@ -22,6 +22,8 @@ public class Team : MonoBehaviour {
 
 	private int level = 1;
 	private int exp = 0;
+	private Vector3 positionBeforeBattle;
+	private CharacterMovement movement;
 
     private Random rng;
 
@@ -37,6 +39,7 @@ public class Team : MonoBehaviour {
         PlayedCharacters = new List<Character>();
         UnplayedCharacters = new List<Character>();
         rng = new Random();
+		movement = gameObject.GetComponent<CharacterMovement>();
     }
 
     public void AddCharacterToTeam(Character c) {
@@ -119,10 +122,28 @@ public class Team : MonoBehaviour {
 			character.AddSkillPoint();
 	}
 
-	public void InitilizeForBattle(BattleController controller) {
+	public void InitilizeForBattle(BattleController controller, Vector3? position = null) {
 		BattleController = controller;
+		if (movement != null)
+			movement.enabled = false;
+		positionBeforeBattle = transform.position;
+		if (position.HasValue) {
+			transform.position = position.Value;
+		}
+
         foreach (Character c in Characters) {
             c.InitializeForBattle(controller);
+        }
+	}
+
+	public void AfterBattle() {
+		BattleController = null;
+		if (movement != null)
+			movement.enabled = true;
+		transform.position = positionBeforeBattle;
+
+        foreach (Character c in Characters) {
+            c.AfterBattle();
         }
 	}
 
@@ -134,10 +155,7 @@ public class Team : MonoBehaviour {
 		this.exp -= expPerLevel;
 		level += 1;
 		foreach (Character character in Characters) {
-			character.maxHealth += (int) Math.Round(character.maxHealth * healthIncPerLevel);
-			character.baseStrength += (int) Math.Round(character.baseStrength * strengthIncPerLevel);
+			character.LevelUp(healthIncPerLevel, strengthIncPerLevel);
 		}
-
-
 	}
 }

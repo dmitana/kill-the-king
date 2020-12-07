@@ -21,6 +21,7 @@ public class BattleController : MonoBehaviour {
 
     private void Awake() {
         rng = new Random();
+		sceneController = GameMaster.instance.GetComponent<SceneController>();
     }
 
     private void FillEnemiesToBattle() {
@@ -35,14 +36,13 @@ public class BattleController : MonoBehaviour {
 
     public void InitializeBattle() {
 		playerTeam = Team.playerTeamInstance;
-        playerTeam.transform.position = new Vector3(-5, 0, 0);
-        playerTeamFirst = (rng.Next(2) == 0);
+		playerTeam.InitilizeForBattle(this, new Vector3(-5, 0, 0));
 
         enemyTeam = GameObject.FindGameObjectWithTag("EnemyTeam").GetComponent<Team>();
 		FillEnemiesToBattle();
-
-		playerTeam.InitilizeForBattle(this);
 		enemyTeam.InitilizeForBattle(this);
+
+        playerTeamFirst = (rng.Next(2) == 0);
 
         skillField = GameObject.FindGameObjectWithTag("SkillField");
         foreach (UISkillField field in skillField.transform.GetComponentsInChildren<UISkillField>()) {
@@ -52,9 +52,10 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(Battle());
     }
 
-    private IEnumerator Combat() {
-        Team playerTeamComp = (Team) playerTeam.GetComponent(typeof(Team));
-        Team enemyTeamComp = (Team) enemyTeam.GetComponent(typeof(Team));
+	private void AfterBattle() {
+		playerTeam.AfterBattle();
+		sceneController.ReturnFromBattleScene();
+	}
 
     private IEnumerator Battle() {
         while (playerTeam.Characters.Count > 0 && enemyTeam.Characters.Count > 0) {
@@ -70,8 +71,10 @@ public class BattleController : MonoBehaviour {
             }
 
             bool playerTeamRound = playerTeamFirst;
-            while (playerTeam.UnplayedCharacters.Count > 0 ||
-                   enemyTeam.UnplayedCharacters.Count > 0) {
+            while ((playerTeam.UnplayedCharacters.Count > 0 ||
+                   enemyTeam.UnplayedCharacters.Count > 0) &&
+				   (playerTeam.Characters.Count > 0 &&
+				   enemyTeam.Characters.Count > 0)) {
                 Debug.Log("Novy tah");
                 ChosenCharacter = null;
 
@@ -117,6 +120,7 @@ public class BattleController : MonoBehaviour {
         }
 
         // End battle function call
+		AfterBattle();
     }
 
     public Team GetCurrentTeam() {
