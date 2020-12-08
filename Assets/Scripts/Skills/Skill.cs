@@ -7,9 +7,9 @@ public class Skill : MonoBehaviour {
     public String skillName;
     public String description;
 
-    public int strength;
-    public int maxStrength;
-    public int increasePerUse;
+    public double strength;
+    public double maxStrength;
+    public double increasePerUse;
 
     public int cooldown;
     public int maxCooldown;

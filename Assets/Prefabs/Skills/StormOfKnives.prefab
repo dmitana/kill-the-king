@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Storm of Knives
-  description: Storm of knives description
-  strength: 0
-  maxStrength: 0
-  increasePerUse: 0
-  cooldown: 0
-  maxCooldown: 0
+  description: This attack hits all enemies. Its strength is multiplier of base attack.
+  strength: 0.2
+  maxStrength: 0.4
+  increasePerUse: 0.02
+  cooldown: 2
+  maxCooldown: 3
   effects: []
-  numOfTargets: 0
+  numOfTargets: -1
