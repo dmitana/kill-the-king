@@ -54,7 +54,13 @@ public class TeamSelectionController : MonoBehaviour {
 	}
 
 	private void CanSelectCharacter(Character character, Toggle characterToggle) {
-		characterToggle.interactable = character.SkillPoints == 0 ? true : false;
+		if (character.SkillPoints == 0) {
+			characterToggle.interactable = true;
+		}
+		else {
+			characterToggle.interactable = false;
+			characterToggle.isOn = false;
+		}
 	}
 
 	private void CreateCharacterDetailUI(Character character) {

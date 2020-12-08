@@ -62,7 +62,7 @@ public class BattleController : MonoBehaviour {
             Debug.Log("Nove kolo zacalo");
             foreach (Character c in playerTeam.Characters) {
                 playerTeam.AddUnplayedCharacter(c);
-                playerTeam.RemovePlayedCharacter(c); // prerobit tak, aby to vymazalo aj mrtve postavy
+                playerTeam.RemovePlayedCharacter(c);
             }
 
             foreach (Character c in enemyTeam.Characters) {
