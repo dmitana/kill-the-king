@@ -110,4 +110,10 @@ public class Character : MonoBehaviour {
 
 		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevel);
 	}
+
+	public void DecreaseCooldowns() {
+		foreach (Skill skill in skills) {
+			skill.DecreaseCooldown();
+		}
+	}
 }

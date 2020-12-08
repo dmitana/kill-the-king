@@ -70,11 +70,13 @@ public class BattleController : MonoBehaviour {
             foreach (Character c in playerTeam.Characters) {
                 playerTeam.AddUnplayedCharacter(c);
                 playerTeam.RemovePlayedCharacter(c);
+                c.DecreaseCooldowns();
             }
 
             foreach (Character c in enemyTeam.Characters) {
                 enemyTeam.AddUnplayedCharacter(c);
                 enemyTeam.RemovePlayedCharacter(c);
+                c.DecreaseCooldowns();
             }
 
             bool playerTeamRound = playerTeamFirst;

@@ -22,8 +22,9 @@ public class Skill : MonoBehaviour {
         effects = new List<Effect>();
     }
 
-    // Some skills can have multiple target while others only one
+    // Default method used whether skill has multiple targets or not
     public void ApplySkill(Character attacker, List<Character> targets) {
+        cooldown = maxCooldown;
         foreach (var target in targets) {
             ApplySkill(attacker, target);
         }
@@ -40,5 +41,10 @@ public class Skill : MonoBehaviour {
 
     public int GetNumOfTargets() {
         return numOfTargets;
+    }
+
+    public void DecreaseCooldown() {
+        if (cooldown > 0)
+            cooldown--;
     }
 }
