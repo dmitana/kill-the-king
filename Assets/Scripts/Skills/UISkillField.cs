@@ -10,7 +10,7 @@ public class UISkillField : MonoBehaviour {
 
     public void SetSkill(Skill s) {
         skill = s;
-        gameObject.GetComponentInChildren<Image>().color = Color.green;
+        gameObject.GetComponentInChildren<Image>().color = (s.cooldown == 0)? Color.green : Color.red;
     }
     
     public void ChooseSkill() {
@@ -18,6 +18,10 @@ public class UISkillField : MonoBehaviour {
             battleController.ChosenSkill = skill;
             Debug.Log("Skill chosen");
         }
+    }
+
+    public void Clear() {
+        gameObject.GetComponentInChildren<Image>().color = Color.black;
     }
     
     public void SetBattleController(BattleController controller) {

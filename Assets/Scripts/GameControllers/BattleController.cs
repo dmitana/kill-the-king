@@ -57,6 +57,13 @@ public class BattleController : MonoBehaviour {
 		sceneController.ReturnFromBattleScene();
 	}
 
+    private void ClearSkillField() {
+        UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
+        foreach (UISkillField skillField in skillFields) {
+            skillField.Clear();
+        }
+    }
+
     private IEnumerator Battle() {
         while (playerTeam.Characters.Count > 0 && enemyTeam.Characters.Count > 0) {
             Debug.Log("Nove kolo zacalo");
@@ -115,6 +122,8 @@ public class BattleController : MonoBehaviour {
                 ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
                 currentTeam.AddPlayedCharacter(ChosenCharacter);
                 currentTeam.RemoveUnplayedCharacter(ChosenCharacter);
+                
+                ClearSkillField();
                 playerTeamRound = !playerTeamRound;
             }
         }
