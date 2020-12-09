@@ -19,9 +19,9 @@ public class Team : MonoBehaviour {
     public List<Character> PlayedCharacters { get; private set; }
     public List<Character> UnplayedCharacters { get; private set; }
 	public int CurrentEnvironment { get; private set; } = 0;
+	public int Level { get; private set; }= 1;
+	public int Exp { get; private set; } = 0;
 
-	private int level = 1;
-	private int exp = 0;
 	private Vector3 positionBeforeBattle;
 	private CharacterMovement movement;
 
@@ -157,12 +157,12 @@ public class Team : MonoBehaviour {
 	}
 
 	public void AddExp(int exp) {
-		this.exp += exp;
-		if (this.exp < expPerLevel)
+		Exp += exp;
+		if (Exp < expPerLevel)
 			return;
 
-		this.exp -= expPerLevel;
-		level += 1;
+		Exp -= expPerLevel;
+		Level += 1;
 		foreach (Character character in Characters) {
 			character.LevelUp(healthIncPerLevel, strengthIncPerLevel);
 		}
