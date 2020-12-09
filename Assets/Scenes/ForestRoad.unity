@@ -3850,10 +3850,9 @@ MonoBehaviour:
   acceptButton: {fileID: 20303891}
   rejectButton: {fileID: 708826021}
   description: 
-  debugMessage: 
   enemies:
   - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
-  - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
+  expReward: 10
 --- !u!1001 &1770528095
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,21 +5,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Event : MonoBehaviour {
+public abstract class Event : MonoBehaviour {
     public GameObject popUpWindow;
     public TMP_Text popUpText;
     public Button acceptButton;
     public Button rejectButton;
     public String description;
-    public String debugMessage;
+	[Space]
     public List<Character> enemies = new List<Character>();
+	public int expReward;
 
+	private Team playerTeam;
     private SceneController sceneController;
 
     void Awake() {
         rejectButton.onClick.AddListener(OnRejectButtonClick);
         acceptButton.onClick.AddListener(OnAcceptButtonClick);
 
+		playerTeam = Team.playerTeamInstance;
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
     }
 
@@ -33,9 +36,21 @@ public class Event : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private void OnAcceptButtonClick() {
+    protected abstract void OnAcceptButtonClick();
+
+	private void GiveExpToPlayerTeam() {
+		playerTeam.AddExp(expReward);
+	}
+
+	protected void Success() {
         popUpWindow.SetActive(false);
-		sceneController.ChangeToBattleScene("Battle", enemies);
+		GiveExpToPlayerTeam();
         Destroy(gameObject);
-    }
+	}
+
+	protected void MoveToBattle(String battleSceneName) {
+        popUpWindow.SetActive(false);
+		sceneController.ChangeToBattleScene(battleSceneName, enemies, GiveExpToPlayerTeam);
+        Destroy(gameObject);
+	}
 }

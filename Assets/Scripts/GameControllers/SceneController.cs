@@ -15,6 +15,8 @@ public class SceneController : MonoBehaviour {
 	private Team playerTeam;
 	private Boolean isChangeToBattleScene = false;
 	private Boolean isChangeToGameScene = false;
+	private Boolean isReturnFromBattleScene = false;
+	private Action returnFromBattleCallback;
     private BattleController battleController;
 
     void Awake() {
@@ -23,6 +25,7 @@ public class SceneController : MonoBehaviour {
 
 		SceneManager.activeSceneChanged += OnChangeToGameScene;
 		SceneManager.activeSceneChanged += OnChangeToBattleScene;
+		SceneManager.activeSceneChanged += OnReturnFromBattleScene;
     }
 
     public void ChangeScene(String newSceneName, Boolean unloadCurrentScene = false) {
@@ -111,7 +114,11 @@ public class SceneController : MonoBehaviour {
 		return true;
 	}
 
-	public void ChangeToBattleScene(String newSceneName, List<Character> enemies) {
+	public void ChangeToBattleScene(String newSceneName, List<Character> enemies,
+			Action returnFromBattleCallback) {
+		// Activate change scene callback
+		isChangeToBattleScene = true;
+
 		gameSceneContainers.Push(GameObject.FindGameObjectWithTag("SceneContainer"));
 		gameSceneContainers.Peek().SetActive(false);
 		playerTeam.SetActiveCamera(false);
@@ -119,9 +126,7 @@ public class SceneController : MonoBehaviour {
 
 		ChangeScene(newSceneName);
 		IsBattleScene = true;
-
-		// Activate change scene callback
-		isChangeToBattleScene = true;
+		this.returnFromBattleCallback = returnFromBattleCallback;
 	}
 
 	public void OnChangeToBattleScene(Scene sceneCurrent, Scene sceneNext) {
@@ -130,7 +135,7 @@ public class SceneController : MonoBehaviour {
 
 		battleController.InitializeBattle();
 
-		// Deactivate change scene helper
+		// Deactivate change scene callback
 		isChangeToBattleScene = false;
 	}
 
@@ -138,11 +143,24 @@ public class SceneController : MonoBehaviour {
 		if (!IsBattleScene)
 			return false;
 
+		// Activate change scene callback
+		isReturnFromBattleScene = true;
+
 		IsBattleScene = false;
 		ChangeScene(currentGameSceneName, true);
 		gameSceneContainers.Pop().SetActive(true);
 		playerTeam.SetActiveCamera(true);
 
 		return true;
+	}
+
+	public void OnReturnFromBattleScene(Scene sceneCurrent, Scene sceneNext) {
+		if (!isReturnFromBattleScene)
+			return;
+
+		returnFromBattleCallback();
+
+		// Deactivate change scene callback
+		isReturnFromBattleScene = false;
 	}
 }
