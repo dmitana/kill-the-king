@@ -133,9 +133,9 @@ MonoBehaviour:
   maxHealth: 200
   baseStrength: 30
   availableSkills:
-  - {fileID: 8637063170039254447, guid: 0657c38c3629153f7b361e7987e818fd, type: 3}
   - {fileID: -4353817375147539090, guid: 5f8984551cb6aa5c984e1afb68b9c340, type: 3}
   - {fileID: 5777983318617136248, guid: 5d0b69dcf8cf9809cba7e0d161248952, type: 3}
+  - {fileID: 8637063170039254447, guid: 0657c38c3629153f7b361e7987e818fd, type: 3}
   - {fileID: -4789432574398516970, guid: 373cf417a0e37e9ee99cb48e84802236, type: 3}
   - {fileID: -1887268139909309780, guid: 5adef63db2dfd6df2b928c89146cf61a, type: 3}
   skills:

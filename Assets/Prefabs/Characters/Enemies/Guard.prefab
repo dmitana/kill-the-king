@@ -152,6 +152,7 @@ MonoBehaviour:
   availableSkills: []
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
+  - {fileID: 6976021123672050609, guid: b753245846f49ecc38e7e3f86d5cedfd, type: 3}
   healthBarUI: {fileID: 8349760241719345808}
 --- !u!61 &-4932485762943665078
 BoxCollider2D:

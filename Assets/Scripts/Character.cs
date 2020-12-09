@@ -23,6 +23,11 @@ public class Character : MonoBehaviour {
 
 	void Start() {
 		health = maxHealth;
+		
+		// Creates clones of script to prevent overwriting prefab
+		for (int i = 0; i < skills.Count; i++) {
+			skills[i] = Instantiate(skills[i], gameObject.transform);
+		}
 	}
 
 	public void AddEffect(Effect effect) {
