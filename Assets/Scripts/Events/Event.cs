@@ -23,12 +23,20 @@ public abstract class Event : MonoBehaviour {
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
     }
 
-    private void OnMouseDown() {
+	protected void OnOpen() {
 		onOpen?.Invoke(this);
+	}
+
+	protected void OnClose() {
+		onClose?.Invoke(this);
+	}
+
+    private void OnMouseDown() {
+		OnOpen();
     }
 
-    public void OnReject() {
-		onClose?.Invoke(this);
+    public virtual void OnReject() {
+		OnClose();
         Destroy(gameObject);
     }
 
@@ -39,13 +47,13 @@ public abstract class Event : MonoBehaviour {
 	}
 
 	protected void Success() {
-		onClose?.Invoke(this);
+		OnClose();
 		GiveExpToPlayerTeam();
         Destroy(gameObject);
 	}
 
 	protected void MoveToBattle() {
-		onClose?.Invoke(this);
+		OnClose();
 		sceneController.ChangeToBattleScene(battleSceneName, enemies, GiveExpToPlayerTeam);
         Destroy(gameObject);
 	}
