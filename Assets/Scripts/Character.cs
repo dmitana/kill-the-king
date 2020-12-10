@@ -63,6 +63,7 @@ public class Character : MonoBehaviour {
 		battleController = controller;
 		inBattle = true;
 		healthBarUI.gameObject.SetActive(true);
+		healthBarUI.UpdateHealthBar(health, maxHealth);
 	}
 
 	public void AfterBattle() {
