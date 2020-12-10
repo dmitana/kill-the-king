@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
@@ -19,9 +20,23 @@ public class BattleController : MonoBehaviour {
     private GameObject skillField;
     private Random rng;
 
+    private Queue<String> logs;
+    public String Log {
+        get {
+            if (logs.Count == 0)
+                return null;
+            return logs.Dequeue();
+        }
+
+        set {
+            logs.Enqueue(value);
+        }
+    }
+
     private void Awake() {
         rng = new Random();
 		sceneController = GameMaster.instance.GetComponent<SceneController>();
+        logs = new Queue<string>();
     }
 
     private void FillEnemiesToBattle() {
@@ -69,13 +84,14 @@ public class BattleController : MonoBehaviour {
             team.ResetTeam(false);
             return true;
         }
+        // If team already finished, flag value is not changed
         return teamFinished;
     }
 
     private IEnumerator Battle() {
         bool playerTeamRound = playerTeamFirst;
         while (playerTeam.Characters.Count > 0 && enemyTeam.Characters.Count > 0) {
-            Debug.Log("Nove kolo zacalo");
+            Log = "Nove kolo zacalo";
             playerTeam.ResetTeam(true);
             enemyTeam.ResetTeam(true);
 
@@ -84,7 +100,7 @@ public class BattleController : MonoBehaviour {
             while ((!playerTeamFinished || !enemyTeamFinished) &&
 				   (playerTeam.Characters.Count > 0 &&
 				   enemyTeam.Characters.Count > 0)) {
-                Debug.Log("Novy tah");
+                Log = "Novy tah";
                 ChosenCharacter = null;
 
                 currentTeam = (playerTeamRound) ? playerTeam: enemyTeam;

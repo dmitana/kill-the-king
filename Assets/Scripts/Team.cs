@@ -103,10 +103,14 @@ public class Team : MonoBehaviour {
     }
 
     public void HighlightUnplayed() {
-        Debug.Log("Unplayed characters");
-        foreach (Character c in UnplayedCharacters) {
-            Debug.Log(c.characterName);
+        BattleController.Log = "Unplayed characters";
+        String chars = "";
+        for (int i = 0; i < UnplayedCharacters.Count; i++) {
+	        chars += UnplayedCharacters[i].characterName;
+	        if (i + 1 < UnplayedCharacters.Count)
+		        chars += ", ";
         }
+        BattleController.Log = chars;
     }
 
 	public void IncreaseEnvironment() {

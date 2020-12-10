@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill : MonoBehaviour {
+public abstract class Skill : MonoBehaviour {
     public String skillName;
     public String description;
 
@@ -17,6 +17,11 @@ public class Skill : MonoBehaviour {
     public List<Effect> effects;
 
     public int numOfTargets;
+    protected BattleController battleController;
+
+    private void Awake() {
+        battleController = GameMaster.instance.GetComponent<BattleController>();
+    }
 
     void Start() {
         effects = new List<Effect>();

@@ -16,11 +16,10 @@ public class UISkillField : MonoBehaviour {
     public void ChooseSkill() {
         if (battleController.ChosenSkill == null && battleController.ChosenCharacter != null) {
             if (skill.cooldown > 0) {
-                Debug.Log($"This skill is on cooldown for {skill.cooldown} rounds");
+                battleController.Log = $"This skill is on cooldown for {skill.cooldown} rounds";
                 return;
             } 
             battleController.ChosenSkill = skill;
-            Debug.Log("Skill chosen");
         }
     }
 

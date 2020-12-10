@@ -9,8 +9,8 @@ public class StormOfKnives : Skill {
     }
     
     public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        Debug.Log($"Number of targets: {numOfTargets}");
-        Debug.Log("Only enemies are valid targets.");
+        battleController.Log = $"Number of targets: {numOfTargets}";
+        battleController.Log = "Only enemies are valid targets.";
         return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
     }
 }

@@ -75,14 +75,14 @@ public class Character : MonoBehaviour {
 			if (currentTeam.UnplayedCharacters.Contains(this))
 				battleController.ChosenCharacter = this;
 			else
-				Debug.Log($"Character {characterName} was already used.");
+				battleController.Log = $"Character {characterName} was already used.";
 		}
 		else if (battleController.ChosenSkill != null && battleController.ValidTargets.Contains(this))
 			battleController.ChosenTargets.Add(this);
 	}
 
 	public void DisplaySkills() {
-		Debug.Log("Display skills");
+		battleController.Log = "Display skills";
 
 		GameObject skillField = battleController.GetSkillField();
 		UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
