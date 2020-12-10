@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameUI : MonoBehaviour {
+public class CharactersUI : MonoBehaviour {
 	public List<GameObject> charactersUI;
 	[Space]
 	public Slider expBar;
