@@ -21,7 +21,7 @@ public class Character : MonoBehaviour {
 	private BattleController battleController;
 	private bool inBattle = false;
 
-	void Start() {
+	void Awake() {
 		health = maxHealth;
 		
 		// Creates clones of script to prevent overwriting prefab
@@ -77,13 +77,11 @@ public class Character : MonoBehaviour {
 			return;
 
 		Team currentTeam = battleController.GetCurrentTeam();
-		if (battleController.ChosenCharacter == null && currentTeam.UnplayedCharacters.Contains(this)) {
-			if (battleController.GetCurrentTeam().PlayedCharacters.Contains(this)) {
+		if (battleController.ChosenCharacter == null && currentTeam.Characters.Contains(this)) {
+			if (currentTeam.UnplayedCharacters.Contains(this))
+				battleController.ChosenCharacter = this;
+			else
 				Debug.Log($"Character {characterName} was already used.");
-				return;
-			}
-
-			battleController.ChosenCharacter = this;
 		}
 		else if (battleController.ChosenSkill != null && battleController.ValidTargets.Contains(this))
 			battleController.ChosenTargets.Add(this);
@@ -101,8 +99,13 @@ public class Character : MonoBehaviour {
 
 	public void SelectSkill() {
 		Random rng = new Random();
-		int idx = rng.Next(skills.Count);
-		battleController.ChosenSkill = skills[idx];
+		List<Skill> skillsNotOnCooldown = new List<Skill>();
+		foreach (Skill skill in skills) {
+			if (skill.cooldown == 0)
+				skillsNotOnCooldown.Add(skill);
+		}
+		int idx = rng.Next(skillsNotOnCooldown.Count);
+		battleController.ChosenSkill = skillsNotOnCooldown[idx];
 	}
 
 	public void AddSkillPoint() {

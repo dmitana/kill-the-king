@@ -64,34 +64,30 @@ public class BattleController : MonoBehaviour {
         }
     }
 
+    private bool ResetTeam(Team team, bool teamFinished) {
+        if (team.UnplayedCharacters.Count == 0) {
+            team.ResetTeam(false);
+            return true;
+        }
+        return teamFinished;
+    }
+
     private IEnumerator Battle() {
+        bool playerTeamRound = playerTeamFirst;
         while (playerTeam.Characters.Count > 0 && enemyTeam.Characters.Count > 0) {
             Debug.Log("Nove kolo zacalo");
-            foreach (Character c in playerTeam.Characters) {
-                playerTeam.AddUnplayedCharacter(c);
-                playerTeam.RemovePlayedCharacter(c);
-                c.DecreaseCooldowns();
-            }
+            playerTeam.ResetTeam(true);
+            enemyTeam.ResetTeam(true);
 
-            foreach (Character c in enemyTeam.Characters) {
-                enemyTeam.AddUnplayedCharacter(c);
-                enemyTeam.RemovePlayedCharacter(c);
-                c.DecreaseCooldowns();
-            }
-
-            bool playerTeamRound = playerTeamFirst;
-            while ((playerTeam.UnplayedCharacters.Count > 0 ||
-                   enemyTeam.UnplayedCharacters.Count > 0) &&
+            bool playerTeamFinished = false;
+            bool enemyTeamFinished = false;
+            while ((!playerTeamFinished || !enemyTeamFinished) &&
 				   (playerTeam.Characters.Count > 0 &&
 				   enemyTeam.Characters.Count > 0)) {
                 Debug.Log("Novy tah");
                 ChosenCharacter = null;
 
                 currentTeam = (playerTeamRound) ? playerTeam: enemyTeam;
-                if (currentTeam.UnplayedCharacters.Count == 0) {
-                    playerTeamRound = !playerTeamRound;
-                    continue;
-                }
 
                 currentTeam.HighlightUnplayed();
                 if (currentTeam.isAI)
@@ -124,6 +120,9 @@ public class BattleController : MonoBehaviour {
                 ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
                 currentTeam.AddPlayedCharacter(ChosenCharacter);
                 currentTeam.RemoveUnplayedCharacter(ChosenCharacter);
+
+                playerTeamFinished = ResetTeam(playerTeam, playerTeamFinished);
+                enemyTeamFinished = ResetTeam(enemyTeam, enemyTeamFinished);
                 
                 ClearSkillField();
                 playerTeamRound = !playerTeamRound;

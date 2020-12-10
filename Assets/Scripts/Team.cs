@@ -145,6 +145,16 @@ public class Team : MonoBehaviour {
         }
 	}
 
+	public void ResetTeam(bool resetCooldowns=false) {
+		PlayedCharacters = new List<Character>();
+		UnplayedCharacters = new List<Character>();
+		foreach (Character c in Characters) {
+			AddUnplayedCharacter(c);
+			if (resetCooldowns)
+				c.DecreaseCooldowns();
+		}
+	}
+
 	public void AfterBattle() {
 		BattleController = null;
 		if (movement != null)

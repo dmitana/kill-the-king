@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bbed159518494a9bc1364dd911708d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: StormOfKnives
+  skillName: Storm of Knives
   description: This attack hits all enemies. Its strength is multiplier of base attack.
   strength: 0.2
   maxStrength: 0.4
