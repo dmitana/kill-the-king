@@ -10,20 +10,18 @@ public class Character : MonoBehaviour {
 	public int baseStrength;
 	public List<Skill> availableSkills = new List<Skill>();
 	public List<Skill> skills = new List<Skill>();
-	[Space]
-	public HealthBarUI healthBarUI;
 
 	public int SkillPoints { get; private set; } = 1;
 	public Team Team { get; set; }
+	public int Health { get; private set; }
+	public bool InBattle { get; private set; } = false;
 
-	private int health;
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
-	private bool inBattle = false;
 
 	void Awake() {
-		health = maxHealth;
-		
+		Health = maxHealth;
+
 		// Creates clones of script to prevent overwriting prefab
 		for (int i = 0; i < skills.Count; i++) {
 			skills[i] = Instantiate(skills[i], gameObject.transform);
@@ -35,10 +33,8 @@ public class Character : MonoBehaviour {
 	}
 
 	public void DecreaseHealth(int damage) {
-		health -= damage;
-		healthBarUI.UpdateHealthBar(health, maxHealth);
-		Debug.Log($"New character health: {health}");
-		if (health <= 0) {
+		Health -= damage;
+		if (Health <= 0) {
 			Team.RemoveCharacterFromTeam(this);
 			Destroy(gameObject);
 		}
@@ -61,20 +57,17 @@ public class Character : MonoBehaviour {
 
 	public void InitializeForBattle(BattleController controller) {
 		battleController = controller;
-		inBattle = true;
-		healthBarUI.gameObject.SetActive(true);
-		healthBarUI.UpdateHealthBar(health, maxHealth);
+		InBattle = true;
 	}
 
 	public void AfterBattle() {
 		battleController = null;
-		inBattle = false;
-		healthBarUI.gameObject.SetActive(false);
-		health = maxHealth;
+		InBattle = false;
+		Health = maxHealth;
 	}
 
 	private void OnMouseDown() {
-		if (inBattle == false)
+		if (InBattle == false)
 			return;
 
 		Team currentTeam = battleController.GetCurrentTeam();
@@ -115,7 +108,7 @@ public class Character : MonoBehaviour {
 
 	public void LevelUp(float healthIncPerLevel, float strengthIncPerLevel) {
 		maxHealth += (int) Math.Round(maxHealth * healthIncPerLevel);
-		health = maxHealth;
+		Health = maxHealth;
 
 		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevel);
 	}

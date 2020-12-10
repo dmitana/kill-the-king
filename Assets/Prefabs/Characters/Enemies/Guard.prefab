@@ -153,7 +153,6 @@ MonoBehaviour:
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
   - {fileID: 6976021123672050609, guid: b753245846f49ecc38e7e3f86d5cedfd, type: 3}
-  healthBarUI: {fileID: 8349760241719345808}
 --- !u!61 &-4932485762943665078
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -289,6 +288,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7247165138871060680}
     m_Modifications:
+    - target: {fileID: 4237092997342556511, guid: 0dd3e3511f90d7b4d81f52ecb2ddb129,
+        type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 5198445200141831959}
     - target: {fileID: 4458475634318289317, guid: 0dd3e3511f90d7b4d81f52ecb2ddb129,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -307,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 5732212379081675304, guid: 0dd3e3511f90d7b4d81f52ecb2ddb129,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6841600701679263777, guid: 0dd3e3511f90d7b4d81f52ecb2ddb129,
         type: 3}
@@ -422,15 +426,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5272979670461674447}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8349760241719345808 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4237092997342556511, guid: 0dd3e3511f90d7b4d81f52ecb2ddb129,
-    type: 3}
-  m_PrefabInstance: {fileID: 5272979670461674447}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6e816ba984601b881d9da690e0c331, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
