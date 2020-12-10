@@ -121,18 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &20303891 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4251930080131346502, guid: 46b6caab9c1e7164a82850fac7bbafe3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4251930080151019605}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &131578983
 GameObject:
   m_ObjectHideFlags: 0
@@ -3604,39 +3592,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 90098289493591359}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &708826021 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4251930080853160944, guid: 46b6caab9c1e7164a82850fac7bbafe3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4251930080151019605}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &719845845 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4251930080866261376, guid: 46b6caab9c1e7164a82850fac7bbafe3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4251930080151019605}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &865904485 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4251930080444385072, guid: 46b6caab9c1e7164a82850fac7bbafe3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4251930080151019605}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1177692909 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4251930079040441016, guid: 46b6caab9c1e7164a82850fac7bbafe3,
     type: 3}
   m_PrefabInstance: {fileID: 4251930080151019605}
   m_PrefabAsset: {fileID: 0}
@@ -3845,11 +3803,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c74ae5aa429c6049446d411ba775f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpWindow: {fileID: 1177692909}
-  popUpText: {fileID: 719845845}
-  acceptButton: {fileID: 20303891}
-  rejectButton: {fileID: 708826021}
-  description: 
+  description: Peasant in danger description.
+  battleSceneName: Battle
   enemies:
   - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
   expReward: 10
@@ -4218,6 +4173,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288440974519350381, guid: 46b6caab9c1e7164a82850fac7bbafe3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b6caab9c1e7164a82850fac7bbafe3, type: 3}

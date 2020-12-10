@@ -6,50 +6,46 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class Event : MonoBehaviour {
-    public GameObject popUpWindow;
-    public TMP_Text popUpText;
-    public Button acceptButton;
-    public Button rejectButton;
-    public String description;
-	[Space]
+	public String description;
+	public String battleSceneName;
     public List<Character> enemies = new List<Character>();
 	public int expReward;
 
 	private Team playerTeam;
     private SceneController sceneController;
 
-    void Awake() {
-        rejectButton.onClick.AddListener(OnRejectButtonClick);
-        acceptButton.onClick.AddListener(OnAcceptButtonClick);
+	public delegate void OnClickDelegate(Event sender);
+	public event OnClickDelegate onOpen;
+	public event OnClickDelegate onClose;
 
+    void Start() {
 		playerTeam = Team.playerTeamInstance;
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
     }
 
     private void OnMouseDown() {
-        popUpWindow.SetActive(true);
-        popUpText.text = description;
+		onOpen?.Invoke(this);
     }
 
-    private void OnRejectButtonClick() {
-        popUpWindow.SetActive(false);
+    public void OnReject() {
+		onClose?.Invoke(this);
         Destroy(gameObject);
     }
 
-    protected abstract void OnAcceptButtonClick();
+    public abstract void OnAccept();
 
 	private void GiveExpToPlayerTeam() {
 		playerTeam.AddExp(expReward);
 	}
 
 	protected void Success() {
-        popUpWindow.SetActive(false);
+		onClose?.Invoke(this);
 		GiveExpToPlayerTeam();
         Destroy(gameObject);
 	}
 
-	protected void MoveToBattle(String battleSceneName) {
-        popUpWindow.SetActive(false);
+	protected void MoveToBattle() {
+		onClose?.Invoke(this);
 		sceneController.ChangeToBattleScene(battleSceneName, enemies, GiveExpToPlayerTeam);
         Destroy(gameObject);
 	}
