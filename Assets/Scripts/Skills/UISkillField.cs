@@ -10,7 +10,7 @@ public class UISkillField : MonoBehaviour {
 
     public void SetSkill(Skill s) {
         skill = s;
-        gameObject.GetComponentInChildren<Image>().color = (s.cooldown == 0)? Color.green : Color.red;
+        gameObject.GetComponentInChildren<Image>().color = (s.cooldown == 0 && s.canBeUsed)? Color.green : Color.red;
     }
     
     public void ChooseSkill() {
@@ -18,7 +18,12 @@ public class UISkillField : MonoBehaviour {
             if (skill.cooldown > 0) {
                 battleController.Log = $"This skill is on cooldown for {skill.cooldown} rounds";
                 return;
-            } 
+            }
+
+            if (!skill.canBeUsed) {
+                battleController.Log = "This skill cannot be used currently.";
+                return;
+            }
             battleController.ChosenSkill = skill;
         }
     }

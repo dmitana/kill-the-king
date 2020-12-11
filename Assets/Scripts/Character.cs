@@ -39,6 +39,10 @@ public class Character : MonoBehaviour {
 		activeEffects.Add(effect);
 	}
 
+	public List<Effect> GetEffects() {
+		return activeEffects;
+	}
+
 	public void ApplyEffects() {
 		int i = 0;
 		while (i < activeEffects.Count) {

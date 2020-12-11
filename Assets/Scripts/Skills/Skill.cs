@@ -20,10 +20,12 @@ public abstract class Skill : MonoBehaviour {
     public int numOfTargets;
     protected BattleController battleController;
     protected Random rnd;
+    public bool canBeUsed;
 
     private void Awake() {
         battleController = GameMaster.instance.GetComponent<BattleController>();
         rnd = new Random();
+        canBeUsed = true;
 		InstantiateEffects();
     }
 
@@ -34,7 +36,7 @@ public abstract class Skill : MonoBehaviour {
 	}
 
     // Default method used whether skill has multiple targets or not
-    public void ApplySkill(Character attacker, List<Character> targets) {
+    public virtual void ApplySkill(Character attacker, List<Character> targets) {
         cooldown = maxCooldown;
         foreach (var target in targets) {
             ApplySkill(attacker, target);
