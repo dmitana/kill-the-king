@@ -3805,10 +3805,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Peasant in danger description.
+  eventExpReward: 25
+  expRewardPerEnemy: 10
   battleSceneName: Battle
-  enemies:
+  minEnemiesCount: 1
+  maxEnemiesCount: 2
+  possibleEnemies:
   - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
-  expReward: 10
 --- !u!1001 &1770528095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3990,11 +3993,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Battle event.
+  eventExpReward: 25
+  expRewardPerEnemy: 10
   battleSceneName: Battle
-  enemies:
+  minEnemiesCount: 1
+  maxEnemiesCount: 3
+  possibleEnemies:
   - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
-  - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
-  expReward: 20
 --- !u!135 &2082422698
 SphereCollider:
   m_ObjectHideFlags: 0

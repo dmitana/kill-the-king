@@ -4,15 +4,22 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public abstract class Event : MonoBehaviour {
 	public String description;
+	public int eventExpReward = 25;
+	public int expRewardPerEnemy = 10;
+	[Space]
 	public String battleSceneName;
-    public List<Character> enemies = new List<Character>();
-	public int expReward;
+	public int minEnemiesCount = 1;
+	public int maxEnemiesCount = 1;
+    public List<Character> possibleEnemies = new List<Character>();
 
 	private Team playerTeam;
     private SceneController sceneController;
+
+	private List<Character> enemies = new List<Character>();
 
 	public delegate void OnClickDelegate(Event sender);
 	public event OnClickDelegate onOpen;
@@ -21,6 +28,7 @@ public abstract class Event : MonoBehaviour {
     void Start() {
 		playerTeam = Team.playerTeamInstance;
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
+		generateEnemies();
     }
 
 	protected void OnOpen() {
@@ -42,19 +50,42 @@ public abstract class Event : MonoBehaviour {
 
     public abstract void OnAccept();
 
-	private void GiveExpToPlayerTeam() {
-		playerTeam.AddExp(expReward);
+	private void GiveExpToPlayerTeam(int exp) {
+		playerTeam.AddExp(exp);
+	}
+
+	private void GiveEventExpReward() {
+		GiveExpToPlayerTeam(eventExpReward);
+	}
+
+	private void GiveBattleExpReward() {
+		GiveExpToPlayerTeam(expRewardPerEnemy * enemies.Count);
+	}
+
+	private void generateEnemies() {
+		Random rnd = new Random();
+		int enemiesCount = rnd.Next(minEnemiesCount, maxEnemiesCount + 1);
+
+		while (enemiesCount > 0) {
+			foreach (Character enemy in possibleEnemies) {
+				if (rnd.NextDouble() < 0.5f) {
+					enemies.Add(enemy);
+					if (--enemiesCount <= 0)
+						break;
+				}
+			}
+		}
 	}
 
 	protected void Success() {
 		OnClose();
-		GiveExpToPlayerTeam();
+		GiveExpToPlayerTeam(eventExpReward);
         Destroy(gameObject);
 	}
 
 	protected void MoveToBattle() {
 		OnClose();
-		sceneController.ChangeToBattleScene(battleSceneName, enemies, GiveExpToPlayerTeam);
+		sceneController.ChangeToBattleScene(battleSceneName, enemies, GiveBattleExpReward);
         Destroy(gameObject);
 	}
 }
