@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class CharacterDetailUI : MonoBehaviour {
 	public List<GameObject> skillsUI;
@@ -37,7 +38,8 @@ public class CharacterDetailUI : MonoBehaviour {
 
 			Toggle toggle = skillsUI[i].GetComponentInChildren<Toggle>();
 
-			if (character.skills.Contains(character.availableSkills[i])) {
+			var skillsNames = character.skills.Select(x => x.skillName);
+			if (skillsNames.Contains(character.availableSkills[i].skillName)) {
 				toggle.group = null;
 				toggle.isOn = true;
 				toggle.interactable = false;

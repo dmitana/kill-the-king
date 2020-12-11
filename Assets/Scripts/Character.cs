@@ -22,13 +22,9 @@ public class Character : MonoBehaviour {
 	void Awake() {
 		Health = maxHealth;
 
-		// Creates clones of script to prevent overwriting prefab
-		for (int i = 0; i < skills.Count; i++) {
-			skills[i] = Instantiate(skills[i], gameObject.transform);
-			for (int j = 0; j < skills[i].effects.Count; j++) {
-				skills[i].effects[j] = Instantiate(skills[i].effects[j], skills[i].gameObject.transform);
-			}
-		}
+		// Instantiate basic attack because it is not added as other skills
+		int i = skills.FindIndex(x => x is BasicAttack);
+		skills[i] = Instantiate(skills[i], transform);
 	}
 
 	public void AddEffect(Effect effect) {
@@ -61,12 +57,14 @@ public class Character : MonoBehaviour {
 				$"Trying to add {skill.name}, which is not available for current character."
 			);
 
-		skills.Add(skill);
+		skills.Add(Instantiate(skill, transform));
 		--SkillPoints;
 	}
 
 	public void RemoveSkill(Skill skill) {
-		skills.Remove(skill);
+		int i = skills.FindIndex(x => x.skillName == skill.skillName);
+		Destroy(skills[i].gameObject);
+		skills.RemoveAt(i);
 		++SkillPoints;
 	}
 

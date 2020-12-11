@@ -24,7 +24,14 @@ public abstract class Skill : MonoBehaviour {
     private void Awake() {
         battleController = GameMaster.instance.GetComponent<BattleController>();
         rnd = new Random();
+		InstantiateEffects();
     }
+
+	private void InstantiateEffects() {
+		for (int i = 0; i < effects.Count; i++) {
+			effects[i] = Instantiate(effects[i], transform);
+		}
+	}
 
     // Default method used whether skill has multiple targets or not
     public void ApplySkill(Character attacker, List<Character> targets) {
