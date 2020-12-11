@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Effect : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public abstract class Effect : MonoBehaviour {
+    public int duration;
+    public double BaseAttackStrength { get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void applyEffect(Character c);
 }

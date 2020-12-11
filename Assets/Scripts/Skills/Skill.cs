@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public abstract class Skill : MonoBehaviour {
     public String skillName;
@@ -18,13 +19,11 @@ public abstract class Skill : MonoBehaviour {
 
     public int numOfTargets;
     protected BattleController battleController;
+    protected Random rnd;
 
     private void Awake() {
         battleController = GameMaster.instance.GetComponent<BattleController>();
-    }
-
-    void Start() {
-        effects = new List<Effect>();
+        rnd = new Random();
     }
 
     // Default method used whether skill has multiple targets or not

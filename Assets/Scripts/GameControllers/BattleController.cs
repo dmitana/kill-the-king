@@ -143,6 +143,10 @@ public class BattleController : MonoBehaviour {
                 ClearSkillField();
                 playerTeamRound = !playerTeamRound;
             }
+            
+            // Apply effects
+            playerTeam.ApplyEffects();
+            enemyTeam.ApplyEffects();
         }
 
         // End battle function call

@@ -181,4 +181,10 @@ public class Team : MonoBehaviour {
 			character.LevelUp(healthIncPerLevel, strengthIncPerLevel);
 		}
 	}
+
+	public void ApplyEffects() {
+		foreach (Character c in Characters) {
+			c.ApplyEffects();
+		}
+	}
 }

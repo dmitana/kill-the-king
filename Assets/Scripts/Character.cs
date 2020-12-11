@@ -25,11 +25,26 @@ public class Character : MonoBehaviour {
 		// Creates clones of script to prevent overwriting prefab
 		for (int i = 0; i < skills.Count; i++) {
 			skills[i] = Instantiate(skills[i], gameObject.transform);
+			for (int j = 0; j < skills[i].effects.Count; j++) {
+				skills[i].effects[j] = Instantiate(skills[i].effects[j], skills[i].gameObject.transform);
+			}
 		}
 	}
 
 	public void AddEffect(Effect effect) {
 		activeEffects.Add(effect);
+	}
+
+	public void ApplyEffects() {
+		int i = 0;
+		while (i < activeEffects.Count) {
+			if (activeEffects[i].duration == 0) {
+				activeEffects.RemoveAt(i);
+				continue;
+			}
+			activeEffects[i].applyEffect(this);
+			i++;
+		}
 	}
 
 	public void DecreaseHealth(int damage) {
@@ -64,6 +79,9 @@ public class Character : MonoBehaviour {
 		battleController = null;
 		InBattle = false;
 		Health = maxHealth;
+		foreach (Skill skill in skills) {
+			skill.cooldown = 0;
+		}
 	}
 
 	private void OnMouseDown() {
