@@ -16,20 +16,20 @@ public abstract class Event : MonoBehaviour {
 	public int maxEnemiesCount = 1;
     public List<Character> possibleEnemies = new List<Character>();
 
+	public List<Character> Enemies { get; private set; } = new List<Character>();
+
 	private Team playerTeam;
     private SceneController sceneController;
-
-	private List<Character> enemies = new List<Character>();
 
 	public delegate void OnClickDelegate(Event sender);
 	public event OnClickDelegate onOpen;
 	public event OnClickDelegate onClose;
 
-    void Start() {
+	void Awake() {
 		playerTeam = Team.playerTeamInstance;
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
 		generateEnemies();
-    }
+	}
 
 	protected void OnOpen() {
 		onOpen?.Invoke(this);
@@ -59,7 +59,7 @@ public abstract class Event : MonoBehaviour {
 	}
 
 	private void GiveBattleExpReward() {
-		GiveExpToPlayerTeam(expRewardPerEnemy * enemies.Count);
+		GiveExpToPlayerTeam(expRewardPerEnemy * Enemies.Count);
 	}
 
 	private void generateEnemies() {
@@ -69,7 +69,7 @@ public abstract class Event : MonoBehaviour {
 		while (enemiesCount > 0) {
 			foreach (Character enemy in possibleEnemies) {
 				if (rnd.NextDouble() < 0.5f) {
-					enemies.Add(enemy);
+					Enemies.Add(enemy);
 					if (--enemiesCount <= 0)
 						break;
 				}
@@ -85,7 +85,7 @@ public abstract class Event : MonoBehaviour {
 
 	protected void MoveToBattle() {
 		OnClose();
-		sceneController.ChangeToBattleScene(battleSceneName, enemies, GiveBattleExpReward);
+		sceneController.ChangeToBattleScene(battleSceneName, Enemies, GiveBattleExpReward);
         Destroy(gameObject);
 	}
 }
