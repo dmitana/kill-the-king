@@ -23,9 +23,16 @@ public class Character : MonoBehaviour {
 	void Awake() {
 		Health = maxHealth;
 
-		// Instantiate basic attack because it is not added as other skills
-		int i = skills.FindIndex(x => x is BasicAttack);
-		skills[i] = Instantiate(skills[i], transform);
+		// Instantiate all skills because this is enemy character
+		if (availableSkills.Count == 0) {
+			for (int i = 0; i < skills.Count; ++i)
+				skills[i] = Instantiate(skills[i], transform);
+		}
+		else {
+			// Instantiate only basic attack because it is not added as other skills
+			int i = skills.FindIndex(x => x is BasicAttack);
+			skills[i] = Instantiate(skills[i], transform);
+		}
 	}
 
 	public void AddEffect(Effect effect) {
