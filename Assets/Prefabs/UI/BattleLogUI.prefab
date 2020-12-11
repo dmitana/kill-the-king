@@ -99,7 +99,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 6116431751717499060}
   - component: {fileID: 4199871758923408059}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: RectMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
