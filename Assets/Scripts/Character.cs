@@ -15,6 +15,7 @@ public class Character : MonoBehaviour {
 	public Team Team { get; set; }
 	public int Health { get; private set; }
 	public bool InBattle { get; private set; } = false;
+	public double Defence { get; set; }
 
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
@@ -35,16 +36,17 @@ public class Character : MonoBehaviour {
 		int i = 0;
 		while (i < activeEffects.Count) {
 			if (activeEffects[i].duration == 0) {
+				activeEffects[i].Deactivate(this);
 				activeEffects.RemoveAt(i);
 				continue;
 			}
-			activeEffects[i].applyEffect(this);
+			activeEffects[i].ApplyEffect(this);
 			i++;
 		}
 	}
 
 	public void DecreaseHealth(int damage) {
-		Health -= damage;
+		Health -= (int)((1 - Defence) * damage);
 		if (Health <= 0) {
 			Team.RemoveCharacterFromTeam(this);
 			Destroy(gameObject);
@@ -80,6 +82,8 @@ public class Character : MonoBehaviour {
 		foreach (Skill skill in skills) {
 			skill.cooldown = 0;
 		}
+		activeEffects = new List<Effect>();
+		Defence = 0;
 	}
 
 	private void OnMouseDown() {

@@ -6,10 +6,9 @@ public class StrongAttack : Skill {
     public override void ApplySkill(Character attacker, Character target) {
         var damage = attacker.baseStrength * 2;
         target.DecreaseHealth(damage);
-        // rnd.NextDouble();
-        if (0.05 < strength) {
+        if (rnd.NextDouble() < strength) {
             Effect effect = Instantiate(effects[0]);
-            effect.BaseAttackStrength = attacker.baseStrength;
+            effect.Strength = attacker.baseStrength;
             target.AddEffect(effect);
         }
     }

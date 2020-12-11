@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 2
+  description: Enemy is damaged each round for 5% of base damage of attacker.
   damagePerRound: 0.05

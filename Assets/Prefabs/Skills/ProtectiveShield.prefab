@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Protective Shield
-  description: Protective Shield description
-  strength: 0
-  maxStrength: 0
-  increasePerUse: 0
+  description: Adds buff that reduces received damage.
+  strength: 0.1
+  maxStrength: 0.5
+  increasePerUse: 0.02
   cooldown: 0
-  maxCooldown: 0
-  effects: []
-  numOfTargets: 0
+  maxCooldown: 3
+  effects:
+  - {fileID: 1532766204363528735, guid: 10ed0ddeb97308ea09f5e5fe5d235ab8, type: 3}
+  numOfTargets: 1

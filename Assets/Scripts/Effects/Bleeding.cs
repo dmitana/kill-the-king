@@ -5,8 +5,10 @@ using UnityEngine;
 public class Bleeding : Effect {
     public double damagePerRound;
 
-    public override void applyEffect(Character c) {
-        c.DecreaseHealth((int) (BaseAttackStrength * damagePerRound));
+    public override void ApplyEffect(Character c) {
+        c.DecreaseHealth((int) (Strength * damagePerRound));
         duration -= 1;
     }
+
+    public override void Deactivate(Character c) { }
 }
