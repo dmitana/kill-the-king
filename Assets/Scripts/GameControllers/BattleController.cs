@@ -67,9 +67,13 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(Battle());
     }
 
-	private void AfterBattle() {
-		playerTeam.AfterBattle();
-		sceneController.ReturnFromBattleScene();
+	private void AfterBattle(bool isPlayerWinner) {
+		if (isPlayerWinner) {
+			playerTeam.AfterBattle();
+			sceneController.ReturnFromBattleScene();
+		}
+		else
+			sceneController.EndGameLoss();
 	}
 
     private void ClearSkillField() {
@@ -139,18 +143,18 @@ public class BattleController : MonoBehaviour {
 
                 playerTeamFinished = ResetTeam(playerTeam, playerTeamFinished);
                 enemyTeamFinished = ResetTeam(enemyTeam, enemyTeamFinished);
-                
+
                 ClearSkillField();
                 playerTeamRound = !playerTeamRound;
             }
-            
+
             // Apply effects
             playerTeam.ApplyEffects();
             enemyTeam.ApplyEffects();
         }
 
         // End battle function call
-		AfterBattle();
+		AfterBattle(playerTeam.Characters.Count > 0);
     }
 
     public Team GetCurrentTeam() {

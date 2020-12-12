@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: King
-  maxHealth: 1000
+  maxHealth: 1
   baseStrength: 75
   availableSkills: []
   skills:

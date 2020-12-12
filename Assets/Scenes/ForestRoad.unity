@@ -3516,6 +3516,7 @@ MonoBehaviour:
   maxEnemiesCount: 3
   possibleEnemies:
   - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
+  isFinalBattle: 0
 --- !u!50 &279938397
 Rigidbody2D:
   serializedVersion: 4

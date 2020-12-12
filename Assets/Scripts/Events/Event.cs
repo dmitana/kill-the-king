@@ -83,9 +83,14 @@ public abstract class Event : MonoBehaviour {
         Destroy(gameObject);
 	}
 
-	protected void MoveToBattle() {
+	protected void MoveToBattle(bool isFinalBattle) {
 		OnClose();
-		sceneController.ChangeToBattleScene(battleSceneName, Enemies, GiveBattleExpReward);
+		if (isFinalBattle)
+			sceneController.ChangeToBattleScene(
+				battleSceneName, Enemies, () => sceneController.EndGameWin()
+			);
+		else
+			sceneController.ChangeToBattleScene(battleSceneName, Enemies, GiveBattleExpReward);
         Destroy(gameObject);
 	}
 }

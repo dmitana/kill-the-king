@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class PeasantInDanger : Event {
     public override void OnAccept() {
-		MoveToBattle();
+		MoveToBattle(false);
     }
 }

@@ -19,7 +19,7 @@ public class Team : MonoBehaviour {
     public List<Character> PlayedCharacters { get; private set; }
     public List<Character> UnplayedCharacters { get; private set; }
 	public int CurrentEnvironment { get; private set; } = 0;
-	public int Level { get; private set; }= 1;
+	public int Level { get; private set; } = 1;
 	public int Exp { get; private set; } = 0;
 
 	private Vector3 positionBeforeBattle;
@@ -186,5 +186,16 @@ public class Team : MonoBehaviour {
 		foreach (Character c in Characters) {
 			c.ApplyEffects();
 		}
+	}
+
+	public void Restart() {
+		CurrentEnvironment = 0;
+		Level = 1;
+		Exp = 0;
+		movement.enabled = true;
+
+		foreach (Character character in Characters)
+			Destroy(character.gameObject);
+        Characters = new List<Character>();
 	}
 }

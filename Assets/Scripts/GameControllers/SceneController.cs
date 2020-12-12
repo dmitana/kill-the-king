@@ -28,6 +28,13 @@ public class SceneController : MonoBehaviour {
 		SceneManager.activeSceneChanged += OnReturnFromBattleScene;
     }
 
+	public void Restart() {
+		IsGameStarted = false;
+		IsGameScene = false;
+		IsBattleScene = false;
+		gameSceneContainers = new Stack<GameObject>();
+	}
+
     public void ChangeScene(String newSceneName, Boolean unloadCurrentScene = false) {
 		StartCoroutine(ChangeSceneCoroutine(newSceneName, unloadCurrentScene));
     }
@@ -42,17 +49,19 @@ public class SceneController : MonoBehaviour {
         while (!newScene.isLoaded) {
             yield return new WaitForSeconds(0.1f);
         }
+
+		// Update current scene name
+		string prevSceneName = currentSceneName;
+		currentSceneName = newSceneName;
         SceneManager.SetActiveScene(newScene);
 
 		if (unloadCurrentScene) {
-			AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(currentSceneName);
+			AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(prevSceneName);
 			while (!asyncUnload.isDone) {
 				yield return new WaitForSeconds(0.1f);
 			}
 		}
 
-		// Update current scene and game scene
-		currentSceneName = newSceneName;
     }
 
 	public void ChangeToGameScene(String newSceneName) {
@@ -147,9 +156,9 @@ public class SceneController : MonoBehaviour {
 		isReturnFromBattleScene = true;
 
 		IsBattleScene = false;
+		playerTeam.SetActiveCamera(true);
 		ChangeScene(currentGameSceneName, true);
 		gameSceneContainers.Pop().SetActive(true);
-		playerTeam.SetActiveCamera(true);
 
 		return true;
 	}
@@ -162,5 +171,16 @@ public class SceneController : MonoBehaviour {
 
 		// Deactivate change scene callback
 		isReturnFromBattleScene = false;
+	}
+
+	public void EndGameLoss() {
+		AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(currentGameSceneName);
+		ChangeScene("EndGame", true);
+	}
+
+	public void EndGameWin() {
+		playerTeam.SetActiveCamera(false);
+		playerTeam.SetActiveCharacters(false);
+		ChangeScene("EndGame", true);
 	}
 }

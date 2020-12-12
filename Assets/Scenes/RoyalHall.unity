@@ -251,6 +251,7 @@ MonoBehaviour:
   maxEnemiesCount: 1
   possibleEnemies:
   - {fileID: 1105110518378183219, guid: c2d97bf94f53c675da3cd1e46ae43b97, type: 3}
+  isFinalBattle: 1
 --- !u!1 &493023285
 GameObject:
   m_ObjectHideFlags: 0
