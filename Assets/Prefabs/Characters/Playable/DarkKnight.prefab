@@ -140,6 +140,7 @@ MonoBehaviour:
   - {fileID: -1887268139909309780, guid: 5adef63db2dfd6df2b928c89146cf61a, type: 3}
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
+  playable: 1
 --- !u!61 &8638354114657139515
 BoxCollider2D:
   m_ObjectHideFlags: 0

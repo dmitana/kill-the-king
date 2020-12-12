@@ -1163,6 +1163,7 @@ MonoBehaviour:
   - {fileID: 6976021123672050609, guid: b753245846f49ecc38e7e3f86d5cedfd, type: 3}
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
+  playable: 1
 --- !u!61 &4906993542882990570
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -17,13 +17,21 @@ public class Character : MonoBehaviour {
 	public int Health { get; private set; }
 	public bool InBattle { get; private set; } = false;
 	public double Defence { get; set; }
+	public bool playable;
+	public bool isCriticallyWounded;
 
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
 	private Collider2D collider;
+	private bool alreadyRevived;
+	private int roundsToDeath;
 
 	void Awake() {
 		Health = maxHealth;
+		isCriticallyWounded = false;
+		alreadyRevived = false;
+		roundsToDeath = -1;
+
 		collider = GetComponent<Collider2D>();
 
 		// Instantiate all skills because this is enemy character
@@ -72,14 +80,26 @@ public class Character : MonoBehaviour {
 	public void DecreaseHealth(int damage) {
 		Health -= (int)((1 - Defence) * damage);
 		if (Health <= 0) {
-			Team.RemoveCharacterFromTeam(this);
-			Destroy(gameObject);
+			if (!alreadyRevived && playable && !isCriticallyWounded) {
+				isCriticallyWounded = true;
+				roundsToDeath = 2;
+				Health = 0;
+				battleController.Log = $"{name} is critically wounded and will die in {roundsToDeath} rounds.";
+				Team.RemoveUnplayedCharacter(this);
+				Team.AddPlayedCharacter(this);
+			}
+			else {
+				battleController.Log = $"{name} died.";
+				Team.RemoveCharacterFromTeam(this);
+				Destroy(gameObject);
+			}
 		}
-
-		foreach (Effect effect in activeEffects) {
-			if (effect.GetType() == typeof(DeadlyAttackBuff)) {
-				effect.Deactivate(this);
-				break;
+		else {
+			foreach (Effect effect in activeEffects) {
+				if (effect.GetType() == typeof(DeadlyAttackBuff)) {
+					effect.Deactivate(this);
+					break;
+				}
 			}
 		}
 	}
@@ -110,6 +130,9 @@ public class Character : MonoBehaviour {
 		battleController = null;
 		InBattle = false;
 		Health = maxHealth;
+		isCriticallyWounded = false;
+		alreadyRevived = false;
+		roundsToDeath = -1;
 		foreach (Skill skill in skills) {
 			skill.cooldown = 0;
 		}
@@ -122,6 +145,12 @@ public class Character : MonoBehaviour {
 			return;
 
 		Team currentTeam = battleController.GetCurrentTeam();
+
+		if (isCriticallyWounded && currentTeam.Characters.Contains(this) && currentTeam.Characters.Count > 1) {
+			ReviveCharacter();
+			return;
+		}
+		
 		if (battleController.ChosenCharacter == null && currentTeam.Characters.Contains(this)) {
 			if (currentTeam.UnplayedCharacters.Contains(this))
 				battleController.ChosenCharacter = this;
@@ -132,9 +161,29 @@ public class Character : MonoBehaviour {
 			battleController.ChosenTargets.Add(this);
 	}
 
-	public void DisplaySkills() {
-		battleController.Log = "Display skills";
+	private void ReviveCharacter() {
+		isCriticallyWounded = false;
+		alreadyRevived = true;
+		battleController.CharacterRevived = true;
+		Health = maxHealth / 2;
+		battleController.Log = $"{name} was revived.";
+	}
 
+	public void DecreaseRoundsToDeath() {
+		if (isCriticallyWounded) {
+			if (roundsToDeath == 0) {
+				Team.RemoveCharacterFromTeam(this);
+				Destroy(gameObject);
+				battleController.Log = $"{name} died from wounds.";
+				return;
+			}
+
+			battleController.Log = $"{name} is critically wounded and will die in {roundsToDeath} rounds.";
+			roundsToDeath--;
+		}
+	}
+
+	public void DisplaySkills() {
 		GameObject skillField = battleController.GetSkillField();
 		UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
 		for (int i = 0; i < skills.Count; i++) {

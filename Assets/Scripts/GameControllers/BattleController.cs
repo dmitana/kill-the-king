@@ -11,6 +11,7 @@ public class BattleController : MonoBehaviour {
     public List<Character> ChosenTargets { get; private set; }
     public List<Character> ValidTargets { get; private set; }
     public Skill ChosenSkill { get; set; }
+    public bool CharacterRevived { get; set; }
 
     private Team playerTeam;
     private Team enemyTeam;
@@ -116,36 +117,39 @@ public class BattleController : MonoBehaviour {
                     yield return new WaitForSeconds(0.5f);
                 }
 
-                ChosenSkill = null;
-                ChosenCharacter.DisplaySkills();
-                if (currentTeam.isAI)
-                    ChosenCharacter.SelectSkill();
-                while (ChosenSkill == null) {
-                    yield return new WaitForSeconds(0.5f);
+                if (!CharacterRevived) {
+                    ChosenSkill = null;
+                    ChosenCharacter.DisplaySkills();
+                    if (currentTeam.isAI)
+                        ChosenCharacter.SelectSkill();
+                    while (ChosenSkill == null) {
+                        yield return new WaitForSeconds(0.5f);
+                    }
+
+                    ChosenTargets = new List<Character>();
+                    ValidTargets = ChosenSkill.HighlightTargets(playerTeam, enemyTeam, playerTeamRound);
+
+                    int numOfTargets = ChosenSkill.GetNumOfTargets();
+                    if (numOfTargets == -1)
+                        numOfTargets = ValidTargets.Count;
+
+                    if (currentTeam.isAI)
+                        currentTeam.SelectTargets(numOfTargets, ValidTargets);
+                    while (numOfTargets != ChosenTargets.Count) {
+                        yield return new WaitForSeconds(0.5f);
+                    }
+
+                    ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
+                    currentTeam.AddPlayedCharacter(ChosenCharacter);
+                    currentTeam.RemoveUnplayedCharacter(ChosenCharacter);
                 }
-
-                ChosenTargets = new List<Character>();
-                ValidTargets = ChosenSkill.HighlightTargets(playerTeam, enemyTeam, playerTeamRound);
-
-                int numOfTargets = ChosenSkill.GetNumOfTargets();
-                if (numOfTargets == -1)
-                    numOfTargets = ValidTargets.Count;
-
-                if (currentTeam.isAI)
-                    currentTeam.SelectTargets(numOfTargets, ValidTargets);
-                while (numOfTargets != ChosenTargets.Count) {
-                    yield return new WaitForSeconds(0.5f);
-                }
-
-                ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
-                currentTeam.AddPlayedCharacter(ChosenCharacter);
-                currentTeam.RemoveUnplayedCharacter(ChosenCharacter);
 
                 playerTeamFinished = ResetTeam(playerTeam, playerTeamFinished);
                 enemyTeamFinished = ResetTeam(enemyTeam, enemyTeamFinished);
 
                 ClearSkillField();
                 playerTeamRound = !playerTeamRound;
+                CharacterRevived = false;
             }
 
             // Apply effects

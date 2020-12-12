@@ -156,6 +156,7 @@ public class Team : MonoBehaviour {
 			AddUnplayedCharacter(c);
 			if (resetCooldowns)
 				c.DecreaseCooldowns();
+			c.DecreaseRoundsToDeath();
 		}
 	}
 
