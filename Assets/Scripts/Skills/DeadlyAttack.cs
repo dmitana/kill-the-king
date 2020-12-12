@@ -15,7 +15,11 @@ public class DeadlyAttack : Skill {
 
         if (buff == null) {
             buff = (DeadlyAttackBuff) Instantiate(effects[0]);
+            attacker.AddEffect(buff);
         }
+        
+        buff.Strength = strength;
+        buff.skill = this;
         
         if (buff.charges < buff.maxCharges)
             buff.charges += 1;

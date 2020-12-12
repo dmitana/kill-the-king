@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Protection : Effect
 {
-    public override void ApplyEffect(Character c) {
+    public override void AtRoundEnd(Character c) {
         duration -= 1;
     }
 

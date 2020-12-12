@@ -37,9 +37,22 @@ public abstract class Skill : MonoBehaviour {
 
     // Default method used whether skill has multiple targets or not
     public virtual void ApplySkill(Character attacker, List<Character> targets) {
+        DeadlyAttackBuff buff = null;
+        foreach (Effect effect in attacker.GetEffects()) {
+            if (effect.GetType() == typeof(DeadlyAttackBuff)) {
+                buff = (DeadlyAttackBuff) effect;
+                buff.Activate(attacker);
+                break;
+            }
+        }
+        
         cooldown = maxCooldown;
         foreach (var target in targets) {
             ApplySkill(attacker, target);
+        }
+
+        if (buff != null) {
+            buff.Deactivate(attacker);
         }
     }
 

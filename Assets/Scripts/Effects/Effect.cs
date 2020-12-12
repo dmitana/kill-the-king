@@ -8,6 +8,7 @@ public abstract class Effect : MonoBehaviour {
     public String description;
     public double Strength { get; set; }
 
-    public abstract void ApplyEffect(Character c);
+    public abstract void AtRoundEnd(Character c);
+    public virtual void Activate(Character c) { }
     public abstract void Deactivate(Character c);
 }

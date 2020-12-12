@@ -64,7 +64,7 @@ public class Character : MonoBehaviour {
 				activeEffects.RemoveAt(i);
 				continue;
 			}
-			activeEffects[i].ApplyEffect(this);
+			activeEffects[i].AtRoundEnd(this);
 			i++;
 		}
 	}
@@ -74,6 +74,13 @@ public class Character : MonoBehaviour {
 		if (Health <= 0) {
 			Team.RemoveCharacterFromTeam(this);
 			Destroy(gameObject);
+		}
+
+		foreach (Effect effect in activeEffects) {
+			if (effect.GetType() == typeof(DeadlyAttackBuff)) {
+				effect.Deactivate(this);
+				break;
+			}
 		}
 	}
 
