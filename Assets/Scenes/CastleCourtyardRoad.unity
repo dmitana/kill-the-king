@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 952294630}
   - component: {fileID: 952294632}
   - component: {fileID: 952294631}
+  - component: {fileID: 952294633}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -4648,6 +4649,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &952294633
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952294629}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1001 &953210569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4748,11 +4765,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019894656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.43, y: 3.12, z: 0}
+  m_LocalPosition: {x: 10.43, y: 3.12, z: 1}
   m_LocalScale: {x: 5.888253, y: 2.9299078, z: 1}
   m_Children: []
   m_Father: {fileID: 2127387343}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1019894658
 SpriteRenderer:
@@ -4846,7 +4863,7 @@ Transform:
   m_Children:
   - {fileID: 952294630}
   m_Father: {fileID: 2127387343}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1463640088
 PrefabInstance:
@@ -4965,6 +4982,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6288440974519350381, guid: 46b6caab9c1e7164a82850fac7bbafe3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b6caab9c1e7164a82850fac7bbafe3, type: 3}
 --- !u!224 &1463640089 stripped
@@ -4988,7 +5010,7 @@ PrefabInstance:
     - target: {fileID: 90098288842959049, guid: 7f8e5eff76996ca69b54d91b69f89c7c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.6
+      value: -3.65
       objectReference: {fileID: 0}
     - target: {fileID: 90098288842959049, guid: 7f8e5eff76996ca69b54d91b69f89c7c,
         type: 3}
@@ -5174,8 +5196,8 @@ Transform:
   m_LocalPosition: {x: -0.5352628, y: 1.7397112, z: -10.537488}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1274981206}
   - {fileID: 1019894657}
+  - {fileID: 1274981206}
   - {fileID: 1982629234}
   - {fileID: 953210570}
   - {fileID: 2003896393}

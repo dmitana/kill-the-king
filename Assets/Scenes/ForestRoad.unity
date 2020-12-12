@@ -132,8 +132,9 @@ GameObject:
   - component: {fileID: 131578984}
   - component: {fileID: 131578986}
   - component: {fileID: 131578985}
+  - component: {fileID: 131578987}
   m_Layer: 0
-  m_Name: NaturePixelArtAssets
+  m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3397,6 +3398,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &131578987
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131578983}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &142320793
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,7 +3511,7 @@ MonoBehaviour:
   description: Battle event.
   eventExpReward: 25
   expRewardPerEnemy: 10
-  battleSceneName: Battle
+  battleSceneName: ForestRoadBattle
   minEnemiesCount: 1
   maxEnemiesCount: 3
   possibleEnemies:
@@ -3507,19 +3524,19 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279938393}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!1 &332017118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3597,7 +3614,7 @@ GameObject:
   - component: {fileID: 434378160}
   - component: {fileID: 434378159}
   m_Layer: 0
-  m_Name: BG_mountains_noon_1024
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3893,145 +3910,11 @@ MonoBehaviour:
   description: Peasant in danger description.
   eventExpReward: 25
   expRewardPerEnemy: 10
-  battleSceneName: Battle
+  battleSceneName: ForestRoadBattle
   minEnemiesCount: 1
   maxEnemiesCount: 2
   possibleEnemies:
   - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
---- !u!1001 &1770528095
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2082646339}
-    m_Modifications:
-    - target: {fileID: 1136940563276654, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_Name
-      value: TCF_mapTiles
-      objectReference: {fileID: 0}
-    - target: {fileID: 1930493908575208, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_Name
-      value: mapTiles_tilemap
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e77bf335b82cfe74d81debd8bdf7484d, type: 3}
---- !u!4 &1770528096 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4472814871369082, guid: e77bf335b82cfe74d81debd8bdf7484d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1770528095}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &2073273164
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2082646339}
-    m_Modifications:
-    - target: {fileID: 1377039525300678, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_Name
-      value: decorations_tilemap
-      objectReference: {fileID: 0}
-    - target: {fileID: 1922385463637482, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_Name
-      value: TCF_decorations
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4868ee7e3e745d1438f2a30cd4449373, type: 3}
---- !u!4 &2073273165 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4070031628022640, guid: 4868ee7e3e745d1438f2a30cd4449373,
-    type: 3}
-  m_PrefabInstance: {fileID: 2073273164}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2082646337
 GameObject:
   m_ObjectHideFlags: 0
@@ -4073,8 +3956,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 131578984}
-  - {fileID: 2073273165}
-  - {fileID: 1770528096}
   m_Father: {fileID: 142320794}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
