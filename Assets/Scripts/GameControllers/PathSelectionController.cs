@@ -8,6 +8,7 @@ public class PathSelectionController : MonoBehaviour {
 	public GameObject countrySideEnvButtons;
 	public GameObject townEnvButtons;
 	public GameObject castleEnvButtons;
+	public GameObject royalHallButton;
 
 	private SceneController sceneController;
 	private Team playerTeam;
@@ -25,6 +26,10 @@ public class PathSelectionController : MonoBehaviour {
 		if (playerTeam.CurrentEnvironment > 1) {
 			castleEnvButtons.SetActive(true);
 			SetNonInteractable(townEnvButtons);
+		}
+		if (playerTeam.CurrentEnvironment > 2) {
+			royalHallButton.SetActive(true);
+			SetNonInteractable(castleEnvButtons);
 		}
 	}
 
