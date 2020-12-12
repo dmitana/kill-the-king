@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
+[RequireComponent(typeof(Collider2D))]
 public class Character : MonoBehaviour {
 	public string characterName;
 	public int maxHealth;
@@ -19,9 +20,11 @@ public class Character : MonoBehaviour {
 
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
+	private Collider2D collider;
 
 	void Awake() {
 		Health = maxHealth;
+		collider = GetComponent<Collider2D>();
 
 		// Instantiate all skills because this is enemy character
 		if (availableSkills.Count == 0) {
@@ -34,6 +37,16 @@ public class Character : MonoBehaviour {
 			skills[i] = Instantiate(skills[i], transform);
 		}
 	}
+
+     void Update() {
+		 if (Input.GetMouseButtonDown(0) && Camera.main != null) {
+			 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			 RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);
+
+			 if (rayHit != null && rayHit.collider == collider)
+				 OnMouseDownRayCast();
+		 }
+     }
 
 	public void AddEffect(Effect effect) {
 		activeEffects.Add(effect);
@@ -97,7 +110,7 @@ public class Character : MonoBehaviour {
 		Defence = 0;
 	}
 
-	private void OnMouseDown() {
+	private void OnMouseDownRayCast() {
 		if (InBattle == false)
 			return;
 
