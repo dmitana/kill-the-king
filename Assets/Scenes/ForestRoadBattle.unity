@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!224 &194340946 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1491488289682694645, guid: ba1badcc0a99fd87e9f097b9c55f4ab6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1491488289572800935}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &258119405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1233,7 @@ PrefabInstance:
     - target: {fileID: 4712068892271742343, guid: fa63d9ad051d639dbb123b3832aab1fa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4712068892271742343, guid: fa63d9ad051d639dbb123b3832aab1fa,
         type: 3}
@@ -1565,7 +1559,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 194340946}
+  - {fileID: 1958454998}
   - {fileID: 265463898}
   m_Father: {fileID: 1089621864}
   m_RootOrder: 3
@@ -1647,7 +1641,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1491488289572800935
+--- !u!1001 &1958454997
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1762,10 +1756,16 @@ PrefabInstance:
     - target: {fileID: 1491488289682694646, guid: ba1badcc0a99fd87e9f097b9c55f4ab6,
         type: 3}
       propertyPath: m_Name
-      value: SkillsImage
+      value: SkillsUI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba1badcc0a99fd87e9f097b9c55f4ab6, type: 3}
+--- !u!224 &1958454998 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1491488289682694645, guid: ba1badcc0a99fd87e9f097b9c55f4ab6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1958454997}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9108875614222671585
 PrefabInstance:
   m_ObjectHideFlags: 0

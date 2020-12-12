@@ -171,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 4712068892271742343, guid: fa63d9ad051d639dbb123b3832aab1fa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4712068892271742343, guid: fa63d9ad051d639dbb123b3832aab1fa,
         type: 3}
@@ -438,7 +438,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 2074652558}
+  - {fileID: 2003165535}
   - {fileID: 644347780}
   m_Father: {fileID: 1086350487}
   m_RootOrder: 4
@@ -1715,7 +1715,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2074652557
+--- !u!1001 &2003165534
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1830,15 +1830,15 @@ PrefabInstance:
     - target: {fileID: 1491488289682694646, guid: ba1badcc0a99fd87e9f097b9c55f4ab6,
         type: 3}
       propertyPath: m_Name
-      value: SkillsImage
+      value: SkillsUI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba1badcc0a99fd87e9f097b9c55f4ab6, type: 3}
---- !u!224 &2074652558 stripped
+--- !u!224 &2003165535 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1491488289682694645, guid: ba1badcc0a99fd87e9f097b9c55f4ab6,
     type: 3}
-  m_PrefabInstance: {fileID: 2074652557}
+  m_PrefabInstance: {fileID: 2003165534}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2143049998
 GameObject:
