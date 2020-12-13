@@ -61,9 +61,6 @@ public class BattleController : MonoBehaviour {
         playerTeamFirst = (rng.Next(2) == 0);
 
         skillField = GameObject.FindGameObjectWithTag("SkillField");
-        foreach (UISkillField field in skillField.transform.GetComponentsInChildren<UISkillField>()) {
-            field.SetBattleController(this);
-        }
 
         StartCoroutine(Battle());
     }
@@ -78,8 +75,8 @@ public class BattleController : MonoBehaviour {
 	}
 
     private void ClearSkillField() {
-        UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
-        foreach (UISkillField skillField in skillFields) {
+        SkillFieldUI[] skillFields = skillField.transform.GetComponentsInChildren<SkillFieldUI>();
+        foreach (SkillFieldUI skillField in skillFields) {
             skillField.Clear();
         }
     }
@@ -119,7 +116,6 @@ public class BattleController : MonoBehaviour {
 
                 if (!CharacterRevived) {
                     ChosenSkill = null;
-                    ChosenCharacter.DisplaySkills();
                     if (currentTeam.isAI)
                         ChosenCharacter.SelectSkill();
                     while (ChosenSkill == null) {

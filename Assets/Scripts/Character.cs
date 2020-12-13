@@ -183,14 +183,6 @@ public class Character : MonoBehaviour {
 		}
 	}
 
-	public void DisplaySkills() {
-		GameObject skillField = battleController.GetSkillField();
-		UISkillField[] skillFields = skillField.transform.GetComponentsInChildren<UISkillField>();
-		for (int i = 0; i < skills.Count; i++) {
-			skillFields[i].SetSkill(skills[i]);
-		}
-	}
-
 	public void SelectSkill() {
 		Random rng = new Random();
 		List<Skill> skillsNotOnCooldown = new List<Skill>();

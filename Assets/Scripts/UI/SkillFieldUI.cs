@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UISkillField : MonoBehaviour {
+public class SkillFieldUI : MonoBehaviour {
     private Skill skill;
     private BattleController battleController;
+
+    private void Awake() {
+        battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
+    }
 
     public void SetSkill(Skill s) {
         skill = s;
@@ -30,9 +34,5 @@ public class UISkillField : MonoBehaviour {
 
     public void Clear() {
         gameObject.GetComponentInChildren<Image>().color = Color.black;
-    }
-    
-    public void SetBattleController(BattleController controller) {
-        battleController = controller;
     }
 }
