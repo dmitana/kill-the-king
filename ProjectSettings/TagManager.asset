@@ -13,6 +13,7 @@ TagManager:
   - SkillField
   - ResumeGameButton
   - PlayerTeamInitialPosition
+  - Character
   layers:
   - Default
   - TransparentFX
