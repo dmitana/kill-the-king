@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class SkillFieldUI : MonoBehaviour {
     private Skill skill;
     private BattleController battleController;
+    private SkillsUI parent;
 
     private void Awake() {
         battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
+        parent = transform.parent.GetComponent<SkillsUI>();
     }
 
     public void SetSkill(Skill s) {
@@ -34,5 +36,34 @@ public class SkillFieldUI : MonoBehaviour {
 
     public void Clear() {
         gameObject.GetComponentInChildren<Image>().color = Color.black;
+    }
+    
+    private void OnMouseOver() {
+        if (skill != null) {
+            parent.skillDescription.SetActive(true);
+            parent.skillName.text = skill.skillName;
+            parent.strength.text = $"Strength: {skill.strength * 100} %";
+            parent.maxStrength.text = $"Max strength: {skill.maxStrength * 100} %";
+            parent.increasePerUse.text = $"Increase per use: {skill.increasePerUse * 100} %";
+            parent.cooldown.text = $"Cooldown: {skill.cooldown}";
+            parent.maxCooldown.text = $"Max cooldown: {skill.maxCooldown}";
+            parent.numOfTargets.text =
+                $"Num of targets: {((skill.numOfTargets == -1) ? "All" : skill.numOfTargets.ToString())}";
+            parent.description.text = skill.description;
+        }
+    }
+
+    private void OnMouseExit() {
+        if (skill != null) {
+            parent.skillDescription.SetActive(false);
+            parent.skillName.text = "";
+            parent.strength.text = "";
+            parent.maxStrength.text = "Max strength: ";
+            parent.increasePerUse.text = "Increase per use: ";
+            parent.cooldown.text = "Cooldown: ";
+            parent.maxCooldown.text = "Max cooldown: ";
+            parent.numOfTargets.text = "Num of targets: ";
+            parent.description.text = "";
+        }
     }
 }

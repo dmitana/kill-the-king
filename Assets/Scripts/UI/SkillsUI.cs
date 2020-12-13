@@ -1,9 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SkillsUI : MonoBehaviour {
+    public GameObject skillDescription;
+    public TMP_Text skillName;
+    public TMP_Text strength;
+    public TMP_Text maxStrength;
+    public TMP_Text increasePerUse;
+    public TMP_Text cooldown;
+    public TMP_Text maxCooldown;
+    public TMP_Text numOfTargets;
+    public TMP_Text description;
+
     private BattleController battleController;
 
     private void Awake() {
