@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4966892414207897708}
   m_Layer: 0
   m_Name: DarkKnight
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
   playable: 1
+  isCriticallyWounded: 0
 --- !u!61 &8638354114657139515
 BoxCollider2D:
   m_ObjectHideFlags: 0

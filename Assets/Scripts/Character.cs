@@ -19,17 +19,24 @@ public class Character : MonoBehaviour {
 	public double Defence { get; set; }
 	public bool playable;
 	public bool isCriticallyWounded;
+	public bool alreadyRevived;
 
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
 	private Collider2D collider;
-	private bool alreadyRevived;
 	private int roundsToDeath;
+	
+	public delegate void OnClickDelegate(Character c);
+	public event OnClickDelegate onHover;
+	public event OnClickDelegate onExit;
+
+	private bool hover;
 
 	void Awake() {
 		Health = maxHealth;
 		isCriticallyWounded = false;
 		alreadyRevived = false;
+		hover = false;
 		roundsToDeath = -1;
 
 		collider = GetComponent<Collider2D>();
@@ -47,13 +54,25 @@ public class Character : MonoBehaviour {
 	}
 
      void Update() {
-		 if (Input.GetMouseButtonDown(0) && Camera.main != null) {
-			 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			 RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);
+	     if (Camera.main != null) {
+		     var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		     RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);
 
-			 if (rayHit != null && rayHit.collider == collider)
-				 OnMouseDownRayCast();
-		 }
+		     if (rayHit != null && rayHit.collider == collider) {
+			     if (Input.GetMouseButtonDown(0)) {
+				     OnMouseDownRayCast();
+			     }
+			     else if (!hover) {
+				     hover = true;
+				     OnMouseOverRayCast();
+			     }
+		     }
+		     else if (rayHit != null && rayHit.collider != collider && hover) {
+			     hover = false;
+			     OnMouseExitRayCast();
+		     }
+		     Debug.Log($"{characterName}, {rayHit != null}, {rayHit.collider != collider}, {hover}");
+	     }
      }
 
 	public void AddEffect(Effect effect) {
@@ -209,5 +228,21 @@ public class Character : MonoBehaviour {
 		foreach (Skill skill in skills) {
 			skill.DecreaseCooldown();
 		}
+	}
+
+	private void OnHover() {
+		onHover?.Invoke(this);
+	}
+
+	private void OnExit() {
+		onExit?.Invoke(this);
+	}
+
+	private void OnMouseOverRayCast() {
+		OnHover();
+	}
+	
+	private void OnMouseExitRayCast() {
+		OnExit();
 	}
 }

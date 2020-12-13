@@ -56,14 +56,6 @@ public class SkillFieldUI : MonoBehaviour {
     private void OnMouseExit() {
         if (skill != null) {
             parent.skillDescription.SetActive(false);
-            parent.skillName.text = "";
-            parent.strength.text = "";
-            parent.maxStrength.text = "Max strength: ";
-            parent.increasePerUse.text = "Increase per use: ";
-            parent.cooldown.text = "Cooldown: ";
-            parent.maxCooldown.text = "Max cooldown: ";
-            parent.numOfTargets.text = "Num of targets: ";
-            parent.description.text = "";
         }
     }
 }

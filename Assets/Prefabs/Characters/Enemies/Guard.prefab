@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 6834773860643851402}
   m_Layer: 0
   m_Name: Guard
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,6 +152,8 @@ MonoBehaviour:
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
   - {fileID: 6976021123672050609, guid: b753245846f49ecc38e7e3f86d5cedfd, type: 3}
+  playable: 0
+  isCriticallyWounded: 0
 --- !u!61 &6834773860643851402
 BoxCollider2D:
   m_ObjectHideFlags: 0
