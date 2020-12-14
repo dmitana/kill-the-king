@@ -45,7 +45,7 @@ public abstract class Skill : MonoBehaviour {
                 break;
             }
         }
-        
+
         cooldown = maxCooldown;
         foreach (var target in targets) {
             ApplySkill(attacker, target);
@@ -54,7 +54,7 @@ public abstract class Skill : MonoBehaviour {
         if (buff != null) {
             buff.Deactivate(attacker);
         }
-        strength += increasePerUse;
+		Improve();
     }
 
     public abstract void ApplySkill(Character attacker, Character target);
@@ -69,4 +69,9 @@ public abstract class Skill : MonoBehaviour {
         if (cooldown > 0)
             cooldown--;
     }
+
+	public void Improve(int times = 1) {
+        strength += increasePerUse * times;
+		strength = (strength > maxStrength) ? maxStrength : strength;
+	}
 }

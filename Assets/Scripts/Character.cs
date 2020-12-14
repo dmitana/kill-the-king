@@ -220,11 +220,10 @@ public class Character : MonoBehaviour {
 		++SkillPoints;
 	}
 
-	public void LevelUp(float healthIncPerLevel, float strengthIncPerLevel) {
-		maxHealth += (int) Math.Round(maxHealth * healthIncPerLevel);
+	public void LevelUp(float healthIncPerLevel, float strengthIncPerLevel, int nLevels = 1) {
+		maxHealth += (int) Math.Round(maxHealth * healthIncPerLevel * nLevels);
 		Health = maxHealth;
-
-		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevel);
+		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevel * nLevels);
 	}
 
 	public void DecreaseCooldowns() {
@@ -249,10 +248,9 @@ public class Character : MonoBehaviour {
 		OnExit();
 	}
 
-	public void ScaleAICharacterToPlayerLevel(int level) {
-		--level;
-		maxHealth += (int) Math.Round(maxHealth * healthIncPerLevelAI * level);
-		Health = maxHealth;
-		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevelAI * level);
+	public void ScaleAICharacterToPlayerLevelAndArea(int level, int area) {
+		LevelUp(healthIncPerLevelAI, strengthIncPerLevelAI, --level);
+		foreach (Skill skill in skills)
+			skill.Improve(--area);
 	}
 }
