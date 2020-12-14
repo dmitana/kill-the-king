@@ -12,6 +12,7 @@ public class BattleController : MonoBehaviour {
     public List<Character> ValidTargets { get; private set; }
     public Skill ChosenSkill { get; set; }
     public bool CharacterRevived { get; set; }
+    public bool battleReady;
 
     private Team playerTeam;
     private Team enemyTeam;
@@ -38,6 +39,7 @@ public class BattleController : MonoBehaviour {
         rng = new Random();
 		sceneController = GameMaster.instance.GetComponent<SceneController>();
         logs = new Queue<string>();
+        battleReady = false;
     }
 
     private void FillEnemiesToBattle() {
@@ -63,6 +65,7 @@ public class BattleController : MonoBehaviour {
         skillField = GameObject.FindGameObjectWithTag("SkillField");
 
         StartCoroutine(Battle());
+        battleReady = true;
     }
 
 	private void AfterBattle(bool isPlayerWinner) {
@@ -72,7 +75,9 @@ public class BattleController : MonoBehaviour {
 		}
 		else
 			sceneController.EndGameLoss();
-	}
+
+        battleReady = false;
+    }
 
     private void ClearSkillField() {
         SkillFieldUI[] skillFields = skillField.transform.GetComponentsInChildren<SkillFieldUI>();

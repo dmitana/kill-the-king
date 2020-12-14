@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -14,16 +15,25 @@ public class CharacterDetailBattleUI : MonoBehaviour
     public TMP_Text skills;
     
     private List<Character> characters;
+    private bool charactersObtained;
+    private BattleController battleController;
 
-    void OnEnable() {
-        characters = new List<Character>();
-        GameObject[] charactersGO = GameObject.FindGameObjectsWithTag("Character");
+    private void Awake() {
+        battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
+        charactersObtained = false;
+    }
 
-        foreach (GameObject go in charactersGO) {
-            Character c = go.GetComponent<Character>();
-            c.onHover += Show;
-            c.onExit += Hide;
-            characters.Add(c);
+    private void Update() {
+        if (!charactersObtained && battleController.battleReady) {
+            characters = new List<Character>();
+            GameObject[] charactersGO = GameObject.FindGameObjectsWithTag("Character");
+
+            foreach (GameObject go in charactersGO) {
+                Character c = go.GetComponent<Character>();
+                c.onHover += Show;
+                c.onExit += Hide;
+                characters.Add(c);
+            }
         }
     }
 

@@ -71,7 +71,6 @@ public class Character : MonoBehaviour {
 			     hover = false;
 			     OnMouseExitRayCast();
 		     }
-		     Debug.Log($"{characterName}, {rayHit != null}, {rayHit.collider != collider}, {hover}");
 	     }
      }
 
