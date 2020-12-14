@@ -235,8 +235,11 @@ MonoBehaviour:
   - {fileID: 5777983318617136248, guid: 5d0b69dcf8cf9809cba7e0d161248952, type: 3}
   - {fileID: 1514053455001747585, guid: 87deebf76b29297a9aebcc86d4777513, type: 3}
   - {fileID: -4789432574398516970, guid: 373cf417a0e37e9ee99cb48e84802236, type: 3}
+  healthIncPerLevelAI: 0.1
+  strengthIncPerLevelAI: 0.05
   playable: 0
   isCriticallyWounded: 0
+  alreadyRevived: 0
 --- !u!61 &7515420858978266994
 BoxCollider2D:
   m_ObjectHideFlags: 0

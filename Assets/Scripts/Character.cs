@@ -11,6 +11,8 @@ public class Character : MonoBehaviour {
 	public int baseStrength;
 	public List<Skill> availableSkills = new List<Skill>();
 	public List<Skill> skills = new List<Skill>();
+	public float healthIncPerLevelAI;
+	public float strengthIncPerLevelAI;
 
 	public int SkillPoints { get; private set; } = 1;
 	public Team Team { get; set; }
@@ -245,5 +247,11 @@ public class Character : MonoBehaviour {
 	
 	private void OnMouseExitRayCast() {
 		OnExit();
+	}
+
+	public void ScaleAICharacterToPlayerLevel(int level) {
+		maxHealth += (int) Math.Round(maxHealth * healthIncPerLevelAI * level);
+		Health = maxHealth;
+		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevelAI * level);
 	}
 }
