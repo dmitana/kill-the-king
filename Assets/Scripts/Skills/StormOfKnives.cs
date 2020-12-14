@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StormOfKnives : Skill {
     public override void ApplySkill(Character attacker, Character target) {
-        var damage = (int) (attacker.baseStrength * strength);
+        var damage = (int) Math.Round(attacker.baseStrength * strength);
         target.DecreaseHealth(damage);
     }
     

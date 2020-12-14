@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class DeadlyAttackBuff : Effect {
             return;
 
         originalStrength = c.baseStrength;
-        c.baseStrength = (int) ((Strength * c.baseStrength) * (charges + 1));
+        c.baseStrength = (int) Math.Round((Strength * c.baseStrength) * (charges + 1));
         charges = 0;
     }
 

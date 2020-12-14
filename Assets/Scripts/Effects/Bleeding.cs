@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Bleeding : Effect {
     public double damagePerRound;
 
     public override void AtRoundEnd(Character c) {
-        c.DecreaseHealth((int) (Strength * damagePerRound));
+        c.DecreaseHealth((int) Math.Round(Strength * damagePerRound));
         duration -= 1;
     }
 
