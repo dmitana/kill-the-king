@@ -54,6 +54,7 @@ public abstract class Skill : MonoBehaviour {
         if (buff != null) {
             buff.Deactivate(attacker);
         }
+        strength += increasePerUse;
     }
 
     public abstract void ApplySkill(Character attacker, Character target);
