@@ -27,7 +27,7 @@ public class Character : MonoBehaviour {
 	private BattleController battleController;
 	private Collider2D collider;
 	private int roundsToDeath;
-	
+
 	public delegate void OnClickDelegate(Character c);
 	public event OnClickDelegate onHover;
 	public event OnClickDelegate onExit;
@@ -171,7 +171,7 @@ public class Character : MonoBehaviour {
 			battleController.ChosenCharacter = this;
 			return;
 		}
-		
+
 		if (battleController.ChosenCharacter == null && currentTeam.Characters.Contains(this)) {
 			if (currentTeam.UnplayedCharacters.Contains(this))
 				battleController.ChosenCharacter = this;
@@ -244,12 +244,13 @@ public class Character : MonoBehaviour {
 	private void OnMouseOverRayCast() {
 		OnHover();
 	}
-	
+
 	private void OnMouseExitRayCast() {
 		OnExit();
 	}
 
 	public void ScaleAICharacterToPlayerLevel(int level) {
+		--level;
 		maxHealth += (int) Math.Round(maxHealth * healthIncPerLevelAI * level);
 		Health = maxHealth;
 		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevelAI * level);
