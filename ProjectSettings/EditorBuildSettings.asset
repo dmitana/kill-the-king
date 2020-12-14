@@ -18,17 +18,23 @@ EditorBuildSettings:
     path: Assets/Scenes/ForestRoad.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/ForestRoadBattle.unity
+    guid: e4ca1348d01a07a81b6b925e3ea0e043
+  - enabled: 1
     path: Assets/Scenes/MainRoad.unity
     guid: 348ee7f112c032fdc9e29b216d03a3ad
+  - enabled: 1
+    path: Assets/Scenes/MainRoadBattle.unity
+    guid: b1e7dc74decde606697610efdf7e5546
   - enabled: 1
     path: Assets/Scenes/CastleCourtyardRoad.unity
     guid: 38e6e6ee18a493b639bf4bed98a08ef4
   - enabled: 1
+    path: Assets/Scenes/CastleCourtyardRoadBattle.unity
+    guid: c488d55dc018cc9e18b2bdb8d7ae39d9
+  - enabled: 1
     path: Assets/Scenes/RoyalHall.unity
     guid: 368044ca931b0e1269853888abac4af4
-  - enabled: 1
-    path: Assets/Scenes/ForestRoadBattle.unity
-    guid: e4ca1348d01a07a81b6b925e3ea0e043
   - enabled: 1
     path: Assets/Scenes/RoyalHallBattle.unity
     guid: 29ffedca01550aa1bb95c29244992ee9

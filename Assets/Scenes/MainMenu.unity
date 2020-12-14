@@ -1340,6 +1340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df255b62ecab8c021b322df10921bcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleReady: 0
 --- !u!114 &2037618715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,6 +1509,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Team
       objectReference: {fileID: 0}
+    - target: {fileID: 5572348361589202607, guid: 6791e638e1c76a3ea904979dfb5e8700,
+        type: 3}
+      propertyPath: orthographic size
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6705946337276884288, guid: 6791e638e1c76a3ea904979dfb5e8700,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1562,6 +1568,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108590480885377642, guid: 6791e638e1c76a3ea904979dfb5e8700,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6791e638e1c76a3ea904979dfb5e8700, type: 3}
