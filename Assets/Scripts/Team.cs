@@ -19,6 +19,7 @@ public class Team : MonoBehaviour {
     public List<Character> PlayedCharacters { get; private set; }
     public List<Character> UnplayedCharacters { get; private set; }
 	public int CurrentEnvironment { get; private set; } = 0;
+	public int CurrentArea { get; private set; } = 0;
 	public int Level { get; private set; } = 1;
 	public int Exp { get; private set; } = 0;
 
@@ -115,6 +116,11 @@ public class Team : MonoBehaviour {
 
 	public void IncreaseEnvironment() {
 		++CurrentEnvironment;
+		IncreaseArea();
+	}
+
+	public void IncreaseArea() {
+		++CurrentArea;
 	}
 
     public void SelectCharacter() {
