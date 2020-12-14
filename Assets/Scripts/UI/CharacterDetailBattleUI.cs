@@ -34,6 +34,7 @@ public class CharacterDetailBattleUI : MonoBehaviour
                 c.onExit += Hide;
                 characters.Add(c);
             }
+            charactersObtained = true;
         }
     }
 
