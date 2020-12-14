@@ -13,7 +13,7 @@ public class CharacterDetailBattleUI : MonoBehaviour
     public TMP_Text alreadyPlayed;
     public TMP_Text alreadyRevived;
     public TMP_Text skills;
-    
+
     private List<Character> characters;
     private bool charactersObtained;
     private BattleController battleController;
@@ -50,7 +50,7 @@ public class CharacterDetailBattleUI : MonoBehaviour
         name.text = c.characterName;
         health.text = $"Health: {c.Health}";
         damage.text = $"Damage: {c.baseStrength}";
-        alreadyPlayed.text = $"Already played: {((c.Team.UnplayedCharacters.Contains(c)) ? "Yes" : "No")}";
+        alreadyPlayed.text = $"Already played: {((c.Team.PlayedCharacters.Contains(c)) ? "Yes" : "No")}";
         alreadyRevived.text = c.playable ? $"Already revived: {((c.alreadyRevived) ? "Yes" : "No")}" : "";
         skills.text = "";
         foreach (Skill s in c.skills) {
