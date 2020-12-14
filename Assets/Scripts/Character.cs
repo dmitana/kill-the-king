@@ -166,6 +166,7 @@ public class Character : MonoBehaviour {
 
 		if (isCriticallyWounded && currentTeam.Characters.Contains(this) && currentTeam.Characters.Count > 1) {
 			ReviveCharacter();
+			battleController.ChosenCharacter = this;
 			return;
 		}
 		
@@ -175,7 +176,8 @@ public class Character : MonoBehaviour {
 			else
 				battleController.Log = $"Character {characterName} was already used.";
 		}
-		else if (battleController.ChosenSkill != null && battleController.ValidTargets.Contains(this))
+		else if (battleController.ChosenSkill != null && battleController.ValidTargets.Contains(this) &&
+		         !battleController.ChosenTargets.Contains(this))
 			battleController.ChosenTargets.Add(this);
 	}
 
