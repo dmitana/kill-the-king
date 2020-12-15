@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PopUpWindowUI : MonoBehaviour {
 	public Image popUpWindow;
+	public TMP_Text popUpTitle;
 	public TMP_Text popUpText;
 	public Button acceptButton;
 	public Button rejectButton;
@@ -33,6 +34,7 @@ public class PopUpWindowUI : MonoBehaviour {
 
 	private void Show(Event e) {
 		popUpWindow.gameObject.SetActive(true);
+		popUpTitle.text = e.title;
 		popUpText.text = e.description;
 		rejectButton.onClick.AddListener(e.OnReject);
 		acceptButton.onClick.AddListener(e.OnAccept);

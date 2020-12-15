@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using Random = System.Random;
 
 public abstract class Event : MonoBehaviour {
+	public String title;
 	public String description;
 	public int eventExpReward = 25;
 	public int expRewardPerEnemy = 10;
