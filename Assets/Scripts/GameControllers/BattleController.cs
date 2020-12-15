@@ -49,7 +49,7 @@ public class BattleController : MonoBehaviour {
             Character newEnemy = Instantiate(enemy, position, Quaternion.identity, enemyTeam.transform);
             newEnemy.ScaleAICharacterToPlayerLevelAndArea(playerTeam.Level, playerTeam.CurrentArea);
             enemyTeam.AddCharacterToTeam(newEnemy);
-            position[0] += 2.2f;
+            position[0] += 1;
         }
     }
 
