@@ -146,12 +146,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Guard
+  characterImg: {fileID: 0}
   maxHealth: 125
   baseStrength: 35
   availableSkills: []
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
-  - {fileID: 6976021123672050609, guid: b753245846f49ecc38e7e3f86d5cedfd, type: 3}
   healthIncPerLevelAI: 0.1
   strengthIncPerLevelAI: 0.05
   playable: 0

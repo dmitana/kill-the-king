@@ -13083,7 +13083,8 @@ MonoBehaviour:
   minEnemiesCount: 1
   maxEnemiesCount: 2
   possibleEnemies:
-  - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
+  - {fileID: 529776291420966388, guid: 2e41e5f5e8e23770994a2e3f7bae7577, type: 3}
+  - {fileID: 3308452446651202856, guid: 13a544fac21435232afa510da438be37, type: 3}
 --- !u!1001 &2073369616
 PrefabInstance:
   m_ObjectHideFlags: 0
