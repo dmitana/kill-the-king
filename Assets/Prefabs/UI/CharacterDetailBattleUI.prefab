@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 2739452807297258851}
   - component: {fileID: 1420041406213256954}
   m_Layer: 5
-  m_Name: CharacterDetail
+  m_Name: CharacterDetailBattleUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 6585247708672609882}
   - component: {fileID: 1215121459807765163}
   m_Layer: 0
-  m_Name: CharacterDetailUI
+  m_Name: CharacterDetailBattleUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
