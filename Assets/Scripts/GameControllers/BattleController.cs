@@ -55,7 +55,7 @@ public class BattleController : MonoBehaviour {
 
     public void InitializeBattle() {
 		playerTeam = Team.playerTeamInstance;
-		playerTeam.InitilizeForBattle(this, new Vector3(-5, 0, 0));
+		playerTeam.InitilizeForBattle(this, new Vector3(-5, 1, 0));
 
         enemyTeam = GameObject.FindGameObjectWithTag("EnemyTeam").GetComponent<Team>();
 		FillEnemiesToBattle();
