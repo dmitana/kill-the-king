@@ -82,7 +82,8 @@ MonoBehaviour:
   maxHealth: 50
   baseStrength: 10
   availableSkills: []
-  skills: []
+  skills:
+  - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
   healthIncPerLevelAI: 0.1
   strengthIncPerLevelAI: 0.05
   playable: 0
@@ -101,7 +102,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.05}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -112,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.4}
+  m_Size: {x: 1, y: 1.7}
   m_EdgeRadius: 0
 --- !u!1 &4133197955151031198
 GameObject:
@@ -150,7 +151,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.84248555}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &9104966700955220919
@@ -395,7 +396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4454579074024376, guid: 1d7298855e86c2340af2ad366bdc4efb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4454579074024376, guid: 1d7298855e86c2340af2ad366bdc4efb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -435,11 +436,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4454579074024376, guid: 1d7298855e86c2340af2ad366bdc4efb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 4454579074024376, guid: 1d7298855e86c2340af2ad366bdc4efb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2
+      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d7298855e86c2340af2ad366bdc4efb, type: 3}
