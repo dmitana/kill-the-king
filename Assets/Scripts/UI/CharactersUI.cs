@@ -39,6 +39,12 @@ public class CharactersUI : MonoBehaviour {
 				continue;
 			}
 			++n;
+			var characterImg = charactersUI[i].GetComponentsInChildren<Image>()[1];
+			if (playerTeam.Characters[i].characterImg != null) {
+				characterImg.color = Color.white;
+				characterImg.sprite = playerTeam.Characters[i].characterImg;
+			}
+
 			var characterTexts = charactersUI[i].GetComponentsInChildren<TMP_Text>();
 			characterTexts[0].text = playerTeam.Characters[i].characterName;
 			characterTexts[1].text = $"HP: {playerTeam.Characters[i].maxHealth}";

@@ -7,6 +7,7 @@ using Random = System.Random;
 [RequireComponent(typeof(Collider2D))]
 public class Character : MonoBehaviour {
 	public string characterName;
+	public Sprite characterImg;
 	public int maxHealth;
 	public int baseStrength;
 	public List<Skill> availableSkills = new List<Skill>();
