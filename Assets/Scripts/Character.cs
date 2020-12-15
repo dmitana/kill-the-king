@@ -253,4 +253,14 @@ public class Character : MonoBehaviour {
 		foreach (Skill skill in skills)
 			skill.Improve(--area);
 	}
+
+	public List<Effect> ProcessBuffs(Skill s) {
+		List<Effect> buffsToDeactivate = new List<Effect>();
+		foreach (Effect effect in activeEffects) {
+			effect.Activate(this, s);
+			buffsToDeactivate.Add(effect);
+		}
+
+		return buffsToDeactivate;
+	}
 }

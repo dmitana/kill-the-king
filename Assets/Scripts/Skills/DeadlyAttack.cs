@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeadlyAttack : Skill {
-    public override void ApplySkill(Character attacker, List<Character> targets) {
+    public override void PrepareSkill(Character attacker) {
         DeadlyAttackBuff buff = null;
 
         foreach (Effect effect in attacker.GetEffects()) {
@@ -19,8 +19,7 @@ public class DeadlyAttack : Skill {
         }
         
         buff.Strength = strength;
-        buff.skill = this;
-        
+
         if (buff.charges < buff.maxCharges)
             buff.charges += 1;
         else {

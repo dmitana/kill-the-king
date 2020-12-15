@@ -36,28 +36,24 @@ public abstract class Skill : MonoBehaviour {
 	}
 
     // Default method used whether skill has multiple targets or not
-    public virtual void ApplySkill(Character attacker, List<Character> targets) {
-        DeadlyAttackBuff buff = null;
-        foreach (Effect effect in attacker.GetEffects()) {
-            if (effect.GetType() == typeof(DeadlyAttackBuff)) {
-                buff = (DeadlyAttackBuff) effect;
-                buff.Activate(attacker);
-                break;
-            }
-        }
+    public void ApplySkill(Character attacker, List<Character> targets) {
+        PrepareSkill(attacker);
+        List<Effect> buffsToDeactivate = attacker.ProcessBuffs(this);
 
         cooldown = maxCooldown;
         foreach (var target in targets) {
             ApplySkill(attacker, target);
         }
 
-        if (buff != null) {
+        foreach (Effect buff in buffsToDeactivate) {
             buff.Deactivate(attacker);
         }
-		Improve();
+        Improve();
     }
 
     public abstract void ApplySkill(Character attacker, Character target);
+    
+    public virtual void PrepareSkill(Character c) {}
 
     public abstract List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn);
 

@@ -9,6 +9,6 @@ public abstract class Effect : MonoBehaviour {
     public double Strength { get; set; }
 
     public abstract void AtRoundEnd(Character c);
-    public virtual void Activate(Character c) { }
+    public virtual void Activate(Character c, Skill s) { }
     public abstract void Deactivate(Character c);
 }
