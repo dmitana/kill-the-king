@@ -83,6 +83,7 @@ MonoBehaviour:
   availableSkills: []
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
+  - {fileID: 1736639641868475647, guid: 2ff1218279b0ff1ddb2826dd09b5aa2f, type: 3}
   healthIncPerLevelAI: 0.1
   strengthIncPerLevelAI: 0.05
   playable: 0
