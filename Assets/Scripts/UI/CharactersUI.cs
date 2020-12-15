@@ -19,8 +19,7 @@ public class CharactersUI : MonoBehaviour {
 
 	void Awake() {
 		characterUIRectTransform = charactersUI[0].GetComponent<RectTransform>();
-		expBarRectTransform = expBar.GetComponent<RectTransform>();
-		levelExpTextRectTransform = levelExpText.GetComponent<RectTransform>();
+		expBarRectTransform = expBar.transform.parent.GetComponent<RectTransform>();
 
 		playerTeam = Team.playerTeamInstance;
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
@@ -42,14 +41,13 @@ public class CharactersUI : MonoBehaviour {
 			++n;
 			var characterTexts = charactersUI[i].GetComponentsInChildren<TMP_Text>();
 			characterTexts[0].text = playerTeam.Characters[i].characterName;
-			characterTexts[1].text = $"Health: {playerTeam.Characters[i].maxHealth}";
-			characterTexts[2].text = $"Strength: {playerTeam.Characters[i].baseStrength}";
+			characterTexts[1].text = $"HP: {playerTeam.Characters[i].maxHealth}";
+			characterTexts[2].text = $"STR: {playerTeam.Characters[i].baseStrength}";
 		}
 
 		// Exp bar
 		Vector2 size = new Vector2(n * characterUIRectTransform.rect.width, expBarRectTransform.rect.height);
 		expBarRectTransform.sizeDelta = size;
-		levelExpTextRectTransform.sizeDelta = size;
 		expBar.value = (float) playerTeam.Exp / playerTeam.expPerLevel;
 		levelExpText.text = $"Level {playerTeam.Level}: {playerTeam.Exp}/{playerTeam.expPerLevel}";
 	}

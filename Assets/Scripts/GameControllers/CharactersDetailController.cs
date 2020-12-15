@@ -36,7 +36,7 @@ public class CharactersDetailController : MonoBehaviour {
 	}
 
 	private void ShowCharactersDetail() {
-		Vector3 offset = new Vector3(characterDetailUI.GetComponent<RectTransform>().rect.width + 10, 0, 0);
+		Vector3 offset = new Vector3(characterDetailUI.GetComponent<RectTransform>().rect.width + 30, 0, 0);
 
 		for (int i = 0; i < playerTeam.Characters.Count; ++i) {
 			CharacterDetailUI characterDetailUIInstantiated = Instantiate(

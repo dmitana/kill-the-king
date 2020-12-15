@@ -389,7 +389,7 @@ RectTransform:
   m_Children:
   - {fileID: 643172938}
   - {fileID: 875016808}
-  - {fileID: 1616694759}
+  - {fileID: 1599663194}
   m_Father: {fileID: 91961131}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -427,10 +427,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1588,7 +1588,7 @@ Transform:
   m_Father: {fileID: 91961131}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1616694758
+--- !u!1001 &1599663193
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1598,12 +1598,7 @@ PrefabInstance:
     - target: {fileID: 1748008887193154087, guid: d3c0e015e3266bc648667a9c1e553031,
         type: 3}
       propertyPath: m_Name
-      value: CharacterDetail
-      objectReference: {fileID: 0}
-    - target: {fileID: 1748008887193154087, guid: d3c0e015e3266bc648667a9c1e553031,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: CharacterDetailBattleUI
       objectReference: {fileID: 0}
     - target: {fileID: 2739452807297258851, guid: d3c0e015e3266bc648667a9c1e553031,
         type: 3}
@@ -1712,11 +1707,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3c0e015e3266bc648667a9c1e553031, type: 3}
---- !u!224 &1616694759 stripped
+--- !u!224 &1599663194 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2739452807297258851, guid: d3c0e015e3266bc648667a9c1e553031,
     type: 3}
-  m_PrefabInstance: {fileID: 1616694758}
+  m_PrefabInstance: {fileID: 1599663193}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1619115254
 GameObject:

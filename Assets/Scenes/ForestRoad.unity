@@ -218,12 +218,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff80420cade9a01f9713d2a491da892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Battle event.
+  title: Battle
+  description: 
   eventExpReward: 25
   expRewardPerEnemy: 10
   battleSceneName: ForestRoadBattle
-  minEnemiesCount: 4
-  maxEnemiesCount: 4
+  minEnemiesCount: 2
+  maxEnemiesCount: 3
   possibleEnemies:
   - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
   isFinalBattle: 0
@@ -12917,10 +12918,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -13074,7 +13075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c74ae5aa429c6049446d411ba775f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Peasant in danger description.
+  title: Peasant in danger
+  description: Peasant in danger description
   eventExpReward: 25
   expRewardPerEnemy: 10
   battleSceneName: ForestRoadBattle
