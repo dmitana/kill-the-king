@@ -13082,26 +13082,8 @@ MonoBehaviour:
   maxEnemiesCount: 2
   possibleEnemies:
   - {fileID: 5198445200141831959, guid: f03f94947951192c08abc8f8b91aef1b, type: 3}
-  - {fileID: 3308452446651202856, guid: 13a544fac21435232afa510da438be37, type: 3}
---- !u!1 &2082646337
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2082646339}
-  - component: {fileID: 2082646338}
-  m_Layer: 0
-  m_Name: Grid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!156049354 &2082646338
-Grid:
+--- !u!1001 &2073369616
+PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
