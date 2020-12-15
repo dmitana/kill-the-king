@@ -100,7 +100,7 @@ public class Character : MonoBehaviour {
 	public void DecreaseHealth(int damage) {
 		Health -= (int)Math.Round((1 - Defence) * damage);
 		if (Health <= 0) {
-			if (!alreadyRevived && playable && !isCriticallyWounded) {
+			if (!alreadyRevived && playable && !isCriticallyWounded && Team.Characters.Count > 1) {
 				isCriticallyWounded = true;
 				roundsToDeath = 2;
 				Health = 0;
