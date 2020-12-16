@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
+using System.Linq;
 
 public class Team : MonoBehaviour {
 	public static Team playerTeamInstance;
@@ -67,7 +68,7 @@ public class Team : MonoBehaviour {
 		int i = 0;
 		Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
 
-        foreach (Character character in Characters) {
+        foreach (Character character in Characters.Reverse<Character>()) {
 			character.gameObject.transform.SetParent(transform);
             character.gameObject.GetComponent<FixedJoint2D>().connectedBody = rb;
 
