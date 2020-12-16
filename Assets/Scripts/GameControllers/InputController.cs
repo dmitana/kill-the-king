@@ -18,5 +18,9 @@ public class InputController : MonoBehaviour {
 		if (Input.GetButtonDown("Map")) {
 			sceneController.ChangeFromGameScene("Map");
 		}
+
+		if (Input.GetButtonDown("Characters")) {
+			sceneController.ChangeFromGameScene("CharactersDetail");
+		}
     }
 }
