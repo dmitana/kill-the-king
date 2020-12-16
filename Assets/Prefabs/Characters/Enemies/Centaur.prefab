@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4962210348315098275}
   m_Layer: 0
   m_Name: Centaur
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Centaur
+  characterImg: {fileID: 0}
   maxHealth: 100
   baseStrength: 25
   availableSkills: []
