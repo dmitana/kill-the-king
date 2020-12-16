@@ -11,9 +11,11 @@ public class TeamSelectionController : MonoBehaviour {
 	public GameObject assassinUI;
 	public GameObject darkKnightUI;
 	public GameObject darkWizardUI;
+	[Space]
 	public CharacterDetailUI characterDetailUI;
 	public GameObject teamSelectionUI;
-
+	public Button createTeamButton;
+	[Space]
 	// Public instantiated prefabs
 	public Character assassin;
 	public Character darkKnight;
@@ -26,7 +28,7 @@ public class TeamSelectionController : MonoBehaviour {
 	// Dark Knight's UI elements
 	private Toggle darkKnightToggle;
 	private Button darkKnightButton;
-	
+
 	// Dark Wizard's UI elements
 	private Toggle darkWizardToggle;
 	private Button darkWizardButton;
@@ -52,7 +54,7 @@ public class TeamSelectionController : MonoBehaviour {
 		darkKnightButton = darkKnightUI.GetComponentInChildren<Button>();
 		darkKnightToggle.onValueChanged.AddListener((change) => AddRemoveCharacter(change, darkKnight));
 		darkKnightButton.onClick.AddListener(() => CreateCharacterDetailUI(darkKnight));
-		
+
 		// Add listerens for Dark Knight UI
 		darkWizardToggle = darkWizardUI.GetComponentInChildren<Toggle>();
 		darkWizardButton = darkWizardUI.GetComponentInChildren<Button>();
@@ -64,6 +66,7 @@ public class TeamSelectionController : MonoBehaviour {
 		CanSelectCharacter(assassin, assassinToggle);
 		CanSelectCharacter(darkKnight, darkKnightToggle);
 		CanSelectCharacter(darkWizard, darkWizardToggle);
+		CanCreateTeam();
 	}
 
 	private void CanSelectCharacter(Character character, Toggle characterToggle) {
@@ -74,6 +77,10 @@ public class TeamSelectionController : MonoBehaviour {
 			characterToggle.interactable = false;
 			characterToggle.isOn = false;
 		}
+	}
+
+	private void CanCreateTeam() {
+		createTeamButton.interactable = playerTeam.Characters.Count == 3 ? true : false;
 	}
 
 	private void CreateCharacterDetailUI(Character character) {

@@ -3142,6 +3142,7 @@ MonoBehaviour:
   characterDetailUI: {fileID: 5837666987076184688, guid: 6a946bd6a18207fcb9a11a64870424af,
     type: 3}
   teamSelectionUI: {fileID: 601875774}
+  createTeamButton: {fileID: 1699361755}
   assassin: {fileID: 2098468928}
   darkKnight: {fileID: 1614182425}
   darkWizard: {fileID: 1702071654}
