@@ -65,13 +65,15 @@ public class BattleController : MonoBehaviour {
         playerTeamFirst = (rng.Next(2) == 0);
 
         skillField = GameObject.FindGameObjectWithTag("SkillField");
+        ClearSkillField();
 
         StartCoroutine(Battle());
         battleReady = true;
     }
 
 	private void AfterBattle(bool isPlayerWinner) {
-		if (isPlayerWinner) {
+        logs = new Queue<string>();
+        if (isPlayerWinner) {
 			playerTeam.AfterBattle();
 			sceneController.ReturnFromBattleScene();
 		}
