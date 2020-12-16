@@ -35,7 +35,7 @@ public class PathSelectionController : MonoBehaviour {
 
 	public void SelectPath(String sceneName) {
 		sceneController.ChangeToGameScene(sceneName);
-		playerTeam.IncreaseEnvironment();
+		playerTeam.IncreaseEnvironment(Constants.SceneToEnvironmentPath[sceneName]);
 	}
 
 	private void SetNonInteractable(GameObject buttonsGroup) {
