@@ -14,5 +14,9 @@ public class InputController : MonoBehaviour {
 		if (Input.GetButtonDown("Cancel")) {
 			sceneController.ChangeFromGameScene("MainMenu");
 		}
+
+		if (Input.GetButtonDown("Map")) {
+			sceneController.ChangeFromGameScene("Map");
+		}
     }
 }
