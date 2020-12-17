@@ -14,4 +14,8 @@ public class WeakenDebuff : Effect {
             duration = 0;
         }
     }
+
+    public override void AfterDamage(Character c, int damage) {
+        Deactivate(c);
+    }
 }

@@ -6,8 +6,7 @@ public class Stun : Skill {
     public override void ApplySkill(Character attacker, Character target) {
         var damage = attacker.baseStrength;
         target.DecreaseHealth(damage);
-        // TODO: rnd.NextDouble()
-        if (0 < strength) {
+        if (rnd.NextDouble() < strength) {
             if (target.Team.PlayedCharacters.Contains(target))
                 target.IsStunned = true;
             else {

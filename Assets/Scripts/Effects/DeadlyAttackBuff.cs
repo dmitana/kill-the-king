@@ -23,4 +23,8 @@ public class DeadlyAttackBuff : Effect {
             c.baseStrength = originalStrength;
         duration = 0;
     }
+
+    public override void AfterDamage(Character c, int damage) {
+        Deactivate(c);
+    }
 }

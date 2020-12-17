@@ -17,7 +17,7 @@ public class Character : MonoBehaviour {
 
 	public int SkillPoints { get; private set; } = 1;
 	public Team Team { get; set; }
-	public int Health { get; private set; }
+	public int Health { get; set; }
 	public bool InBattle { get; private set; } = false;
 	public double Defence { get; set; }
 	public bool playable;
@@ -102,7 +102,8 @@ public class Character : MonoBehaviour {
 	}
 
 	public void DecreaseHealth(int damage) {
-		Health -= (int)Math.Round((1 - Defence) * damage);
+		int finalDamage = (int)Math.Round((1 - Defence) * damage);
+		Health -= finalDamage;
 		if (Health <= 0) {
 			if (!alreadyRevived && playable && !isCriticallyWounded && Team.Characters.Count > 1) {
 				isCriticallyWounded = true;
@@ -118,17 +119,8 @@ public class Character : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}
-		else {
-			foreach (Effect effect in activeEffects) {
-				if (effect.GetType() == typeof(DeadlyAttackBuff)) {
-					effect.Deactivate(this);
-				}
-
-				if (effect.GetType() == typeof(WeakenDebuff)) {
-					effect.Deactivate(this);
-				}
-			}
-		}
+		foreach (Effect effect in activeEffects)
+			effect.AfterDamage(this, finalDamage);
 	}
 
 	public void AddSkill(Skill skill) {
