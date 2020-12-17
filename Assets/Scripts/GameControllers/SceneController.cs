@@ -157,8 +157,8 @@ public class SceneController : MonoBehaviour {
 
 		IsBattleScene = false;
 		playerTeam.SetActiveCamera(true);
-		ChangeScene(currentGameSceneName, true);
 		gameSceneContainers.Pop().SetActive(true);
+		ChangeScene(currentGameSceneName, true);
 
 		return true;
 	}
