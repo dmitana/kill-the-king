@@ -46,7 +46,7 @@ public abstract class Event : MonoBehaviour {
 		OnOpen();
     }
 
-	protected abstract void Initialize();
+	protected virtual void Initialize() {}
 
     public virtual void OnReject() {
 		OnClose();
@@ -87,7 +87,7 @@ public abstract class Event : MonoBehaviour {
         Destroy(gameObject);
 	}
 
-	protected void MoveToBattle(bool isFinalBattle) {
+	protected void MoveToBattle(bool isFinalBattle = false) {
 		OnClose();
 		if (isFinalBattle)
 			sceneController.ChangeToBattleScene(

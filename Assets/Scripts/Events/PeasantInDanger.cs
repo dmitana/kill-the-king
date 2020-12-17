@@ -10,6 +10,6 @@ public class PeasantInDanger : Event {
 	}
 
     public override void OnAccept() {
-		MoveToBattle(false);
+		MoveToBattle();
     }
 }
