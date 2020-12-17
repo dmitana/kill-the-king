@@ -162,7 +162,12 @@ public class Team : MonoBehaviour {
 		PlayedCharacters = new List<Character>();
 		UnplayedCharacters = new List<Character>();
 		foreach (Character c in Characters) {
-			AddUnplayedCharacter(c);
+			if (c.IsStunned) {
+				AddPlayedCharacter(c);
+				c.IsStunned = false;
+			}
+			else
+				AddUnplayedCharacter(c);
 			if (resetCooldowns)
 				c.DecreaseCooldowns();
 			c.DecreaseRoundsToDeath();

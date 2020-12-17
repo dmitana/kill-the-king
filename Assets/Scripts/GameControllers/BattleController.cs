@@ -13,6 +13,7 @@ public class BattleController : MonoBehaviour {
     public Skill ChosenSkill { get; set; }
     public bool CharacterRevived { get; set; }
     public bool battleReady;
+    public bool SkipTurn { get; set; } = false;
 
     private Team playerTeam;
     private Team enemyTeam;
@@ -153,7 +154,10 @@ public class BattleController : MonoBehaviour {
                 enemyTeamFinished = ResetTeam(enemyTeam, enemyTeamFinished);
 
                 ClearSkillField();
-                playerTeamRound = !playerTeamRound;
+
+                if (!SkipTurn)
+                    playerTeamRound = !playerTeamRound;
+                SkipTurn = false;
                 CharacterRevived = false;
             }
 
