@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Area Attack
-  description: Area Attack description
-  strength: 0
-  maxStrength: 0
-  increasePerUse: 0
+  description: Hits all enemies with Strength % of base attack.
+  strength: 0.3
+  maxStrength: 0.5
+  increasePerUse: 0.02
   cooldown: 0
-  maxCooldown: 0
+  maxCooldown: 3
   effects: []
   numOfTargets: -1
+  canBeUsed: 0
