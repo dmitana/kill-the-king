@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: Robbery of a trader
-  description: You can try to rob a trader, but be in alert, there are guards all
+  description: You can try to rob a trader, but be careful, there are guards all
     around.
   eventExpReward: 25
   expRewardPerEnemy: 10
