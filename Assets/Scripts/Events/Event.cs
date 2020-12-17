@@ -26,10 +26,12 @@ public abstract class Event : MonoBehaviour {
 	public event OnClickDelegate onOpen;
 	public event OnClickDelegate onClose;
 
+	protected Random rnd = new Random();
+
 	void Awake() {
 		playerTeam = Team.playerTeamInstance;
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
-		generateEnemies();
+		Initialize();
 	}
 
 	protected void OnOpen() {
@@ -43,6 +45,8 @@ public abstract class Event : MonoBehaviour {
     private void OnMouseDown() {
 		OnOpen();
     }
+
+	protected abstract void Initialize();
 
     public virtual void OnReject() {
 		OnClose();
@@ -63,8 +67,7 @@ public abstract class Event : MonoBehaviour {
 		GiveExpToPlayerTeam(expRewardPerEnemy * Enemies.Count);
 	}
 
-	private void generateEnemies() {
-		Random rnd = new Random();
+	protected void GenerateEnemies() {
 		int enemiesCount = rnd.Next(minEnemiesCount, maxEnemiesCount + 1);
 
 		while (enemiesCount > 0) {
