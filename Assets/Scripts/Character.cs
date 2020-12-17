@@ -89,8 +89,10 @@ public class Character : MonoBehaviour {
 		int i = 0;
 		while (i < activeEffects.Count) {
 			if (activeEffects[i].duration == 0) {
-				activeEffects[i].Deactivate(this);
+				Effect effect = activeEffects[i];
+				effect.Deactivate(this);
 				activeEffects.RemoveAt(i);
+				Destroy(effect.gameObject);
 				continue;
 			}
 			activeEffects[i].AtRoundEnd(this);
@@ -119,7 +121,10 @@ public class Character : MonoBehaviour {
 			foreach (Effect effect in activeEffects) {
 				if (effect.GetType() == typeof(DeadlyAttackBuff)) {
 					effect.Deactivate(this);
-					break;
+				}
+
+				if (effect.GetType() == typeof(WeakenDebuff)) {
+					effect.Deactivate(this);
 				}
 			}
 		}
@@ -145,6 +150,7 @@ public class Character : MonoBehaviour {
 	public void InitializeForBattle(BattleController controller) {
 		battleController = controller;
 		InBattle = true;
+		Defence = 0;
 	}
 
 	public void AfterBattle() {

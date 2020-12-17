@@ -7,7 +7,7 @@ public class StrongAttack : Skill {
         var damage = attacker.baseStrength * 2;
         target.DecreaseHealth(damage);
         if (rnd.NextDouble() < strength) {
-            Effect effect = Instantiate(effects[0]);
+            Effect effect = Instantiate(effects[0], target.gameObject.transform);
             effect.Strength = attacker.baseStrength;
             target.AddEffect(effect);
         }

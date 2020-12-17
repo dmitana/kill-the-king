@@ -14,7 +14,7 @@ public class DeadlyAttack : Skill {
         }
 
         if (buff == null) {
-            buff = (DeadlyAttackBuff) Instantiate(effects[0]);
+            buff = (DeadlyAttackBuff) Instantiate(effects[0], attacker.gameObject.transform);
             attacker.AddEffect(buff);
         }
         
