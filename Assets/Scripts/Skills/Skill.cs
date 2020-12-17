@@ -20,13 +20,11 @@ public abstract class Skill : MonoBehaviour {
     public int numOfTargets;
     protected BattleController battleController;
     protected Random rnd;
-    public bool canBeUsed;
 
     private void Awake() {
         battleController = GameMaster.instance.GetComponent<BattleController>();
         rnd = new Random();
-        canBeUsed = true;
-		InstantiateEffects();
+        InstantiateEffects();
     }
 
 	private void InstantiateEffects() {
@@ -39,8 +37,7 @@ public abstract class Skill : MonoBehaviour {
     public void ApplySkill(Character attacker, List<Character> targets) {
         PrepareSkill(attacker);
         List<Effect> buffsToDeactivate = attacker.ProcessBuffs(this);
-
-        cooldown = maxCooldown;
+        
         foreach (var target in targets) {
             ApplySkill(attacker, target);
         }
@@ -49,6 +46,11 @@ public abstract class Skill : MonoBehaviour {
             buff.Deactivate(attacker);
         }
         Improve();
+        ResetCooldown();
+    }
+
+    public virtual void ResetCooldown() {
+        cooldown = maxCooldown;
     }
 
     public abstract void ApplySkill(Character attacker, Character target);

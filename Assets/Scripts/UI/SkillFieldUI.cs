@@ -21,7 +21,7 @@ public class SkillFieldUI : MonoBehaviour {
 
     public void SetSkill(Skill s) {
         skill = s;
-        background.color = (s.cooldown == 0 && s.canBeUsed)? Color.green : Color.red;
+        background.color = (s.cooldown == 0)? Color.green : Color.red;
         skillName.text = s.skillName;
     }
     
@@ -29,11 +29,6 @@ public class SkillFieldUI : MonoBehaviour {
         if (battleController.ChosenSkill == null && battleController.ChosenCharacter != null && skill != null) {
             if (skill.cooldown > 0) {
                 battleController.Log = $"This skill is on cooldown for {skill.cooldown} rounds";
-                return;
-            }
-
-            if (!skill.canBeUsed) {
-                battleController.Log = "This skill cannot be used currently.";
                 return;
             }
             battleController.ChosenSkill = skill;

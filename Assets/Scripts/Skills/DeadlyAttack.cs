@@ -19,12 +19,13 @@ public class DeadlyAttack : Skill {
         }
         
         buff.Strength = strength;
+        buff.Skill = this;
 
         if (buff.charges < buff.maxCharges)
             buff.charges += 1;
         else {
-            battleController.Log = $"Deadly Attack has {buff.maxCharges} charges. Use another attack to use charges. ";
-            canBeUsed = false;
+            battleController.Log = $"Deadly Attack has {buff.maxCharges} charges. Use another attack to use charges.";
+            cooldown = maxCooldown;
         }
     }
 
@@ -34,4 +35,6 @@ public class DeadlyAttack : Skill {
         battleController.Log = "Deadly Attack serves as buff skill. It has no targets.";
         return new List<Character>();
     }
+
+    public override void ResetCooldown() { }
 }
