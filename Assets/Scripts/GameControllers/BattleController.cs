@@ -14,6 +14,7 @@ public class BattleController : MonoBehaviour {
     public bool CharacterRevived { get; set; }
     public bool battleReady;
     public bool SkipTurn { get; set; } = false;
+	public List<Effect> GlobalEffects { get; private set; } = new List<Effect>();
 
     private Team playerTeam;
     private Team enemyTeam;
@@ -54,6 +55,18 @@ public class BattleController : MonoBehaviour {
         }
     }
 
+	private void ApplyGlobalEffects(Team team) {
+		bool isApplied = false;
+
+		for (int i = GlobalEffects.Count - 1; i >= 0; --i) {
+			isApplied = GlobalEffects[i].GlobalApply(team);
+			if (isApplied) {
+				Destroy(GlobalEffects[i].gameObject);
+				GlobalEffects.RemoveAt(i);
+			}
+		}
+	}
+
     public void InitializeBattle() {
 		GameObject playerTeamInitialPosition = GameObject.FindGameObjectWithTag("PlayerTeamInitialPosition");
 		playerTeam = Team.playerTeamInstance;
@@ -67,6 +80,8 @@ public class BattleController : MonoBehaviour {
 
         skillField = GameObject.FindGameObjectWithTag("SkillField");
         ClearSkillField();
+
+		ApplyGlobalEffects(enemyTeam);
 
         StartCoroutine(Battle());
         battleReady = true;
