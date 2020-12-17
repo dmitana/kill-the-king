@@ -111,6 +111,8 @@ MonoBehaviour:
     around.
   eventExpReward: 25
   expRewardPerEnemy: 10
+  expMessage: You earned {0} experience points.
+  eventMessage: You successfully robbed a trader.
   battleSceneName: MainRoadBattle
   minEnemiesCount: 2
   maxEnemiesCount: 3

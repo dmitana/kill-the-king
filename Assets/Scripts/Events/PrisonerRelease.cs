@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +12,12 @@ public class PrisonerRelease : Event {
 		battleController = GameMaster.instance.GetComponent<BattleController>();
 	}
 
+	protected override String ModifyEventMessage() {
+		return String.Format(eventMessage, (int) (effect.healthDecrease * 100));
+	}
+
 	public override void OnAccept() {
-		if (rnd.NextDouble() < 0.5f) {
+		if (rnd.NextDouble() < successRate) {
 			var effectInstantiated = Instantiate(effect, battleController.transform);
 			battleController.GlobalEffects.Add(effectInstantiated);
 			Success();

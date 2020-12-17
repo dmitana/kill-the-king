@@ -112,6 +112,10 @@ MonoBehaviour:
     you fight the king, but be careful, there are guards all around.
   eventExpReward: 25
   expRewardPerEnemy: 10
+  successRate: 0.5
+  expMessage: You earned {0} experience points.
+  eventMessage: The dark wizard helped you and wounded the king, taking {0:D}% of
+    his health.
   battleSceneName: CastleCourtyardRoadBattle
   minEnemiesCount: 2
   maxEnemiesCount: 2

@@ -11,6 +11,10 @@ public abstract class Event : MonoBehaviour {
 	public String description;
 	public int eventExpReward = 25;
 	public int expRewardPerEnemy = 10;
+	public float successRate = 0.5f;
+	[Space]
+	public String expMessage = "You earned {0} experience points.";
+	public String eventMessage;
 	[Space]
 	public String battleSceneName;
 	public int minEnemiesCount = 1;
@@ -18,6 +22,7 @@ public abstract class Event : MonoBehaviour {
     public List<Character> possibleEnemies = new List<Character>();
 
 	public List<Character> Enemies { get; private set; } = new List<Character>();
+	public String Message { get; private set; }
 
 	private Team playerTeam;
     private SceneController sceneController;
@@ -25,6 +30,7 @@ public abstract class Event : MonoBehaviour {
 	public delegate void OnClickDelegate(Event sender);
 	public event OnClickDelegate onOpen;
 	public event OnClickDelegate onClose;
+	public event OnClickDelegate onFinish;
 
 	protected Random rnd = new Random();
 
@@ -42,11 +48,19 @@ public abstract class Event : MonoBehaviour {
 		onClose?.Invoke(this);
 	}
 
+	protected void OnFinish() {
+		onFinish?.Invoke(this);
+	}
+
     private void OnMouseDown() {
 		OnOpen();
     }
 
 	protected virtual void Initialize() {}
+
+	protected virtual String ModifyEventMessage() {
+		return eventMessage;
+	}
 
     public virtual void OnReject() {
 		OnClose();
@@ -55,8 +69,11 @@ public abstract class Event : MonoBehaviour {
 
     public abstract void OnAccept();
 
+
 	private void GiveExpToPlayerTeam(int exp) {
 		playerTeam.AddExp(exp);
+		Message += String.Format(expMessage, exp);
+		OnFinish();
 	}
 
 	private void GiveEventExpReward() {
@@ -83,6 +100,7 @@ public abstract class Event : MonoBehaviour {
 
 	protected void Success() {
 		OnClose();
+		Message += ModifyEventMessage() + " ";
 		GiveExpToPlayerTeam(eventExpReward);
         Destroy(gameObject);
 	}
