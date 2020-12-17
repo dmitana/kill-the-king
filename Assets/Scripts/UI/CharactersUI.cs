@@ -25,7 +25,7 @@ public class CharactersUI : MonoBehaviour {
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
 	}
 
-	void OnEnable() {
+	void Update() {
 		Show();
 	}
 
