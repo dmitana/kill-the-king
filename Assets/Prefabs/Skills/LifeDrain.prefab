@@ -44,12 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Life Drain
-  description: Life Drain description
-  strength: 0
-  maxStrength: 0
-  increasePerUse: 0
+  description: Drains {0:D}% of the base attack from the enemy's life and adds it
+    to the attacker.
+  defaultInfo: After use its strength increases by {0:D}% up to {1:D}%. Cooldown
+    is {2:D} turn(s).
+  strength: 0.2
+  maxStrength: 0.5
+  increasePerUse: 0.01
   cooldown: 0
-  maxCooldown: 0
+  maxCooldown: 2
   effects: []
-  numOfTargets: 0
-  canBeUsed: 0
+  numOfTargets: 1

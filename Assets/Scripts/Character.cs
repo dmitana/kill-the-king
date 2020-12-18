@@ -101,8 +101,9 @@ public class Character : MonoBehaviour {
 		}
 	}
 
-	public void DecreaseHealth(int damage) {
+	public int DecreaseHealth(int damage) {
 		int finalDamage = (int)Math.Round((1 - Defence) * damage);
+		finalDamage = finalDamage > Health ? Health : finalDamage;
 		Health -= finalDamage;
 		if (Health <= 0) {
 			if (!alreadyRevived && playable && !isCriticallyWounded && Team.Characters.Count > 1) {
@@ -119,8 +120,11 @@ public class Character : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}
+
 		foreach (Effect effect in activeEffects)
 			effect.AfterDamage(this, finalDamage);
+
+		return finalDamage;
 	}
 
 	public void IncreaseHealth(int health) {
