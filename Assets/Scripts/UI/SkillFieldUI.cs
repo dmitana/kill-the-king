@@ -17,6 +17,7 @@ public class SkillFieldUI : MonoBehaviour {
     private void Awake() {
         battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
         background.color = Color.black;
+        battleController.onTurnEnd += Clear;
     }
 
     public void SetSkill(Skill s) {
@@ -35,8 +36,8 @@ public class SkillFieldUI : MonoBehaviour {
         }
     }
 
-    public void Clear() {
-        gameObject.GetComponentInChildren<Image>().color = Color.black;
+    public void Clear(BattleController bc) {
+        background.color = Color.black;
         HoverOff();
         skill = null;
     }

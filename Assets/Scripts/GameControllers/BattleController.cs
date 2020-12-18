@@ -37,6 +37,9 @@ public class BattleController : MonoBehaviour {
         }
     }
 
+    public delegate void OnClickDelegate(BattleController bc);
+    public event OnClickDelegate onTurnEnd;
+
     private void Awake() {
         rng = new Random();
 		sceneController = GameMaster.instance.GetComponent<SceneController>();
@@ -79,7 +82,7 @@ public class BattleController : MonoBehaviour {
         playerTeamFirst = (rng.Next(2) == 0);
 
         skillField = GameObject.FindGameObjectWithTag("SkillField");
-        ClearSkillField();
+        OnTurnEnd();
 
 		ApplyGlobalEffects(enemyTeam);
 
@@ -97,13 +100,6 @@ public class BattleController : MonoBehaviour {
 			sceneController.EndGameLoss();
 
         battleReady = false;
-    }
-
-    private void ClearSkillField() {
-        SkillFieldUI[] skillFields = skillField.transform.GetComponentsInChildren<SkillFieldUI>();
-        foreach (SkillFieldUI skillField in skillFields) {
-            skillField.Clear();
-        }
     }
 
     private bool ResetTeam(Team team, bool teamFinished) {
@@ -183,7 +179,7 @@ public class BattleController : MonoBehaviour {
                 playerTeamFinished = ResetTeam(playerTeam, playerTeamFinished);
                 enemyTeamFinished = ResetTeam(enemyTeam, enemyTeamFinished);
 
-                ClearSkillField();
+                OnTurnEnd();
 
                 if (!SkipTurn)
                     playerTeamRound = !playerTeamRound;
@@ -206,5 +202,9 @@ public class BattleController : MonoBehaviour {
 
     public GameObject GetSkillField() {
         return skillField;
+    }
+
+    private void OnTurnEnd() {
+        onTurnEnd?.Invoke(this);
     }
 }
