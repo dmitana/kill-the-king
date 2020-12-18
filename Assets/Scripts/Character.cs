@@ -123,6 +123,11 @@ public class Character : MonoBehaviour {
 			effect.AfterDamage(this, finalDamage);
 	}
 
+	public void IncreaseHealth(int health) {
+		Health += health;
+		Health = Health > maxHealth ? maxHealth : Health;
+	}
+
 	public void AddSkill(Skill skill) {
 		if (!availableSkills.Contains(skill))
 			throw new System.ArgumentException(
