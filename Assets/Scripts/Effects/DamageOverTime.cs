@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bleeding : Effect {
+public class DamageOverTime : Effect {
     public double damagePerRound;
 
     public override void AtRoundEnd(Character c) {
