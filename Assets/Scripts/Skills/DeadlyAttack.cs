@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeadlyAttack : Skill {
-    public override void PrepareSkill(Character attacker) {
+    public override void ApplySkillOnSelf(Character attacker) {
         DeadlyAttackBuff buff = null;
 
         foreach (Effect effect in attacker.GetEffects()) {

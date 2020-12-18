@@ -46,7 +46,7 @@ public abstract class Skill : MonoBehaviour {
 
     // Default method used whether skill has multiple targets or not
     public void ApplySkill(Character attacker, List<Character> targets) {
-        PrepareSkill(attacker);
+        ApplySkillOnSelf(attacker);
         List<Effect> buffsToDeactivate = attacker.ProcessBuffs(this);
 
         foreach (var target in targets) {
@@ -66,7 +66,7 @@ public abstract class Skill : MonoBehaviour {
 
     public abstract void ApplySkill(Character attacker, Character target);
 
-    public virtual void PrepareSkill(Character c) {}
+    public virtual void ApplySkillOnSelf(Character c) {}
 
     public abstract List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn);
 

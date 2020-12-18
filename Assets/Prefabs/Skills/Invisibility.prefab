@@ -44,11 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Invisibility
-  description: Invisibility description
-  strength: 0
-  maxStrength: 0
-  increasePerUse: 0
+  description: Character becomes invisible for his enemies with {0:D} % chance.
+  defaultInfo: After use, its strength increases by {0:D}% up to {1:D}%. Cooldown
+    is {2:D} turn(s).
+  strength: 0.7
+  maxStrength: 1
+  increasePerUse: 0.01
   cooldown: 0
-  maxCooldown: 0
-  effects: []
+  maxCooldown: 1
+  effects:
+  - {fileID: -1460193340692388742, guid: 8eeda1c8d932d05ea90f250b4898ee78, type: 3}
   numOfTargets: 0

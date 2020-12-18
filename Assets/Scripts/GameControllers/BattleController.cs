@@ -115,6 +115,20 @@ public class BattleController : MonoBehaviour {
         return teamFinished;
     }
 
+    private void GetTargets(Team playerTeam, Team enemyTeam, bool playerTeamRound) {
+        ChosenTargets = new List<Character>();
+
+        ConfusionDebuff debuff = 
+            (ConfusionDebuff) ChosenCharacter.GetEffects().Find(e => e.GetType() == typeof(ConfusionDebuff));
+        if (debuff != null && debuff.duration == 1) {
+            playerTeamRound = !playerTeamRound;
+            debuff.Activate(ChosenCharacter, ChosenSkill);
+        }
+
+        ValidTargets = ChosenSkill.HighlightTargets(playerTeam, enemyTeam, playerTeamRound)
+            .FindAll(c => !c.IsInvisible);
+    }
+
     private IEnumerator Battle() {
         bool playerTeamRound = playerTeamFirst;
         while (playerTeam.Characters.Count > 0 && enemyTeam.Characters.Count > 0) {
@@ -147,22 +161,23 @@ public class BattleController : MonoBehaviour {
                         yield return new WaitForSeconds(0.5f);
                     }
 
-                    ChosenTargets = new List<Character>();
-                    ValidTargets = ChosenSkill.HighlightTargets(playerTeam, enemyTeam, playerTeamRound);
+                    GetTargets(playerTeam, enemyTeam, playerTeamRound);
 
                     int numOfTargets = ChosenSkill.GetNumOfTargets();
-                    if (numOfTargets == -1)
-                        numOfTargets = ValidTargets.Count;
+                    if (ValidTargets.Count > 0 && numOfTargets != 0 || numOfTargets == 0) {
+                        if (numOfTargets == -1)
+                            numOfTargets = ValidTargets.Count;
 
-                    if (currentTeam.isAI)
-                        currentTeam.SelectTargets(numOfTargets, ValidTargets);
-                    while (numOfTargets != ChosenTargets.Count) {
-                        yield return new WaitForSeconds(0.5f);
+                        if (currentTeam.isAI)
+                            currentTeam.SelectTargets(numOfTargets, ValidTargets);
+                        while (numOfTargets != ChosenTargets.Count) {
+                            yield return new WaitForSeconds(0.5f);
+                        }
+
+                        ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
+                        currentTeam.AddPlayedCharacter(ChosenCharacter);
+                        currentTeam.RemoveUnplayedCharacter(ChosenCharacter);
                     }
-
-                    ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
-                    currentTeam.AddPlayedCharacter(ChosenCharacter);
-                    currentTeam.RemoveUnplayedCharacter(ChosenCharacter);
                 }
 
                 playerTeamFinished = ResetTeam(playerTeam, playerTeamFinished);

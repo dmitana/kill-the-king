@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Fury : Skill {
-    public override void PrepareSkill(Character c) {
+    public override void ApplySkillOnSelf(Character c) {
         Effect effect = Instantiate(effects[0], c.gameObject.transform);
         effect.Strength = strength;
         c.AddEffect(effect);

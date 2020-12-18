@@ -37,6 +37,8 @@ public class SkillFieldUI : MonoBehaviour {
 
     public void Clear() {
         gameObject.GetComponentInChildren<Image>().color = Color.black;
+        HoverOff();
+        skill = null;
     }
     
     public void HoverOn() {

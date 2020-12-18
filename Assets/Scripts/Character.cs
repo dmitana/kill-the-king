@@ -24,6 +24,7 @@ public class Character : MonoBehaviour {
 	public bool isCriticallyWounded;
 	public bool alreadyRevived;
 	public bool IsStunned { get; set; } = false;
+	public bool IsInvisible { get; set; } = false;
 
 	private List<Effect> activeEffects = new List<Effect>();
 	private BattleController battleController;
