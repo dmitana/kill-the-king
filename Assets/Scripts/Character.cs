@@ -69,12 +69,12 @@ public class Character : MonoBehaviour {
 			     }
 			     else if (!hover) {
 				     hover = true;
-				     OnMouseOverRayCast();
+				     OnHover();
 			     }
 		     }
 		     else if (rayHit != null && rayHit.collider != collider && hover) {
 			     hover = false;
-			     OnMouseExitRayCast();
+			     OnExit();
 		     }
 	     }
      }
@@ -248,14 +248,6 @@ public class Character : MonoBehaviour {
 
 	private void OnExit() {
 		onExit?.Invoke(this);
-	}
-
-	private void OnMouseOverRayCast() {
-		OnHover();
-	}
-
-	private void OnMouseExitRayCast() {
-		OnExit();
 	}
 
 	public void ScaleAICharacterToPlayerLevelAndArea(int level, int area) {
