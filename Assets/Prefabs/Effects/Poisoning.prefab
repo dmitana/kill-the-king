@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7078687082727661485
+--- !u!1 &6880290882267289705
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1712866553321887747}
-  - component: {fileID: 2035592459908974867}
+  - component: {fileID: 6417937741250576090}
+  - component: {fileID: 1460026225662941860}
   m_Layer: 0
-  m_Name: PoisonousAttack
+  m_Name: Poisoning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1712866553321887747
+--- !u!4 &6417937741250576090
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7078687082727661485}
+  m_GameObject: {fileID: 6880290882267289705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,28 +31,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2035592459908974867
+--- !u!114 &1460026225662941860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7078687082727661485}
+  m_GameObject: {fileID: 6880290882267289705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b788408fd488ffb94abdfcf476a64614, type: 3}
+  m_Script: {fileID: 11500000, guid: 657f55dedd08b20a18a928259e989b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Poisonous Attack
-  description: Deals half damage and poisons target. Poisoning deals damage {0:D}%
-    of base attack for 3 rounds.
-  defaultInfo: After use its strength increases by {0:D}% up to {1:D}%. Cooldown
-    is {2:D} turn(s).
-  strength: 0.3
-  maxStrength: 0.5
-  increasePerUse: 0.01
-  cooldown: 0
-  maxCooldown: 3
-  effects:
-  - {fileID: 1460026225662941860, guid: fbd920f87c602ebaf8deca3895495e9c, type: 3}
-  numOfTargets: 1
+  duration: 3
+  description: Deals damage each round for X% of base damage of the attacker.
+  damagePerRound: 0
