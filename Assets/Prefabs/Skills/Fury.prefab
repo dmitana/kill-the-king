@@ -45,7 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Fury
   description: Character does not feel damage for 2 rounds and damage is stored.
-    After that, all stored damage is dealt with bonus according to skill Strength.
+    After that, all stored damage is dealt with {0:D}% bonus.
+  defaultInfo: After use, bonus damage is decreased by {0:D}% up to {1:D}%. Cooldown
+    is {2:D} turn(s).
   strength: 0.2
   maxStrength: 0
   increasePerUse: -0.01
@@ -54,4 +56,3 @@ MonoBehaviour:
   effects:
   - {fileID: 8170668920580340201, guid: 943d799ad07edaea1a9bf65d4779ab13, type: 3}
   numOfTargets: 0
-  canBeUsed: 0

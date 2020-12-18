@@ -34,7 +34,7 @@ public class CharacterDetailUI : MonoBehaviour {
 		for (int i = 0;  i < skillsUI.Count; ++i) {
 			var skillTexts = skillsUI[i].GetComponentsInChildren<TMP_Text>();
 			skillTexts[0].text = character.availableSkills[i].skillName;
-			skillTexts[1].text = character.availableSkills[i].description;
+			skillTexts[1].text = character.availableSkills[i].Description;
 
 			Toggle toggle = skillsUI[i].GetComponentInChildren<Toggle>();
 

@@ -50,7 +50,7 @@ public class SkillFieldUI : MonoBehaviour {
             parent.maxCooldown.text = $"Max cooldown: {skill.maxCooldown}";
             parent.numOfTargets.text =
                 $"Num of targets: {((skill.numOfTargets == -1) ? "All" : skill.numOfTargets.ToString())}";
-            parent.description.text = skill.description;
+            parent.description.text = skill.Description;
         }
     }
 

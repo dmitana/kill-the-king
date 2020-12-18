@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Stun
-  description: Deals basic damage and with Strength % chance makes target unplayable
-    next turn.
+  description: 'Deals basic damage and with {0:D}% chance makes target unplayable
+    next turn. '
+  defaultInfo: After use its strength increases by {0:D}% up to {1:D}%. Cooldown
+    is {2:D} turn(s).
   strength: 0.15
   maxStrength: 0.5
   increasePerUse: 0.01
@@ -53,4 +55,3 @@ MonoBehaviour:
   maxCooldown: 1
   effects: []
   numOfTargets: 1
-  canBeUsed: 0

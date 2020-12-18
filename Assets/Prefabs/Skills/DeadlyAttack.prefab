@@ -45,7 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Deadly Attack
   description: Character skips turn and adds charge. Each charge increases damage
-    of next attack, which can be base attack or skill.
+    of next attack, which can be base attack or skill, by {0:D}% of base attack.
+    If the character is attacked, all charges are lost and charging is interrupted.
+  defaultInfo: After use its strength increases by {0:D}% up to {1:D}%. Cooldown
+    is {2:D} turn(s).
   strength: 1
   maxStrength: 2
   increasePerUse: 0.05

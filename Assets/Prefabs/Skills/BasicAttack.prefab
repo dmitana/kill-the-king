@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Basic Attack
   description: This attack deals attacker's base strength as damage.
+  defaultInfo: 
   strength: 1
   maxStrength: 1
   increasePerUse: 0
@@ -52,4 +53,3 @@ MonoBehaviour:
   maxCooldown: 0
   effects: []
   numOfTargets: 1
-  canBeUsed: 0

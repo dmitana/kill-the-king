@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Heal
-  description: Heals a friendly character {0}% of the maximum health.
+  description: Heals a friendly character {0:D}% of the maximum health.
+  defaultInfo: After use its strength increases by {0:D}% up to {1:D}%. Cooldown
+    is {2:D} turn(s).
   strength: 0.1
   maxStrength: 0.4
   increasePerUse: 0.01

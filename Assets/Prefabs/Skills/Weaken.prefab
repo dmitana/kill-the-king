@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Weaken
-  description: Increases damage target will receive from next attack by Strength
-    %.
+  description: Increases damage target will receive from next attack by {0:D}%.
+  defaultInfo: After use its strength increases by {0:D}% up to {1:D}%. Cooldown
+    is {2:D} turn(s).
   strength: 0.25
   maxStrength: 1
   increasePerUse: 0.02
@@ -54,4 +55,3 @@ MonoBehaviour:
   effects:
   - {fileID: 5504755626275970430, guid: 2d0a4c01348c9fa77b13206104b75a37, type: 3}
   numOfTargets: 1
-  canBeUsed: 0

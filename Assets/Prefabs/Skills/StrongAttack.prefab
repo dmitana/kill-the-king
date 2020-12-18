@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Strong Attack
-  description: Deals double damage. Also has Strength probability that it will cause
-    bleeding.
+  description: Deals double damage and has {0:D}% chance to cause bleeding with 5%
+    strength of the base attack for 2 rounds.
+  defaultInfo: After use its strength increases by {0:D}% up to {1:D}%. Cooldown
+    is {2:D} turn(s).
   strength: 0.1
   maxStrength: 0.3
   increasePerUse: 0.01
