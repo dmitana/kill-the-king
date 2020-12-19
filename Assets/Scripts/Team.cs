@@ -106,14 +106,7 @@ public class Team : MonoBehaviour {
     }
 
     public void HighlightUnplayed() {
-        BattleController.Log = "Unplayed characters";
-        String chars = "";
-        for (int i = 0; i < UnplayedCharacters.Count; i++) {
-	        chars += UnplayedCharacters[i].characterName;
-	        if (i + 1 < UnplayedCharacters.Count)
-		        chars += ", ";
-        }
-        BattleController.Log = chars;
+        BattleController.Log = $"Unplayed characters: {string.Join(", ", UnplayedCharacters)}";
     }
 
 	public void IncreaseEnvironment(EnvironmentPath path) {

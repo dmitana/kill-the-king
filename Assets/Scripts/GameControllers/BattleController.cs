@@ -82,7 +82,7 @@ public class BattleController : MonoBehaviour {
         playerTeamFirst = (rng.Next(2) == 0);
 
         skillField = GameObject.FindGameObjectWithTag("SkillField");
-        OnTurnEnd();
+        TurnEnd();
 
 		ApplyGlobalEffects(enemyTeam);
 
@@ -123,12 +123,19 @@ public class BattleController : MonoBehaviour {
 
         ValidTargets = ChosenSkill.HighlightTargets(playerTeam, enemyTeam, playerTeamRound)
             .FindAll(c => !c.IsInvisible);
+
+        if (ValidTargets.Count > 0)
+            Log = $"Valid targets: {string.Join(", ", ValidTargets)}";
+        else if (ChosenSkill.numOfTargets == 0)
+            Log = "This skill is applied on character that uses it";
+        else
+            Log = "No valid targets found";
     }
 
     private IEnumerator Battle() {
         bool playerTeamRound = playerTeamFirst;
         while (playerTeam.Characters.Count > 0 && enemyTeam.Characters.Count > 0) {
-            Log = "Nove kolo zacalo";
+            Log = "NEW ROUND";
             playerTeam.ResetTeam(true);
             enemyTeam.ResetTeam(true);
 
@@ -137,10 +144,10 @@ public class BattleController : MonoBehaviour {
             while ((!playerTeamFinished || !enemyTeamFinished) &&
 				   (playerTeam.Characters.Count > 0 &&
 				   enemyTeam.Characters.Count > 0)) {
-                Log = "Novy tah";
                 ChosenCharacter = null;
 
                 currentTeam = (playerTeamRound) ? playerTeam: enemyTeam;
+                Log = $"{((playerTeamRound) ? "Player" : "Enemy")}'s turn";
 
                 currentTeam.HighlightUnplayed();
                 if (currentTeam.isAI)
@@ -179,7 +186,7 @@ public class BattleController : MonoBehaviour {
                 playerTeamFinished = ResetTeam(playerTeam, playerTeamFinished);
                 enemyTeamFinished = ResetTeam(enemyTeam, enemyTeamFinished);
 
-                OnTurnEnd();
+                TurnEnd();
 
                 if (!SkipTurn)
                     playerTeamRound = !playerTeamRound;
@@ -204,7 +211,8 @@ public class BattleController : MonoBehaviour {
         return skillField;
     }
 
-    private void OnTurnEnd() {
+    private void TurnEnd() {
+        Log = "\n";
         onTurnEnd?.Invoke(this);
     }
 }

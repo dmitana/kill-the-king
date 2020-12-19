@@ -21,8 +21,10 @@ public class DeadlyAttack : Skill {
         buff.Strength = strength;
         buff.Skill = this;
 
-        if (buff.charges < buff.maxCharges)
+        if (buff.charges < buff.maxCharges) {
             buff.charges += 1;
+            battleController.Log = $"Deadly Attack now has {buff.charges} charge(s)";
+        }
         else {
             battleController.Log = $"Deadly Attack has {buff.maxCharges} charges. Use another attack to use charges.";
             cooldown = maxCooldown + 1;
@@ -32,7 +34,6 @@ public class DeadlyAttack : Skill {
     public override void ApplySkill(Character attacker, Character target) { }
 
     public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        battleController.Log = "Deadly Attack serves as buff skill. It has no targets.";
         return new List<Character>();
     }
 

@@ -7,10 +7,9 @@ public class Confusion : Skill {
         ConfusionDebuff effect = (ConfusionDebuff) Instantiate(effects[0], target.gameObject.transform);
         effect.Strength = strength;
         target.AddEffect(effect);
+        battleController.Log = $"{attacker} used {skillName} and {target} is now confused";
     }
     public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        battleController.Log = $"Number of targets: {numOfTargets}";
-        battleController.Log = "Only enemies are valid targets.";
         return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
     }
 }

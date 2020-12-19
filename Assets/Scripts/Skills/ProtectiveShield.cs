@@ -7,10 +7,10 @@ public class ProtectiveShield : Skill {
         target.Defence += strength;
         Effect effect = Instantiate(effects[0], target.gameObject.transform);
         target.AddEffect(effect);
+        battleController.Log = $"{attacker} used {skillName} and increased {target}'s defence by {100 * strength} %" +
+                               $" for {effect.duration} rounds";
     }
     public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        battleController.Log = $"Number of targets: {numOfTargets}";
-        battleController.Log = "Only player characters are valid targets.";
         return (playerTeamTurn) ? playerTeam.Characters : enemyTeam.Characters;
     }
 }

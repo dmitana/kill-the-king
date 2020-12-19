@@ -266,4 +266,8 @@ public class Character : MonoBehaviour {
 
 		return buffsToDeactivate;
 	}
+
+	public override string ToString() {
+		return characterName;
+	}
 }

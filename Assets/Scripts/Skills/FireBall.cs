@@ -5,16 +5,16 @@ using UnityEngine;
 public class FireBall : Skill {
     public override void ApplySkill(Character attacker, Character target) {
 		int damage = attacker.baseStrength;
-        target.DecreaseHealth(damage);
+        damage = target.DecreaseHealth(damage);
+        battleController.Log = $"{attacker} used {skillName} and dealt {damage} to {target}";
         if (rnd.NextDouble() < strength) {
             Effect effect = Instantiate(effects[0], target.gameObject.transform);
             effect.Strength = attacker.baseStrength;
             target.AddEffect(effect);
+            battleController.Log = $"{target} is now burning for the next {effect.duration} rounds";
         }
 	}
     public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        battleController.Log = $"Number of targets: {numOfTargets}";
-        battleController.Log = "Only enemies are valid targets.";
         return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
     }
 }
