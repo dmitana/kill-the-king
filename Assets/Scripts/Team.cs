@@ -207,5 +207,7 @@ public class Team : MonoBehaviour {
 		foreach (Character character in Characters)
 			Destroy(character.gameObject);
         Characters = new List<Character>();
+
+        transform.position = new Vector3(0, 0, 0);
 	}
 }
