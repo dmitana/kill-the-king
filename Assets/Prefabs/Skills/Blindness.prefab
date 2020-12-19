@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Blindness
-  description: 'Causes the target to have a {0: D}% chance of not hitting its next
-    attack.'
+  description: Causes the target to have a {0:D}% chance of not hitting its next
+    attack.
   defaultInfo: After use its strength increases by {0:D}% up to {1:D}%. Cooldown
     is {2:D} turn(s).
   strength: 0.7
