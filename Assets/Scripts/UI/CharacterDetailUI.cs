@@ -34,17 +34,19 @@ public class CharacterDetailUI : MonoBehaviour {
 		for (int i = 0;  i < skillsUI.Count; ++i) {
 			var skillTexts = skillsUI[i].GetComponentsInChildren<TMP_Text>();
 			skillTexts[0].text = character.availableSkills[i].skillName;
-			skillTexts[1].text = character.availableSkills[i].Description;
 
 			Toggle toggle = skillsUI[i].GetComponentInChildren<Toggle>();
 
 			var skillsNames = character.skills.Select(x => x.skillName);
 			if (skillsNames.Contains(character.availableSkills[i].skillName)) {
+				var skill = character.skills.Find(x => x.skillName ==character.availableSkills[i].skillName);
+				skillTexts[1].text = skill.Description;
 				toggle.group = null;
 				toggle.isOn = true;
 				toggle.interactable = false;
 				continue;
 			}
+			skillTexts[1].text = character.availableSkills[i].Description;
 
 			if (character.SkillPoints == 0) {
 				toggle.interactable = false;
