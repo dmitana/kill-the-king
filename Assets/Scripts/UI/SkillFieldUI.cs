@@ -20,6 +20,10 @@ public class SkillFieldUI : MonoBehaviour {
         battleController.onTurnEnd += Clear;
     }
 
+    private void OnDisable() {
+        battleController.onTurnEnd -= Clear;
+    }
+
     public void SetSkill(Skill s) {
         skill = s;
         background.color = (s.cooldown == 0)? Color.green : Color.red;

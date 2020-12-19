@@ -82,9 +82,8 @@ public class BattleController : MonoBehaviour {
         playerTeamFirst = (rng.Next(2) == 0);
 
         skillField = GameObject.FindGameObjectWithTag("SkillField");
-        TurnEnd();
 
-		ApplyGlobalEffects(enemyTeam);
+        ApplyGlobalEffects(enemyTeam);
 
         StartCoroutine(Battle());
         battleReady = true;
@@ -92,6 +91,11 @@ public class BattleController : MonoBehaviour {
 
 	private void AfterBattle(bool isPlayerWinner) {
         logs = new Queue<string>();
+        ChosenCharacter = null;
+        ChosenSkill = null;
+        ChosenTargets = null;
+        ValidTargets = null;
+
         if (isPlayerWinner) {
 			playerTeam.AfterBattle();
 			sceneController.ReturnFromBattleScene();
