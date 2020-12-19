@@ -111,6 +111,9 @@ MonoBehaviour:
     fight the survivor or ignore it and move on.
   eventExpReward: 25
   expRewardPerEnemy: 10
+  successRate: 0.5
+  expMessage: You earned {0} experience points.
+  eventMessage: 
   battleSceneName: ForestRoadBattle
   minEnemiesCount: 1
   maxEnemiesCount: 3
