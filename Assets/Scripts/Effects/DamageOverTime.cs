@@ -10,6 +10,4 @@ public class DamageOverTime : Effect {
         c.DecreaseHealth((int) Math.Round(Strength * damagePerRound));
         duration -= 1;
     }
-
-    public override void Deactivate(Character c) { }
 }

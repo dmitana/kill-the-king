@@ -11,8 +11,6 @@ public class DeadlyAttackBuff : Effect {
     private int originalStrength = 0;
     private bool buffUsed = false;
     private bool damageReceived = false;
-    
-    public override void AtRoundEnd(Character c) { }
 
     public override void Activate(Character c, Skill s) {
         if (duration == 0 || typeof(DeadlyAttack) == s.GetType())
