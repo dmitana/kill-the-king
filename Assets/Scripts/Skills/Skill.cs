@@ -61,7 +61,8 @@ public abstract class Skill : MonoBehaviour {
     }
 
     public virtual void ResetCooldown() {
-        cooldown = maxCooldown;
+	    if (maxCooldown > 0)
+			cooldown = maxCooldown + 1;
     }
 
     public abstract void ApplySkill(Character attacker, Character target);

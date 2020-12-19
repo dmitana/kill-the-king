@@ -32,7 +32,7 @@ public class DeadlyAttackBuff : Effect {
             c.baseStrength = originalStrength;
 
         if (Skill.cooldown == 0)
-            Skill.cooldown = Skill.maxCooldown;
+            Skill.cooldown = Skill.maxCooldown + 1;
 
         duration = 0;
     }

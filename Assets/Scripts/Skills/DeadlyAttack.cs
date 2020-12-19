@@ -25,7 +25,7 @@ public class DeadlyAttack : Skill {
             buff.charges += 1;
         else {
             battleController.Log = $"Deadly Attack has {buff.maxCharges} charges. Use another attack to use charges.";
-            cooldown = maxCooldown;
+            cooldown = maxCooldown + 1;
         }
     }
 
