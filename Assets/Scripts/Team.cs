@@ -198,6 +198,8 @@ public class Team : MonoBehaviour {
 
 	public void Restart() {
 		CurrentEnvironment = 0;
+		CurrentArea = 0;
+		Paths = new List<EnvironmentPath>();
 		Level = 1;
 		Exp = 0;
 		movement.enabled = true;
