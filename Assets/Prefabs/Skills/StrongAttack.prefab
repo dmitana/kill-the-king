@@ -54,5 +54,5 @@ MonoBehaviour:
   cooldown: 0
   maxCooldown: 3
   effects:
-  - {fileID: 6143086907004935437, guid: a5d76eed3610af353881b48eef7a4ac7, type: 3}
+  - {fileID: 7088431586556644893, guid: a5d76eed3610af353881b48eef7a4ac7, type: 3}
   numOfTargets: 1
