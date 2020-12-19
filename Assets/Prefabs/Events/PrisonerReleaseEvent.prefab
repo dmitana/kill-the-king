@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5792964910250890934}
   - component: {fileID: 640193098893390806}
   m_Layer: 0
-  m_Name: PrisonerReleaseEvent 1
+  m_Name: PrisonerReleaseEvent
   m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,8 +56,8 @@ MonoBehaviour:
   eventMessage: The dark wizard helped you and wounded the king, taking {0:D}% of
     his health.
   battleSceneName: CastleCourtyardRoadBattle
-  minEnemiesCount: 2
-  maxEnemiesCount: 2
+  minEnemiesCount: 1
+  maxEnemiesCount: 1
   possibleEnemies:
   - {fileID: 6813494093564698146, guid: e1017f726e41bfe1aa11067adbe1ee5f, type: 3}
   effect: {fileID: 6638704725199004499, guid: 76cd986ae4d67c70282b92a72c8f8149, type: 3}
