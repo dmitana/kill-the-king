@@ -191,8 +191,8 @@ public class Team : MonoBehaviour {
 	}
 
 	public void ApplyEffects() {
-		foreach (Character c in Characters) {
-			c.ApplyEffects();
+		for (int i = Characters.Count - 1; i >= 0; i--) {
+			Characters[i].ApplyEffects();
 		}
 	}
 
