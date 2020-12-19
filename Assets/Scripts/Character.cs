@@ -10,6 +10,7 @@ public class Character : MonoBehaviour {
 	public Sprite characterImg;
 	public int maxHealth;
 	public int baseStrength;
+	public double hitChance = 1.0;
 	public List<Skill> availableSkills = new List<Skill>();
 	public List<Skill> skills = new List<Skill>();
 	public float healthIncPerLevelAI;

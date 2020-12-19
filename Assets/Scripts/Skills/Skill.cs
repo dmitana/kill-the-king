@@ -46,17 +46,22 @@ public abstract class Skill : MonoBehaviour {
 
     // Default method used whether skill has multiple targets or not
     public void ApplySkill(Character attacker, List<Character> targets) {
-        ApplySkillOnSelf(attacker);
         List<Effect> buffsToDeactivate = attacker.ProcessBuffs(this);
 
-        foreach (var target in targets) {
-            ApplySkill(attacker, target);
-        }
+		if (rnd.NextDouble() < attacker.hitChance) {
+			ApplySkillOnSelf(attacker);
 
-        foreach (Effect buff in buffsToDeactivate) {
-            buff.Deactivate(attacker);
-        }
-        Improve();
+			foreach (var target in targets) {
+				ApplySkill(attacker, target);
+			}
+
+			Improve();
+		}
+
+		foreach (Effect buff in buffsToDeactivate) {
+			buff.Deactivate(attacker);
+		}
+
         ResetCooldown();
     }
 
