@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls pop up window UI used for displaying events.
+/// </summary>
 public class PopUpWindowUI : MonoBehaviour {
 	public Image popUpWindow;
 	public TMP_Text popUpTitle;
@@ -13,6 +16,9 @@ public class PopUpWindowUI : MonoBehaviour {
 
 	private List<Event> events;
 
+	/// <summary>
+	/// Finds all events and assigns callbacks to events they emit.
+	/// </summary>
 	void OnEnable() {
 		events = new List<Event>();
 		GameObject[] eventsGO = GameObject.FindGameObjectsWithTag("Event");
@@ -25,6 +31,9 @@ public class PopUpWindowUI : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Removes callbacks from events.
+	/// </summary>
 	void OnDisable() {
 		foreach (Event e in events) {
 			e.onOpen -= Show;
@@ -32,6 +41,10 @@ public class PopUpWindowUI : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Activates pop up window, shows event and assigns listeners to reject and accept buttons.
+	/// </summary>
+	/// <param name="e">Event to be showed.</param>
 	private void Show(Event e) {
 		popUpWindow.gameObject.SetActive(true);
 		popUpTitle.text = e.title;
@@ -40,7 +53,10 @@ public class PopUpWindowUI : MonoBehaviour {
 		acceptButton.onClick.AddListener(e.OnAccept);
 	}
 
-	private void Hide(Event e) {
+	/// <summary>
+	/// Deactivates pop up window.
+	/// </summary>
+	private void Hide() {
 		popUpWindow.gameObject.SetActive(false);
 	}
 }

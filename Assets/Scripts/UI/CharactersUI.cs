@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls characters UI displaying player's characters along with exp bar.
+/// </summary>
 public class CharactersUI : MonoBehaviour {
 	public List<GameObject> charactersUI;
 	[Space]
@@ -29,6 +32,10 @@ public class CharactersUI : MonoBehaviour {
 		Show();
 	}
 
+	/// <summary>
+	/// Creates characters UI along with exp bar.
+	/// Exp bar width is set to width of the characters UI.
+	/// </summary>
 	private void Show() {
 		int n = 0;
 
@@ -58,6 +65,10 @@ public class CharactersUI : MonoBehaviour {
 		levelExpText.text = $"Level {playerTeam.Level}: {playerTeam.Exp}/{playerTeam.expPerLevel}";
 	}
 
+	/// <summary>
+	/// Changes scene to Characters detail scene.
+	/// Used as pointer on down listener.
+	/// </summary>
 	public void OnClick() {
 		sceneController.ChangeFromGameScene("CharactersDetail");
 	}

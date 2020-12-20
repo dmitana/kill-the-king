@@ -5,6 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls map UI displaying player's progress in a current path.
+/// </summary>
 public class MapUI : MonoBehaviour {
 	public TMP_Text pathText;
 	public List<Image> areas;
@@ -21,13 +24,17 @@ public class MapUI : MonoBehaviour {
 		Show();
 	}
 
+	/// <summary>
+	/// Creates map of path based on player's current position.
+	/// This map differs from Map scene. Only current path name and area progress is displayed.
+	/// </summary>
 	private void Show() {
 		EnvironmentPath lastPath = playerTeam.Paths.LastOrDefault();
 
 		// Set text
 		pathText.text = playerTeam.Paths.LastOrDefault().ToDescription();
 
-		// Royal Hall is different
+		// Royal Hall is different, it does not have any area
 		if (lastPath == EnvironmentPath.RoyalHall) {
 			pathText.transform.parent.GetComponent<Image>().color = Color.yellow;
 			areas[0].transform.parent.gameObject.SetActive(false);
@@ -42,6 +49,10 @@ public class MapUI : MonoBehaviour {
 			areas[lastArea].color = Color.yellow;
 	}
 
+	/// <summary>
+	/// Changes scene to Map scene.
+	/// Used as pointer on down listener.
+	/// </summary>
 	public void OnClick() {
 		sceneController.ChangeFromGameScene("Map");
 	}
