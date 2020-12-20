@@ -139,12 +139,12 @@ public class Character : MonoBehaviour {
 	public event OnHoverDelegate onHover;
 	
 	/// <summary>
-	/// Event which is emmited when mouse leaves character collider.
+	/// Event which is emitted when mouse leaves character collider.
 	/// </summary>
 	public event OnHoverDelegate onExit;
 
 	/// <summary>
-	/// Sets default values for some attributes and obtaines character collider. Also instantiates prefab skills to
+	/// Sets default values for some attributes and obtains character collider. Also instantiates prefab skills to
 	/// prevent overwriting prefab values during playing. If character is player (availableSkills.Count > 0), only
 	/// <c>BasicAttack</c> from <c>skills</c> is instantiated, because it is not chosen.
 	/// </summary>
@@ -166,7 +166,7 @@ public class Character : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Update is used to check whether mouse entered/leaved character collider and therefore whether to emit onHover or
+	/// Update is used to check whether mouse entered/left character collider and therefore whether to emit onHover or
 	/// onExit events, which turn on/off hover with character information.
 	/// </summary>
      void Update() {
