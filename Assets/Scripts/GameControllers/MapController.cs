@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Controls Map scene.
+/// </summary>
 public class MapController : MonoBehaviour {
 	public TMP_Text countrysideEnvText;
 	public TMP_Text townEnvText;
@@ -59,12 +62,18 @@ public class MapController : MonoBehaviour {
 		Show();
 	}
 
+	/// <summary>
+	/// Assigns names of environments to appropriate texts.
+	/// </summary>
 	private void SetEnvironmentsNames() {
 		countrysideEnvText.text = Environment.Countryside.ToDescription();
 		townEnvText.text = Environment.Town.ToDescription();
 		castleEnvText.text = Environment.Castle.ToDescription();
 	}
 
+	/// <summary>
+	/// Assigns names of paths to appropriate texts.
+	/// </summary>
 	private void SetPathsNames() {
 		forestRoadText.text = EnvironmentPath.ForestRoad.ToDescription();
 		villageRoadText.text = EnvironmentPath.VillageRoad.ToDescription();
@@ -81,6 +90,9 @@ public class MapController : MonoBehaviour {
 		royalHallText.text = EnvironmentPath.RoyalHall.ToDescription();
 	}
 
+	/// <summary>
+	/// Assigns paths to appropriate environments.
+	/// </summary>
 	private void SetEnvironments() {
 		countrysidePathToAreas = new Dictionary<EnvironmentPath, List<Image>>
 		{
@@ -111,6 +123,12 @@ public class MapController : MonoBehaviour {
 		environments.Add(royalHallPathToAreas);
 	}
 
+	/// <summary>
+	/// Creates map based on player's current position.
+	///
+	/// Passed areas are colored green except current, which is colored yellow.
+	/// Areas that can no longer be visited are colored grey.
+	/// </summary>
 	private void Show() {
 		Image lastArea = null;
 		int currentArea = playerTeam.CurrentArea;
@@ -137,6 +155,10 @@ public class MapController : MonoBehaviour {
 			lastArea.color = Color.yellow;
 	}
 
+	/// <summary>
+	/// Resumes game scene.
+	/// Used as Back button listener.
+	/// </summary>
 	public void BackButton() {
 		sceneController.ResumeGameScene();
 	}

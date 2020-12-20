@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Controls EndGame scene.
+/// </summary>
 public class EndGameController : MonoBehaviour {
     public TMP_Text titleText;
 	public String gameOverText;
@@ -21,6 +24,10 @@ public class EndGameController : MonoBehaviour {
 		Team.playerTeamInstance.Restart();
 	}
 
+	/// <summary>
+	/// Changes scene to MainMenu.
+	/// Used as Back button listener.
+	/// </summary>
 	public void BackButton() {
 		sceneController.ChangeScene("MainMenu", true);
 	}
