@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Visualizes battle event.
+/// </summary>
 [RequireComponent(typeof(Event))]
 public class EventVisualizer : MonoBehaviour {
 	private Event e;
@@ -11,6 +14,9 @@ public class EventVisualizer : MonoBehaviour {
 		VisualizeEvent();
     }
 
+	/// <summary>
+	/// Visualizes battle event as its generated enemies.
+	/// </summary>
 	private void VisualizeEvent() {
 		Vector3 position = transform.position;
 
