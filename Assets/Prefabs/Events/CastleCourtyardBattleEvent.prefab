@@ -52,7 +52,7 @@ MonoBehaviour:
   successRate: 0.5
   expMessage: You earned {0} experience points.
   eventMessage: 
-  battleSceneName: CastleCourtyardBattle
+  battleSceneName: CastleCourtyardRoadBattle
   minEnemiesCount: 1
   maxEnemiesCount: 2
   possibleEnemies:
