@@ -12,24 +12,6 @@ public class BattleLogUI : MonoBehaviour {
     private void Awake() {
         battleController = GameMaster.instance.GetComponent<BattleController>();
     }
-    
-    /// <summary>
-    /// Registers battle controller's onTurnEnd event.
-    /// </summary>
-    private void OnEnable() {
-        battleController.onTurnEnd += EmptyLine;
-    }
-
-    /// <summary>
-    /// Unregisters battle controller's onTurnEnd event.
-    /// </summary>
-    private void OnDisable() {
-        battleController.onTurnEnd -= EmptyLine;
-    }
-
-    private void EmptyLine(BattleController bc) {
-        battleLogText.text += "\n";
-    }
 
     /// <summary>
     /// Obtains oldest log and adds it to text field.
