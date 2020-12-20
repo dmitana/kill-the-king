@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Dark Wizard
   characterImg: {fileID: 21300006, guid: e48ddf4fb7304ce4ab48711eb6617a57, type: 3}
-  maxHealth: 125
+  maxHealth: 200
   baseStrength: 40
   hitChance: 1
   availableSkills:

@@ -1154,8 +1154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Assassin
   characterImg: {fileID: 21300000, guid: e134cc05f98f41709a9e02959b115a34, type: 3}
-  maxHealth: 100
+  maxHealth: 150
   baseStrength: 50
+  hitChance: 1
   availableSkills:
   - {fileID: 5665902040732724273, guid: bef085b4349450f2ba9b801f3c25de16, type: 3}
   - {fileID: 5067305964924543703, guid: 3e3a93d23df2fb354a40a43636e6d5ba, type: 3}

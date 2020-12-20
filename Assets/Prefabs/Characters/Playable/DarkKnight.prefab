@@ -131,8 +131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Dark Knight
   characterImg: {fileID: 21300000, guid: 1d31c4c24a42649429583bb010671657, type: 3}
-  maxHealth: 200
+  maxHealth: 300
   baseStrength: 30
+  hitChance: 1
   availableSkills:
   - {fileID: -4353817375147539090, guid: 5f8984551cb6aa5c984e1afb68b9c340, type: 3}
   - {fileID: 5777983318617136248, guid: 5d0b69dcf8cf9809cba7e0d161248952, type: 3}

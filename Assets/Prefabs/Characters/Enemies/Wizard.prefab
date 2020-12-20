@@ -79,8 +79,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Wizard
   characterImg: {fileID: 0}
-  maxHealth: 200
-  baseStrength: 40
+  maxHealth: 175
+  baseStrength: 35
+  hitChance: 1
   availableSkills: []
   skills:
   - {fileID: 3323304935067502049, guid: 0f3b41a023fd16cb793f6cd4e3956a91, type: 3}
