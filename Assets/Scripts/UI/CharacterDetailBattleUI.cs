@@ -15,15 +15,17 @@ public class CharacterDetailBattleUI : MonoBehaviour
     public TMP_Text skills;
 
     private List<Character> characters;
-    private bool charactersObtained;
+    private bool charactersObtained = false;
     private BattleController battleController;
 
     private void Awake() {
         battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
-        charactersObtained = false;
     }
 
     private void Update() {
+		// Adding events to characters have to be done in Update, because
+		// enemies are instantiated after loading a battle scene, so
+		// OnEnable method is not appropriate.
         if (!charactersObtained && battleController.battleReady) {
             characters = new List<Character>();
             GameObject[] charactersGO = GameObject.FindGameObjectsWithTag("Character");
@@ -43,6 +45,7 @@ public class CharacterDetailBattleUI : MonoBehaviour
             c.onHover -= Show;
             c.onExit -= Hide;
         }
+		charactersObtained = false;
     }
 
     private void Show(Character c) {

@@ -10,15 +10,18 @@ public class SkillFieldUI : MonoBehaviour {
     public Image background;
     public TMP_Text skillName;
     public SkillsUI parent;
-    
+
     private Skill skill;
     private BattleController battleController;
 
     private void Awake() {
         battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
         background.color = Color.black;
-        battleController.onTurnEnd += Clear;
     }
+
+	private void OnEnable() {
+        battleController.onTurnEnd += Clear;
+	}
 
     private void OnDisable() {
         battleController.onTurnEnd -= Clear;
@@ -29,7 +32,7 @@ public class SkillFieldUI : MonoBehaviour {
         background.color = (s.cooldown == 0)? Color.green : Color.red;
         skillName.text = s.skillName;
     }
-    
+
     public void ChooseSkill() {
         if (battleController.ChosenSkill == null && battleController.ChosenCharacter != null && skill != null) {
             if (skill.cooldown > 0) {
@@ -45,7 +48,7 @@ public class SkillFieldUI : MonoBehaviour {
         HoverOff();
         skill = null;
     }
-    
+
     public void HoverOn() {
         if (skill != null && battleController.ChosenCharacter != null) {
             parent.skillDescription.SetActive(true);
