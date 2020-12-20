@@ -27,10 +27,11 @@ public abstract class Event : MonoBehaviour {
 	private Team playerTeam;
     private SceneController sceneController;
 
-	public delegate void OnClickDelegate(Event sender);
-	public event OnClickDelegate onOpen;
-	public event OnClickDelegate onClose;
-	public event OnClickDelegate onFinish;
+	public delegate void OnOpenDelegate(Event sender);
+	public delegate void OnCloseDelegate();
+	public event OnOpenDelegate onOpen;
+	public event OnCloseDelegate onClose;
+	public event OnOpenDelegate onFinish;
 
 	protected Random rnd = new Random();
 
@@ -45,7 +46,7 @@ public abstract class Event : MonoBehaviour {
 	}
 
 	protected void OnClose() {
-		onClose?.Invoke(this);
+		onClose?.Invoke();
 	}
 
 	protected void OnFinish() {
