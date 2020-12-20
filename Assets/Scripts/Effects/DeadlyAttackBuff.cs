@@ -12,8 +12,14 @@ public class DeadlyAttackBuff : Effect {
     private bool buffUsed = false;
     private bool damageReceived = false;
 
+    /// <summary>
+    /// If effect was not used already and skill, that is used is not Deadly Attack, original strength of character is
+    /// stored and character's base strength is boosted.
+    /// </summary>
+    /// <param name="c">Character with effect.</param>
+    /// <param name="s">Skill that is used.</param>
     public override void Activate(Character c, Skill s) {
-        if (duration == 0 || typeof(DeadlyAttack) == s.GetType())
+        if (buffUsed || typeof(DeadlyAttack) == s.GetType())
             return;
 
         originalStrength = c.baseStrength;
@@ -22,6 +28,11 @@ public class DeadlyAttackBuff : Effect {
         buffUsed = true;
     }
 
+    /// <summary>
+    /// If effect was used or character received damage, original strength is restored if it was set and cooldown is set
+    /// if it was not set already. 
+    /// </summary>
+    /// <param name="c">Character with effect.</param>
     public override void Deactivate(Character c) {
         if (!buffUsed && !damageReceived)
             return;
@@ -35,6 +46,11 @@ public class DeadlyAttackBuff : Effect {
         duration = 0;
     }
 
+    /// <summary>
+    /// When damage is received, effect is removed.
+    /// </summary>
+    /// <param name="c">Character with effect.</param>
+    /// <param name="damage">Received final damage.</param>
     public override void AfterDamage(Character c, int damage) {
         if (damage != 0) {
             damageReceived = true;

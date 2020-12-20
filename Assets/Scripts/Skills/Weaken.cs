@@ -7,7 +7,6 @@ public class Weaken : Skill
     public override void ApplySkill(Character attacker, Character target) {
         WeakenDebuff effect = (WeakenDebuff) Instantiate(effects[0], target.gameObject.transform);
         effect.Strength = strength;
-        effect.OriginalHealth = target.Health;
         target.Defence -= strength;
         target.AddEffect(effect);
         battleController.Log = $"{attacker} used {skillName} on {target}, which will receive {100 * strength} %" +

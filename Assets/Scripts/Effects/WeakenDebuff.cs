@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeakenDebuff : Effect {
-    public int OriginalHealth { get; set; }
-
+    private bool receivedDamage = false;
+    
     public override void Deactivate(Character c) {
-        if (c.Health < OriginalHealth && duration == -1) {
+        if (receivedDamage && duration == 1) {
             c.Defence += Strength;
             duration = 0;
         }
     }
 
     public override void AfterDamage(Character c, int damage) {
+        receivedDamage = true;
         Deactivate(c);
     }
 }

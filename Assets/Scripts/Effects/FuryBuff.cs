@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FuryBuff : Effect {
+    /// <summary>
+    /// Accumulated damage is a sum of all damage character received during effect's influence. Damage is always changed
+    /// by character's defence.
+    /// </summary>
     private int accumulatedDamage = 0;
     public override void AtRoundEnd(Character c) {
         duration -= 1;
