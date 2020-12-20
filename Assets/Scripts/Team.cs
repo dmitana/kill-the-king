@@ -5,31 +5,102 @@ using UnityEngine;
 using Random = System.Random;
 using System.Linq;
 
+/// <summary>
+/// Represents team.
+/// </summary>
 public class Team : MonoBehaviour {
+	/// <summary>
+	/// Player team singleton instance.
+	/// </summary>
 	public static Team playerTeamInstance;
 
+	/// <summary>
+	/// Camera inside team game object.
+	/// </summary>
     public Camera teamCamera;
+	
+	/// <summary>
+	/// Flag representing whether team is controlled by AI.
+	/// </summary>
     public bool isAI = false;
 	[Space]
+	
+	/// <summary>
+	/// Value representing how many experience is needed to gaing new level.
+	/// </summary>
 	public int expPerLevel;
+	
+	/// <summary>
+	/// Percentual value of how much player character health will increase when gaining new level.
+	/// </summary>
 	public float healthIncPerLevel;
+	
+	/// <summary>
+	/// Percentual value of how much player character base strength will increase when gaining new level.
+	/// </summary>
 	public float strengthIncPerLevel;
 
+	/// <summary>
+	/// Reference to BattleController component of GameMaster GameObject.
+	/// </summary>
     public BattleController BattleController { get; set; }
+	
+	/// <summary>
+	/// Characters of a team.
+	/// </summary>
     public List<Character> Characters { get; private set; }
+	
+	/// <summary>
+	/// Characters that have been already played in a round.
+	/// </summary>
     public List<Character> PlayedCharacters { get; private set; }
+	
+	/// <summary>
+	/// Characters that haven't been played in a round yet.
+	/// </summary>
     public List<Character> UnplayedCharacters { get; private set; }
+	
+	/// <summary>
+	/// Number of current environment. Increments with each passed environment.
+	/// </summary>
 	public int CurrentEnvironment { get; private set; } = 0;
+	
+	/// <summary>
+	/// Number of current area in current environment. Increments with each passed area and resets in a new environment.
+	/// </summary>
 	public int CurrentArea { get; private set; } = 0;
+	
+	/// <summary>
+	/// List of paths player chose. It is used in map.
+	/// </summary>
 	public List<EnvironmentPath> Paths { get; private set; } = new List<EnvironmentPath>();
+	
+	/// <summary>
+	/// Current player level.
+	/// </summary>
 	public int Level { get; private set; } = 1;
+	
+	/// <summary>
+	/// Experience points player gained on current player level.
+	/// </summary>
 	public int Exp { get; private set; } = 0;
 
+	/// <summary>
+	/// Position of team before entering battle. When returning from battle, it is used to place team where it was
+	/// before battle.
+	/// </summary>
 	private Vector3 positionBeforeBattle;
+	
+	/// <summary>
+	/// CharacterMovement component, which is turned off in battle.
+	/// </summary>
 	private CharacterMovement movement;
 
     private Random rng;
 
+    /// <summary>
+    /// Initializes team.
+    /// </summary>
     void Awake() {
 		if (playerTeamInstance == null && gameObject.tag == "PlayerTeam") {
 			playerTeamInstance = this;
@@ -45,11 +116,19 @@ public class Team : MonoBehaviour {
 		movement = gameObject.GetComponent<CharacterMovement>();
     }
 
+    /// <summary>
+    /// Adds character to team.
+    /// </summary>
+    /// <param name="c">Character to be added to team.</param>
     public void AddCharacterToTeam(Character c) {
         Characters.Add(c);
 		c.Team = this;
     }
 
+    /// <summary>
+    /// Removes character from team.
+    /// </summary>
+    /// <param name="c">Character to be removed.</param>
     public void RemoveCharacterFromTeam(Character c) {
         Characters.Remove(c);
 		c.Team = null;
@@ -60,11 +139,17 @@ public class Team : MonoBehaviour {
             PlayedCharacters.Remove(c);
     }
 
+    /// <summary>
+    /// Removes all characters from team.
+    /// </summary>
 	public void ClearCharacters() {
 		Characters.Clear();
 	}
 
-    public void SetCharactersParent() {
+    /// <summary>
+    /// Sets parent game object of each character as team game object and also moves characters to not overlap.
+    /// </summary>
+	public void SetCharactersParent() {
 		int i = 0;
 		Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
 
@@ -80,50 +165,84 @@ public class Team : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Activates/deactivates characters game objects.
+    /// </summary>
+    /// <param name="value">Boolean used to activate/deactivate characters.</param>
     public void SetActiveCharacters(Boolean value) {
         foreach (Character c in Characters)
             c.gameObject.SetActive(value);
     }
 
+    /// <summary>
+    /// Activates/deactivates team camera.
+    /// </summary>
+    /// <param name="value">Boolean used to activate/deactivate team camera.</param>
     public void SetActiveCamera(Boolean value) {
         teamCamera.gameObject.SetActive(value);
     }
 
+    /// <summary>
+    /// Adds character as played.
+    /// </summary>
+    /// <param name="c">Character, which was played.</param>
     public void AddPlayedCharacter(Character c) {
         PlayedCharacters.Add(c);
     }
 
-    public void RemovePlayedCharacter(Character c) {
-        PlayedCharacters.Remove(c);
-    }
-
+    /// <summary>
+    /// Adds character as unplayed.
+    /// </summary>
+    /// <param name="c">Character, which was not played.</param>
     public void AddUnplayedCharacter(Character c) {
         UnplayedCharacters.Add(c);
     }
 
+    /// <summary>
+    /// Removes character from unplayed list.
+    /// </summary>
+    /// <param name="c">Character, which was played.</param>
     public void RemoveUnplayedCharacter(Character c) {
         UnplayedCharacters.Remove(c);
     }
 
+    /// <summary>
+    /// Adds all unplayed characters to battle log.
+    /// </summary>
     public void HighlightUnplayed() {
         BattleController.Log = $"Unplayed characters: {string.Join(", ", UnplayedCharacters)}";
     }
 
+    /// <summary>
+    /// Increases environment counter and adds path to list of paths.
+    /// </summary>
+    /// <param name="path">New path player chose.</param>
 	public void IncreaseEnvironment(EnvironmentPath path) {
 		++CurrentEnvironment;
 		Paths.Add(path);
 		IncreaseArea();
 	}
 
-	public void IncreaseArea() {
+	/// <summary>
+	/// Increase area counter.
+	/// </summary>
+    public void IncreaseArea() {
 		++CurrentArea;
 	}
 
+	/// <summary>
+	/// AI method for selecting one of unplayed characters.
+	/// </summary>
     public void SelectCharacter() {
         int idx = rng.Next(UnplayedCharacters.Count);
         BattleController.ChosenCharacter = UnplayedCharacters[idx];
     }
 
+	/// <summary>
+	/// AI method for selecting targets of a skill from list of valid targets.
+	/// </summary>
+	/// <param name="numOfTargets">How many targets should be chosen.</param>
+	/// <param name="validTargets">List of all valid characters.</param>
     public void SelectTargets(int numOfTargets, List<Character> validTargets) {
         while (numOfTargets > BattleController.ChosenTargets.Count) {
             int idx = rng.Next(validTargets.Count);
@@ -132,11 +251,18 @@ public class Team : MonoBehaviour {
         }
     }
 
+	/// <summary>
+	/// Adds skill point to all characters.
+	/// </summary>
 	public void AddSkillPointToCharacters() {
 		foreach (Character character in Characters)
 			character.AddSkillPoint();
 	}
 
+	/// <summary>
+	/// Initializes team for battle. Movement is turned off and team is placed into correct position.
+	/// </summary>
+	/// <param name="position">Position to which team will be placed.</param>
 	public void InitilizeForBattle(Vector3? position = null) {
 		BattleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
 		if (movement != null)
@@ -151,6 +277,11 @@ public class Team : MonoBehaviour {
         }
 	}
 
+	/// <summary>
+	/// Resets team. All characters become unplayed except stunned characters, which become played. Also cooldowns and
+	/// rounds to death are decreased.
+	/// </summary>
+	/// <param name="resetCooldowns">Cooldowns are reset only at round end.</param>
 	public void ResetTeam(bool resetCooldowns=false) {
 		PlayedCharacters = new List<Character>();
 		UnplayedCharacters = new List<Character>();
@@ -167,6 +298,9 @@ public class Team : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Restores movement and position of team before battle. Also restores characters attributes.
+	/// </summary>
 	public void AfterBattle() {
 		BattleController = null;
 		if (movement != null)
@@ -178,6 +312,11 @@ public class Team : MonoBehaviour {
         }
 	}
 
+	/// <summary>
+	/// Adds experience to team after battle or successful event. Also increases player level if enough experience was
+	/// obtained.
+	/// </summary>
+	/// <param name="exp">Gained experience.</param>
 	public void AddExp(int exp) {
 		Exp += exp;
 		if (Exp < expPerLevel)
@@ -190,12 +329,18 @@ public class Team : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Applies effects to all characters. Application of DamageOverTime effect can cause death of a character.
+	/// </summary>
 	public void ApplyEffects() {
 		for (int i = Characters.Count - 1; i >= 0; i--) {
 			Characters[i].ApplyEffects();
 		}
 	}
 
+	/// <summary>
+	/// Restart team after Game ends.
+	/// </summary>
 	public void Restart() {
 		CurrentEnvironment = 0;
 		CurrentArea = 0;
