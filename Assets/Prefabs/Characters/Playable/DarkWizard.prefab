@@ -51,6 +51,7 @@ MonoBehaviour:
   characterImg: {fileID: 21300006, guid: e48ddf4fb7304ce4ab48711eb6617a57, type: 3}
   maxHealth: 125
   baseStrength: 40
+  hitChance: 1
   availableSkills:
   - {fileID: 6815600484783893398, guid: 88f6fab0b9a924744b821ce886466b79, type: 3}
   - {fileID: 8836977012010649023, guid: c14bfe10a8931e7c39b96c52b2a56902, type: 3}
@@ -110,7 +111,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!255 &3246075735008775957
 FixedJoint2D:
   m_ObjectHideFlags: 0
