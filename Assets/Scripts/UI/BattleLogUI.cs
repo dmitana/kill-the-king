@@ -13,8 +13,10 @@ public class BattleLogUI : MonoBehaviour {
         battleController = GameMaster.instance.GetComponent<BattleController>();
     }
 
+    /// <summary>
+    /// Obtains oldest log and adds it to text field.
+    /// </summary>
     private void Update() {
-        // Get logs from battle controller
         log = battleController.Log;
         if (log != null) {
             battleLogText.text += log + "\n";
