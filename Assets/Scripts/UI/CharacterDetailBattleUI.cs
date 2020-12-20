@@ -22,10 +22,11 @@ public class CharacterDetailBattleUI : MonoBehaviour
         battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
     }
 
+    /// <summary>
+    /// When battle is initialized, characters are obtained and their events are registered. Other methods cannot be
+    /// used because enemies are not instantiated instantly.
+    /// </summary>
     private void Update() {
-		// Adding events to characters have to be done in Update, because
-		// enemies are instantiated after loading a battle scene, so
-		// OnEnable method is not appropriate.
         if (!charactersObtained && battleController.battleReady) {
             characters = new List<Character>();
             GameObject[] charactersGO = GameObject.FindGameObjectsWithTag("Character");
@@ -40,6 +41,9 @@ public class CharacterDetailBattleUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When deactivated, events of all characters are unregistered.
+    /// </summary>
     void OnDisable() {
         foreach (Character c in characters) {
             c.onHover -= Show;
@@ -48,6 +52,10 @@ public class CharacterDetailBattleUI : MonoBehaviour
 		charactersObtained = false;
     }
 
+    /// <summary>
+    /// Activates hover area and fills it with information.
+    /// </summary>
+    /// <param name="c">Character whose information are filled into hover.</param>
     private void Show(Character c) {
         characterDetail.SetActive(true);
         name.text = c.characterName;
@@ -61,6 +69,10 @@ public class CharacterDetailBattleUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deactivates hover area.
+    /// </summary>
+    /// <param name="c">Character whose information were filled into hover.</param>
     private void Hide(Character c) {
         characterDetail.SetActive(false);
     }
