@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Confusion
   description: Causes character to use skill on oposite team than originally intended
-    with {0:D} % strength..
+    with {0:D} % strength.
   defaultInfo: After use, its strength increases by {0:D}% up to {1:D}%. Cooldown
     is {2:D} turn(s).
   strength: 0.5

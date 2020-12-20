@@ -331,7 +331,6 @@ public class BattleController : MonoBehaviour {
     /// Emits onTurnEnd event for Skills UI element.
     /// </summary>
     private void TurnEnd() {
-        Log = "\n";
         onTurnEnd?.Invoke(this);
     }
 }
