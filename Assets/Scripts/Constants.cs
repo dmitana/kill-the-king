@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
+/// <summary>
+/// Game environments.
+/// </summary>
 public enum Environment {
 	[Description("Countryside")]
 	Countryside,
@@ -13,6 +16,9 @@ public enum Environment {
 	Castle
 }
 
+/// <summary>
+/// Game paths in environments.
+/// </summary>
 public enum EnvironmentPath {
 	[Description(("Forest Road"))]
 	ForestRoad,
@@ -36,7 +42,14 @@ public enum EnvironmentPath {
 	RoyalHall
 }
 
+/// <summary>
+/// Defines extensions applyable at enums.
+/// </summary>
 public static class EnumExtensions {
+	/// <summary>
+	/// Returns Description field of a enum value.
+	/// </summary>
+	/// <param name="val">Enum value to be used</param>
 	public static string ToDescription(this Enum val) {
 		DescriptionAttribute[] attributes = (DescriptionAttribute[])val
 		   .GetType()
@@ -46,6 +59,9 @@ public static class EnumExtensions {
 	}
 }
 
+/// <summary>
+/// Represents constants in a game.
+/// </summary>
 public class Constants {
 	public static Dictionary<String, EnvironmentPath> SceneToEnvironmentPath = new Dictionary<String, EnvironmentPath>
 	{
