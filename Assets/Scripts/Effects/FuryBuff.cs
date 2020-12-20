@@ -19,7 +19,7 @@ public class FuryBuff : Effect {
 
     public override void Deactivate(Character c) {
         if (duration == 0) {
-            c.Health -= accumulatedDamage;
+			c.Health -= c.Health < accumulatedDamage ? c.Health : accumulatedDamage;
             accumulatedDamage = 0;
         }
     }
