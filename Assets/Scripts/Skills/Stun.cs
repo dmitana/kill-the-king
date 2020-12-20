@@ -7,7 +7,7 @@ public class Stun : Skill {
         var damage = attacker.baseStrength;
         damage = target.DecreaseHealth(damage);
         battleController.Log = $"{attacker} used {skillName} and dealt {damage} to {target}";
-        if (rnd.NextDouble() < strength) {
+        if (rnd.NextDouble() < strength && target != null) {
             // If character was already played, it will skip its next turn after team reset at turn end.
             if (target.Team.PlayedCharacters.Contains(target))
                 target.IsStunned = true;

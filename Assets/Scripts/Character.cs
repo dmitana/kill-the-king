@@ -212,12 +212,12 @@ public class Character : MonoBehaviour {
 				isCriticallyWounded = true;
 				roundsToDeath = 2;
 				Health = 0;
-				battleController.Log = $"{name} is critically wounded and will die in {roundsToDeath} rounds.";
+				battleController.Log = $"{characterName} is critically wounded and will die in {roundsToDeath} rounds.";
 				Team.RemoveUnplayedCharacter(this);
 				Team.AddPlayedCharacter(this);
 			}
 			else {
-				battleController.Log = $"{name} died.";
+				battleController.Log = $"{characterName} died.";
 				Team.RemoveCharacterFromTeam(this);
 				Destroy(gameObject);
 			}
