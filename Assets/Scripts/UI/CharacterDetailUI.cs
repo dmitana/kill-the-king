@@ -5,21 +5,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+/// <summary>
+/// Controls characters' detail UI displaying detail of player's characters.
+/// This UI also serves as UI for adding new skills to characters.
+/// </summary>
 public class CharacterDetailUI : MonoBehaviour {
 	public List<GameObject> skillsUI;
 	public TMP_Text characterNameText;
 	public TMP_Text characterHealthText;
 	public TMP_Text characterStrenghtText;
 
-
 	void Awake() {
-		// Get character detail UI childen
 		var texts = gameObject.GetComponentsInChildren<TMP_Text>();
 		characterNameText = texts[0];
 		characterHealthText = texts[1];
 		characterStrenghtText = texts[2];
 	}
 
+	/// <summary>
+	/// Shows characters detail UI for a character.
+	///
+	/// Health, strength and skills are displaying for the character.
+	///
+	/// If character the character has some skill point, then skill's
+	/// toggle is interactable and skill can be added.
+	/// </summary>
+	/// <param name="character">Character to show details of.</param>
 	public void Show(Character character) {
 		characterNameText.text = character.characterName;
 		characterHealthText.text = $"Health: {character.maxHealth}";
@@ -60,6 +71,12 @@ public class CharacterDetailUI : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Adds or removes skill to/from a character based on toggle change.
+	/// </summary>
+	/// <param name="change">Change of skill's toggle.</param>
+	/// <param name="skill">Skill to be added or removed to/from a character.</param>
+	/// <param name="character">Character displayed in a detail.</param>
 	private void AddRemoveSkill(bool change, Skill skill, Character character) {
 		if (change)
 			character.AddSkill(skill);
