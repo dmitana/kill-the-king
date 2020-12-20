@@ -22,10 +22,10 @@ public class MapUI : MonoBehaviour {
 	}
 
 	private void Show() {
-		EnvironmentPath lastPath = playerTeam.Paths.Last();
+		EnvironmentPath lastPath = playerTeam.Paths.LastOrDefault();
 
 		// Set text
-		pathText.text = playerTeam.Paths.Last().ToDescription();
+		pathText.text = playerTeam.Paths.LastOrDefault().ToDescription();
 
 		// Royal Hall is different
 		if (lastPath == EnvironmentPath.RoyalHall) {
@@ -38,7 +38,8 @@ public class MapUI : MonoBehaviour {
 		int lastArea = (playerTeam.CurrentArea - 1) % 3;
 		for (int i = 0; i < lastArea; ++i)
 			areas[i].color = Color.green;
-		areas[lastArea].color = Color.yellow;
+		if (lastArea < areas.Count && lastArea >= 0)
+			areas[lastArea].color = Color.yellow;
 	}
 
 	public void OnClick() {
