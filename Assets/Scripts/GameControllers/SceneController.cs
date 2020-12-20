@@ -11,6 +11,7 @@ public class SceneController : MonoBehaviour {
 
 	private String currentSceneName = "MainMenu";
 	private String currentGameSceneName;
+	private String currentBattleSceneName;
 	private Stack<GameObject> gameSceneContainers = new Stack<GameObject>();
 	private Team playerTeam;
 	private Boolean isChangeToBattleScene = false;
@@ -21,12 +22,15 @@ public class SceneController : MonoBehaviour {
 
     void Awake() {
 		battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
-		playerTeam = Team.playerTeamInstance;
 
 		SceneManager.activeSceneChanged += OnChangeToGameScene;
 		SceneManager.activeSceneChanged += OnChangeToBattleScene;
 		SceneManager.activeSceneChanged += OnReturnFromBattleScene;
     }
+
+	void Start() {
+		playerTeam = Team.playerTeamInstance;
+	}
 
 	public void Restart() {
 		IsGameStarted = false;
@@ -65,13 +69,13 @@ public class SceneController : MonoBehaviour {
     }
 
 	public void ChangeToGameScene(String newSceneName) {
-		ChangeScene(newSceneName, true);
 		currentGameSceneName = newSceneName;
 		IsGameStarted = true;
 		IsGameScene = true;
 
 		// Activate change scene callback
 		isChangeToGameScene = true;
+		ChangeScene(newSceneName, true);
 	}
 
 	public void OnChangeToGameScene(Scene sceneCurrent, Scene sceneNext) {
@@ -113,12 +117,17 @@ public class SceneController : MonoBehaviour {
 		if (IsGameScene)
 			return false;
 
-		ChangeScene(currentGameSceneName, true);
+		var sceneName = currentGameSceneName;
+
+		playerTeam.SetActiveCharacters(true);
 		gameSceneContainers.Pop().SetActive(true);
 		IsGameScene = true;
-		if (!IsBattleScene)
+		if (IsBattleScene)
+			sceneName = currentBattleSceneName;
+		else
 			playerTeam.SetActiveCamera(true);
-		playerTeam.SetActiveCharacters(true);
+
+		ChangeScene(sceneName, true);
 
 		return true;
 	}
@@ -132,10 +141,11 @@ public class SceneController : MonoBehaviour {
 		gameSceneContainers.Peek().SetActive(false);
 		playerTeam.SetActiveCamera(false);
 		battleController.Enemies = enemies;
+		currentBattleSceneName = newSceneName;
 
-		ChangeScene(newSceneName);
 		IsBattleScene = true;
 		this.returnFromBattleCallback = returnFromBattleCallback;
+		ChangeScene(newSceneName);
 	}
 
 	public void OnChangeToBattleScene(Scene sceneCurrent, Scene sceneNext) {
