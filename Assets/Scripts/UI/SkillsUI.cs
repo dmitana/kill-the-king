@@ -21,6 +21,9 @@ public class SkillsUI : MonoBehaviour {
         battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
     }
 
+    /// <summary>
+    /// If character was chosen, its skills are filled into skill fields.
+    /// </summary>
     private void Update() {
         if (battleController.ChosenCharacter != null) {
             Character c = battleController.ChosenCharacter;

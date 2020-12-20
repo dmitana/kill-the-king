@@ -19,20 +19,34 @@ public class SkillFieldUI : MonoBehaviour {
         background.color = Color.black;
     }
 
+    /// <summary>
+    /// Registers battle controller's onTurnEnd event.
+    /// </summary>
 	private void OnEnable() {
         battleController.onTurnEnd += Clear;
 	}
 
+    /// <summary>
+    /// Unregisters battle controller's onTurnEnd event.
+    /// </summary>
     private void OnDisable() {
         battleController.onTurnEnd -= Clear;
     }
 
+    /// <summary>
+    /// Sets skill into a skill field and changes color depending on whether skill can be used.
+    /// </summary>
+    /// <param name="s"></param>
     public void SetSkill(Skill s) {
         skill = s;
         background.color = (s.cooldown == 0)? Color.green : Color.red;
         skillName.text = s.skillName;
     }
 
+    /// <summary>
+    /// When player presses button of skill field, skill is set as chosen if some character was already chosen and
+    /// skill was not.
+    /// </summary>
     public void ChooseSkill() {
         if (battleController.ChosenSkill == null && battleController.ChosenCharacter != null && skill != null) {
             if (skill.cooldown > 0) {
@@ -43,12 +57,19 @@ public class SkillFieldUI : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Clears all skill fields when battle controller emits onTurnEnd event.
+    /// </summary>
+    /// <param name="bc"></param>
     public void Clear(BattleController bc) {
         background.color = Color.black;
         HoverOff();
         skill = null;
     }
 
+    /// <summary>
+    /// Activates hover area and fills it with skill information.
+    /// </summary>
     public void HoverOn() {
         if (skill != null && battleController.ChosenCharacter != null) {
             parent.skillDescription.SetActive(true);
@@ -64,6 +85,9 @@ public class SkillFieldUI : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Deactivates hover area.
+    /// </summary>
     public void HoverOff() {
         if (skill != null && battleController.ChosenCharacter != null) {
             parent.skillDescription.SetActive(false);
