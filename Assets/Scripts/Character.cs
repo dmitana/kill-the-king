@@ -9,24 +9,9 @@ using Random = System.Random;
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class Character : MonoBehaviour {
-	/// <summary>
-	/// Name of character.
-	/// </summary>
 	public string characterName;
-	
-	/// <summary>
-	/// Character sprite.
-	/// </summary>
 	public Sprite characterImg;
-	
-	/// <summary>
-	/// Max health character can have. Increases with each level.
-	/// </summary>
 	public int maxHealth;
-	
-	/// <summary>
-	/// Strength of basic attack. Increases with each level.
-	/// </summary>
 	public int baseStrength;
 	
 	/// <summary>
@@ -40,17 +25,17 @@ public class Character : MonoBehaviour {
 	public List<Skill> availableSkills = new List<Skill>();
 	
 	/// <summary>
-	/// List of all skills player has chosen from <c>availableSkills</c>.
+	/// List of all skills player has chosen from availableSkills.
 	/// </summary>
 	public List<Skill> skills = new List<Skill>();
 	
 	/// <summary>
-	/// Amount by which <c>maxHealth</c> of AI will increase to increase difficulty when player becomes stronger.
+	/// Amount by which maxHealth of AI will increase to increase difficulty when player becomes stronger.
 	/// </summary>
 	public float healthIncPerLevelAI;
 	
 	/// <summary>
-	/// Amount by which <c>baseStrength</c> of AI will increase to increase difficulty when player becomes stronger.
+	/// Amount by which baseStrength of AI will increase to increase difficulty when player becomes stronger.
 	/// </summary>
 	public float strengthIncPerLevelAI;
 
@@ -60,7 +45,7 @@ public class Character : MonoBehaviour {
 	public int SkillPoints { get; private set; } = 1;
 	
 	/// <summary>
-	/// Team to which character belongs to. Can be <c>playerTeam</c> or <c>enemyTeam</c>.
+	/// Team to which character belongs to. Can be playerTeam or enemyTeam.
 	/// </summary>
 	public Team Team { get; set; }
 	
@@ -70,7 +55,7 @@ public class Character : MonoBehaviour {
 	public int Health { get; set; }
 	
 	/// <summary>
-	/// Flag used to control whether clicking on character has any effect. When in battle, is is set to <c>true</c> and
+	/// Flag used to control whether clicking on character has any effect. When in battle, is is set to true and
 	/// character can be clicked.
 	/// </summary>
 	public bool InBattle { get; private set; } = false;
@@ -81,14 +66,10 @@ public class Character : MonoBehaviour {
 	public double Defence { get; set; }
 	
 	/// <summary>
-	/// Flag used to control whether character becomes critically wounded or dies immediately. Only player characters
-	/// can be critically wounded.
+	/// Flag used to control whether character is controlled by player. Only playable characters can become critically
+	/// wounded. Enemy characters die immediately.
 	/// </summary>
 	public bool playable;
-	
-	/// <summary>
-	/// Flag used to signal that character is critically wounded.
-	/// </summary>
 	public bool isCriticallyWounded = false;
 	
 	/// <summary>
@@ -112,9 +93,6 @@ public class Character : MonoBehaviour {
 	/// </summary>
 	private List<Effect> activeEffects = new List<Effect>();
 	
-	/// <summary>
-	/// Reference to <c>BattleController</c> component of GameMaster GameObject.
-	/// </summary>
 	private BattleController battleController;
 	
 	/// <summary>
@@ -146,7 +124,7 @@ public class Character : MonoBehaviour {
 	/// <summary>
 	/// Sets default values for some attributes and obtains character collider. Also instantiates prefab skills to
 	/// prevent overwriting prefab values during playing. If character is player (availableSkills.Count > 0), only
-	/// <c>BasicAttack</c> from <c>skills</c> is instantiated, because it is not chosen.
+	/// BasicAttack from skills is instantiated, because it is not chosen.
 	/// </summary>
 	void Awake() {
 		Health = maxHealth;
@@ -189,19 +167,11 @@ public class Character : MonoBehaviour {
 		     }
 	     }
      }
-
-	/// <summary>
-	/// Adds new effect to list of active effects.
-	/// </summary>
-	/// <param name="effect">New effect which will affect the character.</param>
+	
 	public void AddEffect(Effect effect) {
 		activeEffects.Add(effect);
 	}
-
-	/// <summary>
-	/// Returns list of active effects.
-	/// </summary>
-	/// <returns>List of active effects.</returns>
+	
 	public List<Effect> GetEffects() {
 		return activeEffects;
 	}
@@ -258,11 +228,7 @@ public class Character : MonoBehaviour {
 
 		return finalDamage;
 	}
-
-	/// <summary>
-	/// Increases health of the character up to maxHealth.
-	/// </summary>
-	/// <param name="health">Amount by which health will be increased.</param>
+	
 	public void IncreaseHealth(int health) {
 		Health += health;
 		Health = Health > maxHealth ? maxHealth : Health;
@@ -294,10 +260,7 @@ public class Character : MonoBehaviour {
 		skills.RemoveAt(i);
 		++SkillPoints;
 	}
-
-	/// <summary>
-	/// Initializes character for battle.
-	/// </summary>
+	
 	public void InitializeForBattle() {
 		InBattle = true;
 		Defence = 0;
@@ -384,11 +347,7 @@ public class Character : MonoBehaviour {
 		int idx = rng.Next(skillsNotOnCooldown.Count);
 		battleController.ChosenSkill = skillsNotOnCooldown[idx];
 	}
-
-	/// <summary>
-	/// Increases number of skill points character has and therefore skills. Is called when player reaches end of
-	/// environment.
-	/// </summary>
+	
 	public void AddSkillPoint() {
 		++SkillPoints;
 	}
@@ -404,26 +363,17 @@ public class Character : MonoBehaviour {
 		Health = maxHealth;
 		baseStrength += (int) Math.Round(baseStrength * strengthIncPerLevel * nLevels);
 	}
-
-	/// <summary>
-	/// Decreases cooldown of each skill at end of round.
-	/// </summary>
+	
 	public void DecreaseCooldowns() {
 		foreach (Skill skill in skills) {
 			skill.DecreaseCooldown();
 		}
 	}
-
-	/// <summary>
-	/// Emits onHover event after mouse enters character collider.
-	/// </summary>
+	
 	private void OnHover() {
 		onHover?.Invoke(this);
 	}
-
-	/// <summary>
-	/// Emits onExit event after mouse leaves character collider.
-	/// </summary>
+	
 	private void OnExit() {
 		onExit?.Invoke(this);
 	}
@@ -450,11 +400,7 @@ public class Character : MonoBehaviour {
 
 		return activeEffects;
 	}
-
-	/// <summary>
-	/// Overrides default ToString to return only character's name.
-	/// </summary>
-	/// <returns>Character's name.</returns>
+	
 	public override string ToString() {
 		return characterName;
 	}
