@@ -137,8 +137,8 @@ public class Team : MonoBehaviour {
 			character.AddSkillPoint();
 	}
 
-	public void InitilizeForBattle(BattleController controller, Vector3? position = null) {
-		BattleController = controller;
+	public void InitilizeForBattle(Vector3? position = null) {
+		BattleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
 		if (movement != null)
 			movement.enabled = false;
 		positionBeforeBattle = transform.position;
@@ -147,7 +147,7 @@ public class Team : MonoBehaviour {
 		}
 
         foreach (Character c in Characters) {
-            c.InitializeForBattle(controller);
+            c.InitializeForBattle();
         }
 	}
 

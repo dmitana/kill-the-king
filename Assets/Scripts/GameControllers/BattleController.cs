@@ -73,11 +73,11 @@ public class BattleController : MonoBehaviour {
     public void InitializeBattle() {
 		GameObject playerTeamInitialPosition = GameObject.FindGameObjectWithTag("PlayerTeamInitialPosition");
 		playerTeam = Team.playerTeamInstance;
-		playerTeam.InitilizeForBattle(this, playerTeamInitialPosition.transform.position);
+		playerTeam.InitilizeForBattle(playerTeamInitialPosition.transform.position);
 
         enemyTeam = GameObject.FindGameObjectWithTag("EnemyTeam").GetComponent<Team>();
 		FillEnemiesToBattle();
-		enemyTeam.InitilizeForBattle(this);
+		enemyTeam.InitilizeForBattle();
 
         playerTeamFirst = (rng.Next(2) == 0);
 
