@@ -384,9 +384,9 @@ public class Character : MonoBehaviour {
 	/// <param name="level">Value representing player level.</param>
 	/// <param name="area">Value representing how many areas player has passed.</param>
 	public void ScaleAICharacterToPlayerLevelAndArea(int level, int area) {
-		LevelUp(healthIncPerLevelAI, strengthIncPerLevelAI, --level);
+		LevelUp(healthIncPerLevelAI, strengthIncPerLevelAI, level - 1);
 		foreach (Skill skill in skills)
-			skill.Improve(--area);
+			skill.Improve(area - 1);
 	}
 
 	/// <summary>

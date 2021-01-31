@@ -16,9 +16,11 @@ public class SkillsUI : MonoBehaviour {
     public TMP_Text description;
 
     private BattleController battleController;
+    private SkillFieldUI[] skillFields;
 
     private void Awake() {
         battleController = GameMaster.instance.gameObject.GetComponent<BattleController>();
+        skillFields = transform.GetComponentsInChildren<SkillFieldUI>();
     }
 
     /// <summary>
@@ -27,7 +29,6 @@ public class SkillsUI : MonoBehaviour {
     private void Update() {
         if (battleController.ChosenCharacter != null) {
             Character c = battleController.ChosenCharacter;
-            SkillFieldUI[] skillFields = transform.GetComponentsInChildren<SkillFieldUI>();
             for (int i = 0; i < c.skills.Count; i++) {
                 skillFields[i].SetSkill(c.skills[i]);
             }
