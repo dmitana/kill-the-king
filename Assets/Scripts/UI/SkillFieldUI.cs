@@ -48,12 +48,17 @@ public class SkillFieldUI : MonoBehaviour {
     /// skill was not.
     /// </summary>
     public void ChooseSkill() {
-        if (battleController.ChosenSkill == null && battleController.ChosenCharacter != null && skill != null) {
-            if (skill.cooldown > 0) {
-                battleController.Log = $"This skill is on cooldown for {skill.cooldown} rounds";
-                return;
+        if (battleController.ChosenCharacter != null && skill != null) {
+            if (skill != battleController.ChosenSkill) {
+                if (skill.cooldown > 0) {
+                    battleController.Log = $"This skill is on cooldown for {skill.cooldown} rounds";
+                    return;
+                }
+
+                if (battleController.ChosenSkill != null)
+                    battleController.SkillChanged = true;
+                battleController.ChosenSkill = skill;
             }
-            battleController.ChosenSkill = skill;
         }
     }
 

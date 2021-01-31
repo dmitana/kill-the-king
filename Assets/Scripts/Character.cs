@@ -299,7 +299,7 @@ public class Character : MonoBehaviour {
 			return;
 		}
 
-		if (battleController.ChosenCharacter == null && currentTeam.Characters.Contains(this)) {
+		if (battleController.ChosenSkill == null && currentTeam.Characters.Contains(this)) {
 			if (currentTeam.UnplayedCharacters.Contains(this))
 				battleController.ChosenCharacter = this;
 			else

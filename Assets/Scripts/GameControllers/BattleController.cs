@@ -34,6 +34,8 @@ public class BattleController : MonoBehaviour {
     /// </summary>
     public Skill ChosenSkill { get; set; }
     
+    public bool SkillChanged { get; set; }
+    
     /// <summary>
     /// Flag which shows whether character was revived in current turn. If yes, then turn is ended.
     /// </summary>
@@ -231,6 +233,8 @@ public class BattleController : MonoBehaviour {
             Log = "This skill is applied on character that uses it";
         else
             Log = "No valid targets found";
+
+        SkillChanged = false;
     }
 
     /// <summary>
@@ -249,9 +253,11 @@ public class BattleController : MonoBehaviour {
             bool enemyTeamFinished = false;
             // Round lasts until both teams played each character at least once or until one team loses all characters.
             while ((!playerTeamFinished || !enemyTeamFinished) &&
-				   (playerTeam.Characters.Count > 0 &&
-				   enemyTeam.Characters.Count > 0)) {
+				   playerTeam.Characters.Count > 0 &&
+				   enemyTeam.Characters.Count > 0) {
                 ChosenCharacter = null;
+                ChosenSkill = null;
+                ValidTargets = null;
 
                 currentTeam = (playerTeamRound) ? playerTeam: enemyTeam;
                 Log = $"{((playerTeamRound) ? "Player" : "Enemy")}'s turn";
@@ -268,31 +274,37 @@ public class BattleController : MonoBehaviour {
                 if (!CharacterRevived) {
                     
                     // Selection of skill.
-                    ChosenSkill = null;
                     if (currentTeam.isAI)
                         ChosenCharacter.SelectSkill();
                     while (ChosenSkill == null) {
                         yield return new WaitForSeconds(0.5f);
                     }
 
-                    GetTargets(playerTeam, enemyTeam, playerTeamRound);
+                    while (true) {
+                        GetTargets(playerTeam, enemyTeam, playerTeamRound);
 
-                    // If skill has targets but none are valid (all targets have Invisibility, etc.), turn ends.
-                    int numOfTargets = ChosenSkill.GetNumOfTargets();
-                    if (ValidTargets.Count > 0 && numOfTargets != 0 || numOfTargets == 0) {
-                        if (numOfTargets == -1)
-                            numOfTargets = ValidTargets.Count;
+                        // If skill has targets but none are valid (all targets have Invisibility, etc.), turn ends.
+                        int numOfTargets = ChosenSkill.GetNumOfTargets();
+                        if (ValidTargets.Count > 0 && numOfTargets != 0 || numOfTargets == 0) {
+                            if (numOfTargets == -1)
+                                numOfTargets = ValidTargets.Count;
 
-                        // Selection of targets.
-                        if (currentTeam.isAI)
-                            currentTeam.SelectTargets(numOfTargets, ValidTargets);
-                        while (numOfTargets != ChosenTargets.Count) {
-                            yield return new WaitForSeconds(0.5f);
+                            // Selection of targets.
+                            if (currentTeam.isAI)
+                                currentTeam.SelectTargets(numOfTargets, ValidTargets);
+                            while (numOfTargets != ChosenTargets.Count) {
+                                yield return new WaitForSeconds(0.5f);
+                                if (SkillChanged)
+                                    break;
+                            }
+                            if (SkillChanged)
+                                continue;
+
+                            ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
+                            currentTeam.AddPlayedCharacter(ChosenCharacter);
+                            currentTeam.RemoveUnplayedCharacter(ChosenCharacter);
                         }
-
-                        ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
-                        currentTeam.AddPlayedCharacter(ChosenCharacter);
-                        currentTeam.RemoveUnplayedCharacter(ChosenCharacter);
+                        break;
                     }
                 }
 
