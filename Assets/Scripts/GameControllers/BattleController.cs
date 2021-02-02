@@ -199,6 +199,12 @@ public class BattleController : MonoBehaviour {
     /// <param name="teamFinished">Boolean representing if team played all of its characters at least once.</param>
     /// <returns></returns>
     private bool ResetTeam(Team team, bool teamFinished) {
+        foreach (Character c in team.Characters) {
+            c.IsSelected = false;
+            c.IsTargeted = false;
+            c.IsValidTarget = false;
+        }
+        
         if (team.UnplayedCharacters.Count == 0) {
             team.ResetTeam(false);
             return true;
@@ -235,6 +241,10 @@ public class BattleController : MonoBehaviour {
             Log = "No valid targets found";
 
         SkillChanged = false;
+
+        foreach (Character c in ValidTargets) {
+            c.IsValidTarget = true;
+        }
     }
 
     /// <summary>

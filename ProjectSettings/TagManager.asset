@@ -15,6 +15,7 @@ TagManager:
   - PlayerTeamInitialPosition
   - Character
   - King
+  - CharacterHighlightImage
   layers:
   - Default
   - TransparentFX

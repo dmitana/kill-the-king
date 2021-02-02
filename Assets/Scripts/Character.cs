@@ -109,6 +109,10 @@ public class Character : MonoBehaviour {
 	/// Flag used to signal whether hover with this character's info is active.
 	/// </summary>
 	private bool hover = false;
+	
+	public bool IsSelected { get; set; }
+	public bool IsTargeted { get; set; }
+	public bool IsValidTarget { get; set; }
 	public delegate void OnHoverDelegate(Character c);
 	
 	/// <summary>
@@ -300,14 +304,20 @@ public class Character : MonoBehaviour {
 		}
 
 		if (battleController.ChosenSkill == null && currentTeam.Characters.Contains(this)) {
-			if (currentTeam.UnplayedCharacters.Contains(this))
+			if (currentTeam.UnplayedCharacters.Contains(this)) {
+				if (battleController.ChosenCharacter != null)
+					battleController.ChosenCharacter.IsSelected = false;
 				battleController.ChosenCharacter = this;
+				IsSelected = true;
+			}
 			else
 				battleController.Log = $"Character {characterName} was already used.";
 		}
 		else if (battleController.ChosenSkill != null && battleController.ValidTargets.Contains(this) &&
-		         !battleController.ChosenTargets.Contains(this))
+		         !battleController.ChosenTargets.Contains(this)) {
 			battleController.ChosenTargets.Add(this);
+			IsTargeted = true;
+		}
 	}
 
 	/// <summary>
