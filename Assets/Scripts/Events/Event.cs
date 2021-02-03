@@ -26,6 +26,7 @@ public abstract class Event : MonoBehaviour {
 
 	public List<Character> Enemies { get; private set; } = new List<Character>();
 	public String Message { get; private set; }
+	public bool IsClickable { get; set; } = true;
 
 	private Team playerTeam;
     private SceneController sceneController;
@@ -57,7 +58,8 @@ public abstract class Event : MonoBehaviour {
 	}
 
     private void OnMouseDown() {
-		OnOpen();
+		if (IsClickable)
+			OnOpen();
     }
 
 	/// <summary>

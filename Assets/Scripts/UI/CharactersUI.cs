@@ -20,6 +20,9 @@ public class CharactersUI : MonoBehaviour {
 	private Team playerTeam;
 	private SceneController sceneController;
 
+	public delegate void OnClickDelegate();
+	public event OnClickDelegate onClick;
+
 	void Awake() {
 		characterUIRectTransform = charactersUI[0].GetComponent<RectTransform>();
 		expBarRectTransform = expBar.transform.parent.GetComponent<RectTransform>();
@@ -70,6 +73,7 @@ public class CharactersUI : MonoBehaviour {
 	/// Used as pointer on down listener.
 	/// </summary>
 	public void OnClick() {
+		onClick?.Invoke();
 		sceneController.ChangeFromGameScene("CharactersDetail");
 	}
 }

@@ -15,6 +15,9 @@ public class MapUI : MonoBehaviour {
 	private SceneController sceneController;
 	private Team playerTeam;
 
+	public delegate void OnClickDelegate();
+	public event OnClickDelegate onClick;
+
 	void Awake() {
 		sceneController = GameMaster.instance.GetComponent<SceneController>();
 		playerTeam = Team.playerTeamInstance;
@@ -54,6 +57,7 @@ public class MapUI : MonoBehaviour {
 	/// Used as pointer on down listener.
 	/// </summary>
 	public void OnClick() {
+		onClick?.Invoke();
 		sceneController.ChangeFromGameScene("Map");
 	}
 }
