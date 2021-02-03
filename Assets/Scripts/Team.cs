@@ -175,6 +175,13 @@ public class Team : MonoBehaviour {
     /// </summary>
     public void HighlightUnplayed() {
         BattleController.Log = $"Unplayed characters: {string.Join(", ", UnplayedCharacters)}";
+
+        if (!isAI) {
+	        foreach (Character c in UnplayedCharacters)
+		        c.OnValid(true);
+	        foreach (Character c in PlayedCharacters)
+		        c.OnValid(false);
+        }
     }
     
 	public void IncreaseEnvironment(EnvironmentPath path) {

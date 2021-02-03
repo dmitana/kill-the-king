@@ -199,12 +199,6 @@ public class BattleController : MonoBehaviour {
     /// <param name="teamFinished">Boolean representing if team played all of its characters at least once.</param>
     /// <returns></returns>
     private bool ResetTeam(Team team, bool teamFinished) {
-        foreach (Character c in team.Characters) {
-            c.IsSelected = false;
-            c.IsTargeted = false;
-            c.IsValidTarget = false;
-        }
-        
         if (team.UnplayedCharacters.Count == 0) {
             team.ResetTeam(false);
             return true;
@@ -242,8 +236,20 @@ public class BattleController : MonoBehaviour {
 
         SkillChanged = false;
 
-        foreach (Character c in ValidTargets) {
-            c.IsValidTarget = true;
+        foreach (Character c in playerTeam.Characters) {
+            if (ValidTargets.Contains(c))
+                c.OnValid(true);
+            else if (ChosenCharacter == c)
+                c.OnSelected(true);
+            else
+                c.OnInvalid();
+        }
+        
+        foreach (Character c in enemyTeam.Characters) {
+            if (ValidTargets.Contains(c))
+                c.OnValid(true);
+            else
+                c.OnInvalid();
         }
     }
 
@@ -318,12 +324,12 @@ public class BattleController : MonoBehaviour {
                     }
                 }
 
+                // Emit onTurnEnd event.
+                TurnEnd();
+
                 // Teams are reset to allow smaller teams to continue playing until larger team is finished.
                 playerTeamFinished = ResetTeam(playerTeam, playerTeamFinished);
                 enemyTeamFinished = ResetTeam(enemyTeam, enemyTeamFinished);
-
-                // Emit onTurnEnd event.
-                TurnEnd();
 
                 // If last unplayed character of opposing team has been stunned, that team will skip its round.
                 if (!SkipTurn)

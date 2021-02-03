@@ -109,10 +109,6 @@ public class Character : MonoBehaviour {
 	/// Flag used to signal whether hover with this character's info is active.
 	/// </summary>
 	private bool hover = false;
-	
-	public bool IsSelected { get; set; }
-	public bool IsTargeted { get; set; }
-	public bool IsValidTarget { get; set; }
 	public delegate void OnHoverDelegate(Character c);
 	
 	/// <summary>
@@ -124,6 +120,11 @@ public class Character : MonoBehaviour {
 	/// Event which is emitted when mouse leaves character collider.
 	/// </summary>
 	public event OnHoverDelegate onExit;
+
+	public delegate void OnSelectionDelegate(bool b);
+	public event OnSelectionDelegate onValid;
+	public event OnSelectionDelegate onInvalid;
+	public event OnSelectionDelegate onSelected;
 
 	/// <summary>
 	/// Sets default values for some attributes and obtains character collider. Also instantiates prefab skills to
@@ -306,9 +307,9 @@ public class Character : MonoBehaviour {
 		if (battleController.ChosenSkill == null && currentTeam.Characters.Contains(this)) {
 			if (currentTeam.UnplayedCharacters.Contains(this)) {
 				if (battleController.ChosenCharacter != null)
-					battleController.ChosenCharacter.IsSelected = false;
+					battleController.ChosenCharacter.OnSelected(false);
 				battleController.ChosenCharacter = this;
-				IsSelected = true;
+				OnSelected(true);
 			}
 			else
 				battleController.Log = $"Character {characterName} was already used.";
@@ -316,7 +317,7 @@ public class Character : MonoBehaviour {
 		else if (battleController.ChosenSkill != null && battleController.ValidTargets.Contains(this) &&
 		         !battleController.ChosenTargets.Contains(this)) {
 			battleController.ChosenTargets.Add(this);
-			IsTargeted = true;
+			OnSelected(true);
 		}
 	}
 
@@ -386,6 +387,18 @@ public class Character : MonoBehaviour {
 	
 	private void OnExit() {
 		onExit?.Invoke(this);
+	}
+
+	public void OnSelected(bool b) {
+		onSelected?.Invoke(b);
+	}
+
+	public void OnValid(bool b) {
+		onValid?.Invoke(b);
+	}
+
+	public void OnInvalid() {
+		onInvalid?.Invoke(true);
 	}
 
 	/// <summary>
