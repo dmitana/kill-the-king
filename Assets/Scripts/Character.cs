@@ -125,6 +125,7 @@ public class Character : MonoBehaviour {
 	public event OnSelectionDelegate onValid;
 	public event OnSelectionDelegate onInvalid;
 	public event OnSelectionDelegate onSelected;
+	public event OnSelectionDelegate onSkillSelected;
 
 	/// <summary>
 	/// Sets default values for some attributes and obtains character collider. Also instantiates prefab skills to
@@ -390,8 +391,12 @@ public class Character : MonoBehaviour {
 		onExit?.Invoke(this);
 	}
 
-	public void OnSelected(bool b) {
+	private void OnSelected(bool b) {
 		onSelected?.Invoke(b);
+	}
+	
+	public void OnSkillSelected(bool b) {
+		onSkillSelected?.Invoke(b);
 	}
 
 	public void OnValid(bool b) {

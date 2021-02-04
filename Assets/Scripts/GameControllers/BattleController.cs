@@ -247,7 +247,7 @@ public class BattleController : MonoBehaviour {
             if (ValidTargets.Contains(c))
                 c.OnValid(true);
             else if (ChosenCharacter == c)
-                c.OnSelected(true);
+                c.OnSkillSelected(true);
             else
                 c.OnInvalid();
         }

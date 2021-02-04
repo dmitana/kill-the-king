@@ -17,6 +17,7 @@ public class CharacterHighlightUI : MonoBehaviour {
 
     private void OnEnable() {
         character.onSelected += Selected;
+        character.onSkillSelected += Selected;
         character.onValid += Valid;
         character.onInvalid += Invalid;
         battleController.onTurnEnd += TurnEnd;
@@ -24,6 +25,7 @@ public class CharacterHighlightUI : MonoBehaviour {
 
     private void OnDisable() {
         character.onSelected -= Selected;
+        character.onSkillSelected -= Selected;
         character.onValid -= Valid;
         character.onInvalid -= Invalid;
         battleController.onTurnEnd -= TurnEnd;
