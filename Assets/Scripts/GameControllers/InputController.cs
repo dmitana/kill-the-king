@@ -9,6 +9,11 @@ using UnityEngine.SceneManagement;
 public class InputController : MonoBehaviour {
 	private SceneController sceneController;
 
+	public delegate void OnInputDelegate();
+	public event OnInputDelegate onCharactersOpen;
+	public event OnInputDelegate onMapOpen;
+	public event OnInputDelegate onMainMenuOpen;
+
 	void Start() {
 		sceneController = GameMaster.instance.gameObject.GetComponent<SceneController>();
 	}
@@ -18,14 +23,17 @@ public class InputController : MonoBehaviour {
 	/// </summary>
     void Update() {
 		if (Input.GetButtonDown("Cancel")) {
+			onMainMenuOpen?.Invoke();
 			sceneController.ChangeFromGameScene("MainMenu");
 		}
 
 		if (Input.GetButtonDown("Map")) {
+			onMapOpen?.Invoke();
 			sceneController.ChangeFromGameScene("Map");
 		}
 
 		if (Input.GetButtonDown("Characters")) {
+			onCharactersOpen?.Invoke();
 			sceneController.ChangeFromGameScene("CharactersDetail");
 		}
     }

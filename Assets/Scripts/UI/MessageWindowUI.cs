@@ -26,6 +26,10 @@ public class MessageWindowUI : MonoBehaviour {
 			e.onFinish += Show;
 			events.Add(e);
 		}
+
+		// Coroutine will stop when GameObject is deactivated e.g. after scene change,
+		// so it's necessary to reset hiding in this situation.
+		StartCoroutine(Hide());
 	}
 
 	/// <summary>

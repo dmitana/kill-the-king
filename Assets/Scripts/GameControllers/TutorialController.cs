@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controls tutorial process.
+/// <summary>
 public class TutorialController : MonoBehaviour {
 	public GameObject[] instructions;
 	public Event exampleEvent;
@@ -17,10 +20,19 @@ public class TutorialController : MonoBehaviour {
 	private bool isExampleBattleEventOpen = false;
 	private bool isExampleBattleEventFinished = false;
 
+	private InputController inputController;
 	private bool isCharactersUIOpen = false;
 	private bool isMapUIOpen = false;
+	private bool isMainMenuOpen = false;
 
 
+	void Awake() {
+		inputController = GameMaster.instance.GetComponent<InputController>();
+	}
+
+	/// <summary>
+	/// Adds listeners for events to process through tutorial's instructions.
+	/// </summary>
 	void OnEnable() {
 		exampleEvent.onOpen += OpenExampleEvent;
 		exampleEvent.onClose += CloseExampleEvent;
@@ -30,9 +42,17 @@ public class TutorialController : MonoBehaviour {
 		exampleBattleEvent.onFinish += FinishExampleBattleEvent;
 
 		charactersUI.onClick += OpenCharactersUI;
+		inputController.onCharactersOpen += OpenCharactersUI;
+
 		mapUI.onClick += OpenMapUI;
+		inputController.onMapOpen += OpenMapUI;
+
+		inputController.onMainMenuOpen += OpenMainMenu;
 	}
 
+	/// <summary>
+	/// Removes listeners from events.
+	/// </summary>
 	void OnDisable() {
 		exampleEvent.onOpen -= OpenExampleEvent;
 		exampleEvent.onClose -= CloseExampleEvent;
@@ -42,7 +62,12 @@ public class TutorialController : MonoBehaviour {
 		exampleBattleEvent.onFinish -= FinishExampleBattleEvent;
 
 		charactersUI.onClick -= OpenCharactersUI;
+		inputController.onCharactersOpen -= OpenCharactersUI;
+
 		mapUI.onClick -= OpenMapUI;
+		inputController.onMapOpen -= OpenMapUI;
+
+		inputController.onMainMenuOpen -= OpenMainMenu;
 	}
 
 	void Start() {
@@ -57,8 +82,10 @@ public class TutorialController : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Shows tutorial instructions.
+	/// </summary>
     void Update() {
-
 		for (int i = 0; i < instructions.Length; i++) {
 			if (i == instructionIndex)
 				instructions[i].SetActive(true);
@@ -97,9 +124,6 @@ public class TutorialController : MonoBehaviour {
 		}
 		// Characters' detail
 		else if (instructionIndex == 5) {
-			// TODO: press C is not working
-			if (Input.GetButtonDown("Characters"))
-				isCharactersUIOpen = true;
 			if (isCharactersUIOpen)
 				++instructionIndex;
 		}
@@ -108,12 +132,19 @@ public class TutorialController : MonoBehaviour {
 			if (isMapUIOpen)
 				++instructionIndex;
 		}
+		// Main menu
+		else if (instructionIndex == 7) {
+			if (isMainMenuOpen)
+				++instructionIndex;
+		}
 		else {
 			// Make all events clickable
 			foreach (Event e in events)
 				e.IsClickable = true;
 
+			// Hide last instruction
 			instructions[instructionIndex - 1].SetActive(false);
+
 			Destroy(gameObject);
 		}
     }
@@ -139,10 +170,17 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	private void OpenCharactersUI() {
-		isCharactersUIOpen = true;
+		if (isExampleBattleEventFinished)
+			isCharactersUIOpen = true;
 	}
 
 	private void OpenMapUI() {
-		isMapUIOpen = true;
+		if (isCharactersUIOpen)
+			isMapUIOpen = true;
+	}
+
+	private void OpenMainMenu() {
+		if (isMapUIOpen)
+			isMainMenuOpen = true;
 	}
 }
