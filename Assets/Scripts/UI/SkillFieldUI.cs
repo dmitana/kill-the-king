@@ -24,13 +24,15 @@ public class SkillFieldUI : MonoBehaviour {
     /// </summary>
 	private void OnEnable() {
         battleController.onTurnEnd += Clear;
-	}
+        battleController.onSkillChanged += ResetColor;
+    }
 
     /// <summary>
     /// Unregisters battle controller's onTurnEnd event.
     /// </summary>
     private void OnDisable() {
         battleController.onTurnEnd -= Clear;
+        battleController.onSkillChanged -= ResetColor;
     }
 
     /// <summary>
@@ -58,6 +60,7 @@ public class SkillFieldUI : MonoBehaviour {
                 if (battleController.ChosenSkill != null)
                     battleController.SkillChanged = true;
                 battleController.ChosenSkill = skill;
+                background.color = Color.yellow;
             }
         }
     }
@@ -68,6 +71,8 @@ public class SkillFieldUI : MonoBehaviour {
     /// <param name="bc"></param>
     public void Clear(BattleController bc) {
         background.color = Color.black;
+        gameObject.GetComponent<Button>().interactable = false;
+        skillName.text = "No Skill";
         HoverOff();
         skill = null;
     }
@@ -97,5 +102,10 @@ public class SkillFieldUI : MonoBehaviour {
         if (skill != null && battleController.ChosenCharacter != null) {
             parent.skillDescription.SetActive(false);
         }
+    }
+
+    private void ResetColor() {
+        if (skill != null && battleController.ChosenSkill != skill)
+            background.color = (skill.cooldown == 0)? Color.green : Color.red;
     }
 }

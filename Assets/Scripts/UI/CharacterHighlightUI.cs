@@ -9,18 +9,24 @@ public class CharacterHighlightUI : MonoBehaviour {
     public Character character;
     public Image image;
 
+    private BattleController battleController;
+
+    private void Awake() {
+        battleController = GameMaster.instance.GetComponent<BattleController>();
+    }
+
     private void OnEnable() {
         character.onSelected += Selected;
         character.onValid += Valid;
         character.onInvalid += Invalid;
-        GameMaster.instance.GetComponent<BattleController>().onTurnEnd += TurnEnd;
+        battleController.onTurnEnd += TurnEnd;
     }
 
     private void OnDisable() {
         character.onSelected -= Selected;
         character.onValid -= Valid;
         character.onInvalid -= Invalid;
-        GameMaster.instance.GetComponent<BattleController>().onTurnEnd -= TurnEnd;
+        battleController.onTurnEnd -= TurnEnd;
     }
 
     private void Selected(bool b) {

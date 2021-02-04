@@ -309,6 +309,7 @@ public class Character : MonoBehaviour {
 				if (battleController.ChosenCharacter != null)
 					battleController.ChosenCharacter.OnSelected(false);
 				battleController.ChosenCharacter = this;
+				battleController.OnCharacterChanged(this);
 				OnSelected(true);
 			}
 			else

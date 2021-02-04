@@ -109,6 +109,13 @@ public class BattleController : MonoBehaviour {
     /// </summary>
     public event OnTurnEndDelegate onTurnEnd;
 
+    public delegate void OnSkillChangedDelegate();
+    public event OnSkillChangedDelegate onSkillChanged;
+
+    public delegate void OnCharacterChangedDelegate(Character c);
+
+    public event OnCharacterChangedDelegate onCharacterChanged;
+
     /// <summary>
     /// Sets initial values of some attributes.
     /// </summary>
@@ -313,8 +320,11 @@ public class BattleController : MonoBehaviour {
                                 if (SkillChanged)
                                     break;
                             }
-                            if (SkillChanged)
+
+                            if (SkillChanged) {
+                                OnSkillChanged();
                                 continue;
+                            }
 
                             ChosenSkill.ApplySkill(ChosenCharacter, ChosenTargets);
                             currentTeam.AddPlayedCharacter(ChosenCharacter);
@@ -361,5 +371,13 @@ public class BattleController : MonoBehaviour {
     private void TurnEnd() {
         Log = "\n";
         onTurnEnd?.Invoke(this);
+    }
+
+    private void OnSkillChanged() {
+        onSkillChanged?.Invoke();
+    }
+
+    public void OnCharacterChanged(Character c) {
+        onCharacterChanged?.Invoke(c);
     }
 }
