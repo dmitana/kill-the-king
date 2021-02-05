@@ -57,6 +57,11 @@ public class PopUpWindowUI : MonoBehaviour {
 	/// Deactivates pop up window.
 	/// </summary>
 	private void Hide() {
+		// Listeners from buttons have to be removed, because in
+		// Show method will be added new listeners
+		rejectButton.onClick.RemoveAllListeners();
+		acceptButton.onClick.RemoveAllListeners();
+
 		popUpWindow.gameObject.SetActive(false);
 	}
 }
