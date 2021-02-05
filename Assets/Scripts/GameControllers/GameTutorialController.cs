@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Controls tutorial process.
+/// Controls game tutorial process.
 /// <summary>
-public class TutorialController : MonoBehaviour {
+public class GameTutorialController : MonoBehaviour {
 	public GameObject[] instructions;
 	public Event exampleEvent;
 	public Battle exampleBattleEvent;
