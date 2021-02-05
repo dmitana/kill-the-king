@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class GameMaster : MonoBehaviour {
 	public static GameMaster instance;
+	public static bool IsBattleTutorialFinished { get; set; } = false;
 
 	void Awake() {
 		if (instance == null) {
