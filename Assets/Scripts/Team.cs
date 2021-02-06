@@ -171,11 +171,9 @@ public class Team : MonoBehaviour {
     }
 
     /// <summary>
-    /// Adds all unplayed characters to battle log.
+    /// Highlights all unplayed characters.
     /// </summary>
     public void HighlightUnplayed() {
-        BattleController.Log = $"Unplayed characters: {string.Join(", ", UnplayedCharacters)}";
-
         if (!isAI) {
 	        foreach (Character c in UnplayedCharacters)
 		        c.OnValid(true);

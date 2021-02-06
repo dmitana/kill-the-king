@@ -19,7 +19,7 @@ public class BattleLogUI : MonoBehaviour {
     private void Update() {
         log = battleController.Log;
         if (log != null) {
-            battleLogText.text += log + "\n";
+            battleLogText.text += log + "\n\n";
         }
     }
 }

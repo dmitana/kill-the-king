@@ -234,11 +234,7 @@ public class BattleController : MonoBehaviour {
         ValidTargets = ChosenSkill.HighlightTargets(playerTeam, enemyTeam, playerTeamRound)
             .FindAll(c => !c.IsInvisible);
 
-        if (ValidTargets.Count > 0)
-            Log = $"Valid targets: {string.Join(", ", ValidTargets)}";
-        else if (ChosenSkill.numOfTargets == 0)
-            Log = "This skill is applied on character that uses it";
-        else
+        if (ValidTargets.Count == 0 && ChosenSkill.numOfTargets != 0)
             Log = "No valid targets found";
 
         SkillChanged = false;
@@ -266,9 +262,14 @@ public class BattleController : MonoBehaviour {
     /// <returns></returns>
     private IEnumerator Battle() {
         bool playerTeamRound = playerTeamFirst;
+        Log = playerTeamRound ? "Player begins" : "Enemy begins";
+        int rounds_counter = 1;
+        
         // Battle lasts until one team loses all characters.
         while (playerTeam.Characters.Count > 0 && enemyTeam.Characters.Count > 0) {
-            Log = "NEW ROUND";
+            if (rounds_counter > 1)
+                Log = $"============================== ROUND {rounds_counter} ==============================";
+            
             playerTeam.ResetTeam(true);
             enemyTeam.ResetTeam(true);
 
@@ -283,7 +284,6 @@ public class BattleController : MonoBehaviour {
                 ValidTargets = null;
 
                 currentTeam = (playerTeamRound) ? playerTeam: enemyTeam;
-                Log = $"{((playerTeamRound) ? "Player" : "Enemy")}'s turn";
 
                 // Selection of character.
                 currentTeam.HighlightUnplayed();
@@ -346,11 +346,15 @@ public class BattleController : MonoBehaviour {
                     playerTeamRound = !playerTeamRound;
                 SkipTurn = false;
                 CharacterRevived = false;
+
+                if (!currentTeam.isAI)
+                    yield return new WaitForSeconds(0.5f);
             }
 
             // Apply effects for both teams.
             playerTeam.ApplyEffects();
             enemyTeam.ApplyEffects();
+            rounds_counter++;
         }
 
         // End battle function call.
@@ -369,7 +373,6 @@ public class BattleController : MonoBehaviour {
     /// Emits onTurnEnd event for Skills UI element.
     /// </summary>
     private void TurnEnd() {
-        Log = "\n";
         onTurnEnd?.Invoke(this);
     }
 
