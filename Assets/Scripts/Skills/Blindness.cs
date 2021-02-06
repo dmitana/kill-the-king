@@ -9,8 +9,4 @@ public class Blindness : Skill {
         battleController.Log = $"{attacker} used {skillName} on {target} which now has only {100 * strength} % chance" +
                                $" that his next attack will hit its target";
     }
-
-    public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
-    }
 }

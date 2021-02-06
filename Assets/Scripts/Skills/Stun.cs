@@ -22,8 +22,4 @@ public class Stun : Skill {
             battleController.Log = $"{target} is stunned and cannot be used";
         }
     }
-
-    public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
-    }
 }

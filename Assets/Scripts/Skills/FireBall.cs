@@ -14,7 +14,4 @@ public class FireBall : Skill {
             battleController.Log = $"{target} is now burning for the next {effect.duration} rounds";
         }
 	}
-    public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
-    }
 }

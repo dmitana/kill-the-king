@@ -10,8 +10,4 @@ public class LifeDrain : Skill {
 		attacker.IncreaseHealth(damage);
 		battleController.Log = $"{attacker} used {skillName} and stole {damage} HP from {target}";
     }
-
-    public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-	    return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
-    }
 }

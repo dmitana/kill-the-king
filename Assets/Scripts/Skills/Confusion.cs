@@ -9,7 +9,4 @@ public class Confusion : Skill {
         target.AddEffect(effect);
         battleController.Log = $"{attacker} used {skillName} and {target} is now confused";
     }
-    public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
-    }
 }

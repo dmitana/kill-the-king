@@ -14,7 +14,4 @@ public class StrongAttack : Skill {
             battleController.Log = $"{target} is bleeding for {effect.duration} rounds";
         }
     }
-    public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
-    }
 }

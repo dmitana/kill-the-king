@@ -10,8 +10,4 @@ public class AreaAttack : Skill
         damage = target.DecreaseHealth(damage);
         battleController.Log = $"{attacker} used {skillName} and dealt {damage} to {target}";
     }
-    
-    public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-        return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
-    }
 }

@@ -13,8 +13,4 @@ public class PoisonousAttack : Skill {
 		battleController.Log = $"{attacker} used {skillName} and dealt {damage} to {target}";
 		battleController.Log = $"{target} is poisoned for next {effect.duration} rounds";
 	}
-
-    public override List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
-	    return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
-    }
 }

@@ -130,7 +130,9 @@ public abstract class Skill : MonoBehaviour {
     /// <param name="enemyTeam"></param>
     /// <param name="playerTeamTurn"></param>
     /// <returns>List of valid targets.</returns>
-    public abstract List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn);
+    public virtual List<Character> HighlightTargets(Team playerTeam, Team enemyTeam, bool playerTeamTurn) {
+	    return (playerTeamTurn) ? enemyTeam.Characters : playerTeam.Characters;
+    }
 
     public int GetNumOfTargets() {
         return numOfTargets;
