@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 1
   description: Causes character to attack oposite team than intended.
+  effectName: Confusion

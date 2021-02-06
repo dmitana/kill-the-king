@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 1
   description: Causes the target to have less chance of hitting its next attack.
+  effectName: Blindness

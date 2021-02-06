@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0
   description: 
+  effectName: Weakness
   healthDecrease: 0.1

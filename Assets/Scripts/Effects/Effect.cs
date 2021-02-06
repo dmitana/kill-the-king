@@ -12,6 +12,7 @@ public abstract class Effect : MonoBehaviour {
 	/// </summary>
     public int duration;
     public String description;
+    public String effectName;
     
     /// <summary>
     /// Strength of effect. Can be damage per round, reduction of damage, ...

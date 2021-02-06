@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 1
   description: Character cannot be attacked until its next turn.
+  effectName: Invisibility

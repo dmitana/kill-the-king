@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 2
   description: Deals damage each round for 5% of base damage of the attacker.
+  effectName: Bleeding
   damagePerRound: 0.05

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4314271558627808291}
   - component: {fileID: 417759127140372191}
   m_Layer: 0
-  m_Name: DeadlyAttack
+  m_Name: DeadlyAttackBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,5 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: -1
   description: Stores charges used to boost attacks.
+  effectName: Deadly Attack
   charges: 0
   maxCharges: 3

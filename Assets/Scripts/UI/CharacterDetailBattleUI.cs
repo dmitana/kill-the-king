@@ -13,6 +13,7 @@ public class CharacterDetailBattleUI : MonoBehaviour
     public TMP_Text alreadyPlayed;
     public TMP_Text alreadyRevived;
     public TMP_Text skills;
+    public TMP_Text effects;
 
     private List<Character> characters;
     private bool charactersObtained = false;
@@ -63,9 +64,16 @@ public class CharacterDetailBattleUI : MonoBehaviour
         damage.text = $"Damage: {c.baseStrength}";
         alreadyPlayed.text = $"Already played: {((c.Team.PlayedCharacters.Contains(c)) ? "Yes" : "No")}";
         alreadyRevived.text = c.playable ? $"Already revived: {((c.alreadyRevived) ? "Yes" : "No")}" : "";
-        skills.text = "";
+        skills.text = "Skills:\n";
         foreach (Skill s in c.skills) {
             skills.text += $"{s.skillName}: {((s.cooldown > 0) ? $"On cooldown for {s.cooldown} rounds" : "Ready")}\n";
+        }
+
+        effects.text = "Effects:\n";
+        if (c.GetEffects().Count == 0)
+            effects.text += "No active effects";
+        foreach (Effect e in c.GetEffects()) {
+            effects.text += $"{e.effectName}\n";
         }
     }
 

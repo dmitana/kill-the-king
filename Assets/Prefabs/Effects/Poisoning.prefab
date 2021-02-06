@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 3
   description: Deals damage each round for X% of base damage of the attacker.
+  effectName: Poison
   damagePerRound: 0

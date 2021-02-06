@@ -46,3 +46,4 @@ MonoBehaviour:
   duration: 2
   description: Character does not receive damage imediately but after 2 turns. May
     be scaled depending on skill power.
+  effectName: Fury
