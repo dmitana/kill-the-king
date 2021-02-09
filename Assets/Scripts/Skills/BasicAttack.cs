@@ -6,6 +6,6 @@ public class BasicAttack : Skill {
     public override void ApplySkill(Character attacker, Character target) {
         var damage = attacker.baseStrength;
         damage = target.DecreaseHealth(damage);
-        battleController.Log = $"{attacker} used {skillName} and dealt {damage} to {target}";
+        battleController.Log = $"{attacker} used {skillName} and dealt {damage} damage to {target}";
     }
 }

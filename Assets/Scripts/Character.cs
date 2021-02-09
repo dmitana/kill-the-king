@@ -187,6 +187,7 @@ public class Character : MonoBehaviour {
 	/// game object is destroyed.
 	/// </summary>
 	public void ApplyEffects() {
+		bool logMentioned = false;
 		int i = 0;
 		while (i < activeEffects.Count) {
 			if (activeEffects[i].duration == 0) {
@@ -197,6 +198,12 @@ public class Character : MonoBehaviour {
 				continue;
 			}
 			activeEffects[i].AtRoundEnd(this);
+
+			if (Health == 0 && !logMentioned) {
+				battleController.Log = $"{characterName} was killed by {activeEffects[i].effectName}";
+				logMentioned = true;
+			}
+
 			i++;
 		}
 	}
@@ -222,8 +229,7 @@ public class Character : MonoBehaviour {
 				Team.RemoveUnplayedCharacter(this);
 				Team.AddPlayedCharacter(this);
 			}
-			else {
-				battleController.Log = $"{characterName} died.";
+			else if (Team != null) {
 				Team.RemoveCharacterFromTeam(this);
 				Destroy(gameObject);
 			}

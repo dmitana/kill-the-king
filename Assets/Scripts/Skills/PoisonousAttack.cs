@@ -10,7 +10,7 @@ public class PoisonousAttack : Skill {
 		effect.Strength = attacker.baseStrength;
 		effect.damagePerRound = strength;
 		target.AddEffect(effect);
-		battleController.Log = $"{attacker} used {skillName} and dealt {damage} to {target}";
+		battleController.Log = $"{attacker} used {skillName} and dealt {damage} damage to {target}";
 		battleController.Log = $"{target} is poisoned for next {effect.duration} rounds";
 	}
 }

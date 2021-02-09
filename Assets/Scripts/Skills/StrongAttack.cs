@@ -6,7 +6,7 @@ public class StrongAttack : Skill {
     public override void ApplySkill(Character attacker, Character target) {
         var damage = attacker.baseStrength * 2;
         damage = target.DecreaseHealth(damage);
-        battleController.Log = $"{attacker} used {skillName} and dealt {damage} to {target}";
+        battleController.Log = $"{attacker} used {skillName} and dealt {damage} damage to {target}";
         if (rnd.NextDouble() < strength && target != null) {
             Effect effect = Instantiate(effects[0], target.gameObject.transform);
             effect.Strength = attacker.baseStrength;

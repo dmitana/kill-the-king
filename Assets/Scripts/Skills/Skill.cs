@@ -89,6 +89,8 @@ public abstract class Skill : MonoBehaviour {
 
 			foreach (var target in targets) {
 				ApplySkill(attacker, target);
+				if (target.Health == 0)
+					battleController.Log = $"{target.characterName} died.";
 			}
 
 			Improve();

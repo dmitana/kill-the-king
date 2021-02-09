@@ -113,13 +113,13 @@ public class Team : MonoBehaviour {
     /// </summary>
     /// <param name="c">Character to be removed.</param>
     public void RemoveCharacterFromTeam(Character c) {
-        Characters.Remove(c);
-		c.Team = null;
-
+        if (Characters.Contains(c))
+			Characters.Remove(c);
         if (UnplayedCharacters.Contains(c))
             UnplayedCharacters.Remove(c);
         if (PlayedCharacters.Contains(c))
             PlayedCharacters.Remove(c);
+        c.Team = null;
     }
     
 	public void ClearCharacters() {
